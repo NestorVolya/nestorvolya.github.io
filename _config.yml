@@ -1,0 +1,26 @@
+﻿title: "Nestor Volya — OSINT Analyst"
+description: "OSINT analyst profile, selected cases, methods, and public verification links."
+url: "https://nestorvolya.github.io"
+baseurl: ""
+lang: "uk-UA"
+timezone: "Europe/Kyiv"
+markdown: kramdown
+permalink: pretty
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - node_modules/
+
+nav:
+  - title: "Profile"
+    url: "/profile/"
+  - title: "Cases"
+    url: "/cases/"
+  - title: "Methods"
+    url: "/methods/"
+  - title: "CV"
+    url: "/cv/"
+  - title: "Verification"
+    url: "/verification/"
