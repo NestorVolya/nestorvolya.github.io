@@ -1,12 +1,13 @@
 ﻿---
 layout: default
 title: Home
+hide_title: true
 description: Public OSINT analyst profile for Nestor Volya.
 ---
 
 <section class="hero">
-  <div class="eyebrow">OSINT analyst profile</div>
-  <h1>Нестор Воля — OSINT-аналітик, дослідник інформаційних операцій, AI-automation engineer.</h1>
+  <div class="eyebrow">Public OSINT analyst profile</div>
+  <h1>Нестор Воля</h1>
   <p class="lead">Публічна версія профілю для командира, рекрутера або команди, які шукають аналітика з досвідом доказового OSINT, InfoOps, медіакомунікацій і технічної автоматизації.</p>
   <div class="badges">
     <span class="badge">OSINT investigations</span>
@@ -17,7 +18,7 @@ description: Public OSINT analyst profile for Nestor Volya.
   </div>
 </section>
 
-## Focus
+## Research and work interests
 
 <div class="grid">
   <section class="card">
@@ -34,13 +35,25 @@ description: Public OSINT analyst profile for Nestor Volya.
   </section>
 </div>
 
-## Selected proof points
+## Selected cases
 
-- Rentafont OSINT investigation published on dev.ua and DOU.
-- Long-running Ichkerian diaspora network research and documentation.
-- InfoOps and recruitment communication work around public regional events.
-- Actor-profile automation with source health scoring and contradiction detection.
-- Geospatial verification work using Berkeley Protocol-style reasoning.
+<div class="archive-list">
+  <section class="archive-item">
+    <h3>Rentafont OSINT</h3>
+    <p class="venue">Published investigation · dev.ua / DOU</p>
+    <p>Attribution, infrastructure, partner ecosystem, and archive-based verification around a font rental service and RF-market ties.</p>
+  </section>
+  <section class="archive-item">
+    <h3>Ichkerian diaspora research</h3>
+    <p class="venue">Network research · 2019-2025</p>
+    <p>Long-running public and local evidence corpus around actors, factions, motivations, and diaspora networks.</p>
+  </section>
+  <section class="archive-item">
+    <h3>Actor-profile automation</h3>
+    <p class="venue">OSINT pipeline · 2025-2026</p>
+    <p>Source health scoring, LLM extraction, contradiction detection, PostgreSQL/pgvector, and structured reporting.</p>
+  </section>
+</div>
 
 <div class="callout">
 This site is a public-facing layer. Raw exports, personal data, operational details, and sensitive source material are intentionally excluded from the published build.
