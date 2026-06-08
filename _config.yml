@@ -1,11 +1,26 @@
-﻿title: "Nestor Volya — OSINT Analyst"
-description: "OSINT analyst profile, selected cases, methods, and public verification links."
+﻿title: "Nestor Volya"
+name: "Nestor Volya"
+description: "OSINT analyst profile, selected cases, methods, CV, and public verification links."
 url: "https://nestorvolya.github.io"
 baseurl: ""
 lang: "uk-UA"
 timezone: "Europe/Kyiv"
 markdown: kramdown
 permalink: pretty
+
+author:
+  name: "Нестор Воля"
+  bio: "OSINT-аналітик · дослідник інформаційних операцій · AI-automation engineer"
+  location: "Ukraine"
+  links:
+    - label: "DOU"
+      url: "https://dou.ua/users/nestor-volya/"
+    - label: "LinkedIn"
+      url: "https://www.linkedin.com/in/kornisan"
+    - label: "YouTube"
+      url: "https://www.youtube.com/channel/UCfZqkVkfPCYuBvdukNCU0ag"
+    - label: "dev.ua"
+      url: "https://dev.ua/blogs/posts/vidmovliaiutsia-vid-spivpratsi-rf-blog"
 
 exclude:
   - Gemfile

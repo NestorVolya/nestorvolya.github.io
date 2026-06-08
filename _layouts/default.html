@@ -8,20 +8,45 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="{{ '/' | relative_url }}">Nestor Volya</a>
-      <nav class="nav" aria-label="Main navigation">
-        {% for item in site.nav %}
-          <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
-        {% endfor %}
-      </nav>
+    <header class="masthead">
+      <div class="masthead__inner">
+        <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+        <nav class="site-nav" aria-label="Main navigation">
+          {% for item in site.nav %}
+            <a {% if page.url == item.url %}class="active"{% endif %} href="{{ item.url | relative_url }}">{{ item.title }}</a>
+          {% endfor %}
+        </nav>
+      </div>
     </header>
-    <main class="page">
-      {{ content }}
+
+    <main id="main" class="site-main">
+      <aside class="sidebar" aria-label="Author profile">
+        <div class="author-card">
+          <div class="avatar" aria-hidden="true">NV</div>
+          <h2>{{ site.author.name }}</h2>
+          <p class="author-bio">{{ site.author.bio }}</p>
+          <p class="author-location">{{ site.author.location }}</p>
+          <ul class="author-links">
+            {% for link in site.author.links %}
+              <li><a href="{{ link.url }}">{{ link.label }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </aside>
+
+      <article class="page">
+        {% unless page.hide_title %}
+          {% if page.title %}<h1 class="page-title">{{ page.title }}</h1>{% endif %}
+        {% endunless %}
+        {{ content }}
+      </article>
     </main>
-    <footer class="site-footer">
-      <span>OSINT analyst profile. Public version only.</span>
-      <span>Raw sources and sensitive context are excluded from the published site.</span>
+
+    <footer class="page__footer">
+      <div class="footer-inner">
+        <span>OSINT analyst profile. Public version only.</span>
+        <span>Raw sources and sensitive context are excluded from this site.</span>
+      </div>
     </footer>
   </body>
 </html>
