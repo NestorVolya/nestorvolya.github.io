@@ -1,65 +1,72 @@
-﻿---
+---
 layout: default
-title: Cases
+title: Кейси
 permalink: /cases/
 ---
 
-# Selected Cases
+# Кейси
+
+Це публічна добірка. Частина повних матеріалів існує лише у локальному архіві або закритих додатках.
 
 ## Rentafont OSINT
 
-**Role:** author, researcher  
-**Period:** 2023-2024  
-**Status:** published / externally checkable
+- **Роль:** автор / дослідник
+- **Статус:** публічно перевіряється
+- **Публічні посилання:** [dev.ua](https://dev.ua/blogs/posts/vidmovliaiutsia-vid-spivpratsi-rf-blog) · [DOU](https://dou.ua/forums/topic/47877/)
 
-Investigation into the Russian-market history, infrastructure, partner ecosystem, and public claims around the Rentafont font rental service.
+Дослідження публічної історії, інфраструктури, партнерського середовища та зв'язків із російським ринком навколо сервісу оренди шрифтів.
 
-**Methods:** Wayback Machine, BuiltWith, WHOIS/DNS, `.RU` domains, MX/TXT/A records, Google operators, partner and audience analysis.
+**Методи:** веб-архіви, пошукові оператори, WHOIS/DNS, домени, технічні сліди, аналіз партнерів і аудиторій.
 
-**Outputs:** dev.ua publication, DOU discussion, local casefile.
+**Релевантність:** показує повний цикл OSINT-дослідження: джерела, перевірка, аналітичний висновок, публічний вихід.
 
-## Ichkerian Diaspora Research
+## Чекаль / Wikipedia case
 
-**Role:** initiator, researcher, mediator  
-**Period:** 2019-2025  
-**Status:** local evidence / public traces
+- **Роль:** ручний пошук і аналітичне структурування
+- **Статус:** публічний архів
+- **Публічне посилання:** [Wayback Machine](https://web.archive.org/web/20260129202211/https://uk.wikipedia.org/wiki/Чекаль_Олексій_Георгійович)
 
-Long-running network research around Ichkerian / Chechen diaspora actors, public events, factions, motivations, and political-military context.
+Критично важливий і складний кейс ручного пошуку, звірки та структурування публічних джерел для енциклопедичного формату.
 
-**Methods:** public presence, interviews, personal meetings, YouTube/Facebook traces, actor and faction mapping.
+**Методи:** пошук біографічних і контекстних слідів, перевірка дат і тверджень, робота з відкритими джерелами, акуратне перенесення матеріалу у формат статті.
 
-## InfoOps / Recruiting Communication
+**Релевантність:** демонструє уважність до деталей, ручний OSINT без залежності від автоматизації, роботу з джерелами й обережне формулювання висновків.
 
-**Role:** media communications / recruiting-event participant  
-**Period:** 2024  
-**Status:** public media traces / local evidence
+## Публічні Notion-кейси InfoVARTA
 
-Work around public regional recruitment events, media contacts, photo archive structure, and documented information presence.
+- **Статус:** публічні матеріали
+- **Публічні посилання:** [кейс 1](https://infovarta.notion.site/_-308d7fb5fd9a80198f40ee491df41d18) · [OSINT v4](https://infovarta.notion.site/OSINT-v4-309d7fb5fd9a80aab298f2abe0adc735)
 
-**Methods:** regional media coordination, Facebook analytics without admin access, event documentation, Google Photos archive discipline.
+Публічні матеріали, які показують дослідницьку логіку, структурування джерел і підготовку матеріалів для зовнішньої аудиторії.
 
-## Actor Profile Automation
+**Релевантність:** підтверджують здатність оформлювати аналітичний матеріал як зрозумілий продукт, а не лише як внутрішні нотатки.
 
-**Role:** architect, developer, analyst  
-**Period:** 2025-2026  
-**Status:** local pipeline MVP
+## Actor-profile / AI-assisted pipeline
 
-Automated actor-profile pipeline using search APIs, LLM extraction, source-health scoring, and contradiction detection.
+- **Роль:** дослідник / розробник пайплайну
+- **Статус:** публічний навчальний GitHub-репозиторій + локальні закриті артефакти
+- **Публічне посилання:** [osint-homework-2026](https://github.com/NestorVolya/osint-homework-2026)
 
-**Methods:** Exa, Tavily, entity extraction, stance analysis, 5-gate Corpus Health, PostgreSQL/pgvector.
+Технічний напрям, пов'язаний з автоматизацією збору, структурування й аналізу матеріалів для профілювання акторів.
 
-## Bucha Satellite Verification
+**Методи:** Python, браузерна автоматизація, структурування корпусу, LLM-допоміжний витяг фактів, перевірка суперечностей, підготовка звітних матеріалів.
 
-**Role:** researcher  
-**Period:** 2026  
-**Status:** completed local study
+**Релевантність:** показує здатність перетворювати OSINT-дослідження на повторюваний процес і технічний інструмент.
 
-Geospatial and chronological verification exercise using Berkeley Protocol-style reasoning and satellite imagery context.
+## Bucha satellite verification
 
-## Doppelganger Operation Analysis
+- **Роль:** дослідник
+- **Статус:** навчальний / локальний аналітичний кейс
 
-**Role:** researcher  
-**Period:** 2026  
-**Status:** completed local study
+Геопросторова й хронологічна перевірка з використанням логіки Berkeley Protocol та супутникового контексту.
 
-Analysis of RF clone-media infrastructure, narrative distribution, and cross-country information operation patterns.
+**Релевантність:** демонструє здатність працювати з часовою лінією, геопросторовими ознаками, джерельною невизначеністю та доказовою аргументацією.
+
+## Doppelganger operation analysis
+
+- **Роль:** дослідник
+- **Статус:** навчальний / локальний аналітичний кейс
+
+Аналіз clone-media інфраструктури, поширення наративів і транскордонних патернів інформаційної операції.
+
+**Релевантність:** корисний для ролей, пов'язаних з моніторингом інформаційних операцій противника, медіааналізом і виявленням координованої активності.

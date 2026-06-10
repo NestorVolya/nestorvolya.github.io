@@ -1,41 +1,53 @@
-﻿---
+---
 layout: default
-title: CV
+title: Коротке CV
 permalink: /cv/
 ---
 
-# OSINT CV Snapshot
+# Коротке CV
 
-## Target roles
+Це коротка публічна версія. Повне CV і закриті додатки надаються адресно.
 
-- OSINT analyst
-- Information operations researcher
-- Actor-profile analyst
-- OSINT automation / AI-assisted analysis engineer
-- Military recruiting / media intelligence analyst
+## Цільові ролі
 
-## Core value
+- OSINT-аналітик;
+- аналітик інформаційних операцій;
+- дослідник акторів, мереж і публічних слідів;
+- фахівець з AI/OSINT автоматизації;
+- аналітик для підготовки довідок, звітів і візуалізацій.
 
-Builds evidence-based profiles and casefiles from open sources, public traces, archived web data, media signals, network context, and structured technical pipelines.
+## Профіль
 
-## Skills
+OSINT-аналітик із поєднанням доказового пошуку, медійного й військового контексту, аналітичного письма та технічної автоматизації. Працює з відкритими джерелами, архівами, доменами, публічними профілями, медіаслідами, наративами й структурованими корпусами даних.
 
-- OSINT investigations and source verification
-- Actor mapping and narrative analysis
-- Corporate/domain/DNS/web archive research
-- Public media and recruiting communication analysis
-- Python, Playwright, PostgreSQL, pgvector
-- LLM-assisted extraction and summarization
-- Markdown-first reporting and evidence packaging
+## Ключові навички
 
-## Selected outputs
+- збір і перевірка інформації з відкритих джерел;
+- пошук людей, організацій, компаній, доменів і публічних зв'язків;
+- робота з веб-архівами, реєстрами, медіа, соціальними платформами;
+- підготовка аналітичних звітів, інформаційних довідок і кейсфайлів;
+- аналіз інформаційних операцій і медійних наративів;
+- автоматизація дослідницьких процесів: Python, Playwright, PostgreSQL/pgvector;
+- LLM-допоміжний витяг фактів, структурування матеріалів і перевірка суперечностей.
 
-- Rentafont OSINT publication on dev.ua and DOU.
-- Ichkerian diaspora research corpus.
-- InfoOps/recruiting communication documentation.
-- Actor-profile pipeline with health scoring.
-- Geospatial verification and information operation analysis exercises.
+## Навчання
 
-## Availability of proof
+[robot_dreams "AI для OSINT і розвідки"](https://robotdreams.cc/uk/course/2631-ai-osint-intelligence), 2026: прикінцева стадія навчання, курсовий проєкт; топова позиція в рейтингу курсу.
 
-Public links are listed on the verification page. Sensitive raw sources and operational details are available only in controlled context.
+Публічні технічні матеріали:
+
+- [GitHub profile](https://github.com/NestorVolya)
+- [osint-homework-2026](https://github.com/NestorVolya/osint-homework-2026)
+
+Локальні пайплайни для медіамоніторингу та AI/OSINT автоматизації не публікуються як відкриті репозиторії, але можуть бути описані адресно в закритому додатку.
+
+## Вибрані публічні матеріали
+
+- Rentafont OSINT: [dev.ua](https://dev.ua/blogs/posts/vidmovliaiutsia-vid-spivpratsi-rf-blog) · [DOU](https://dou.ua/forums/topic/47877/)
+- Чекаль / Wikipedia case: [архівована сторінка](https://web.archive.org/web/20260129202211/https://uk.wikipedia.org/wiki/Чекаль_Олексій_Георгійович)
+- Публічні InfoVARTA / Notion матеріали: [кейс](https://infovarta.notion.site/_-308d7fb5fd9a80198f40ee491df41d18) · [OSINT v4](https://infovarta.notion.site/OSINT-v4-309d7fb5fd9a80aab298f2abe0adc735)
+- Сторінка кейсів: [nestorvolya.github.io/cases](https://nestorvolya.github.io/cases)
+
+## Межа публічного CV
+
+Ця сторінка не містить службових деталей, закритих доказів, персональних даних третіх осіб або повного HR-досьє.

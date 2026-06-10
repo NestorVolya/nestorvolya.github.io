@@ -1,62 +1,66 @@
-﻿---
+---
 layout: default
 title: Home
 hide_title: true
-description: Public OSINT analyst profile for Nestor Volya.
+description: Публічний профіль Нестора Волі: OSINT, інформаційні операції, AI/OSINT автоматизація, вибрані кейси.
 ---
 
 <section class="hero">
-  <div class="eyebrow">Public OSINT analyst profile</div>
+  <div class="eyebrow">Публічний OSINT-профіль</div>
   <h1>Нестор Воля</h1>
-  <p class="lead">Публічна версія профілю для командира, рекрутера або команди, які шукають аналітика з досвідом доказового OSINT, InfoOps, медіакомунікацій і технічної автоматизації.</p>
+  <p class="lead">OSINT-аналітик і дослідник інформаційних операцій з практичним досвідом доказового аналізу, підготовки аналітичних матеріалів, роботи з публічними кейсами та автоматизації збору й структурування даних.</p>
   <div class="badges">
-    <span class="badge">OSINT investigations</span>
-    <span class="badge">InfoOps / StratCom</span>
-    <span class="badge">Actor profiling</span>
+    <span class="badge">доказовий OSINT</span>
+    <span class="badge">аналіз акторів і мереж</span>
+    <span class="badge">інформаційні операції</span>
+    <span class="badge">аналітичні звіти</span>
     <span class="badge">Python / Playwright / PostgreSQL</span>
-    <span class="badge">LLM-assisted analysis</span>
+    <span class="badge">AI-допоміжний аналіз</span>
   </div>
 </section>
 
-## Research and work interests
+## Основні напрями
 
 <div class="grid">
   <section class="card">
-    <h3>Evidence-first OSINT</h3>
-    <p>Source provenance, multi-source verification, contradiction handling, and structured casefiles.</p>
+    <h3>OSINT і перевірка джерел</h3>
+    <p>Пошук, звірка, архівація та аналіз відкритих джерел: медіа, реєстри, домени, веб-архіви, соціальні сигнали, публічні профілі.</p>
   </section>
   <section class="card">
-    <h3>Information operations</h3>
-    <p>Practical media and recruiting communication experience in a military context, with public media traces.</p>
+    <h3>Інформаційні операції</h3>
+    <p>Аналіз наративів, медійних слідів, публічної присутності, мереж поширення та контексту комунікацій.</p>
   </section>
   <section class="card">
-    <h3>Automation</h3>
-    <p>OSINT pipelines using Python, browser automation, PostgreSQL, pgvector, and LLM extraction layers.</p>
+    <h3>AI/OSINT автоматизація</h3>
+    <p>Технічні пайплайни для збору, структурування, витягу сутностей, виявлення суперечностей і підготовки звітних матеріалів.</p>
   </section>
 </div>
 
-## Selected cases
+## Вибрані публічні підтвердження
 
 <div class="archive-list">
   <section class="archive-item">
     <h3>Rentafont OSINT</h3>
-    <p class="venue">Published investigation · dev.ua / DOU</p>
-    <p>Attribution, infrastructure, partner ecosystem, and archive-based verification around a font rental service and RF-market ties.</p>
+    <p class="venue">Опубліковане дослідження · dev.ua / DOU</p>
+    <p>Дослідження публічної історії, інфраструктури, партнерської мережі та зв'язків із російським ринком.</p>
+    <p><a href="https://dev.ua/blogs/posts/vidmovliaiutsia-vid-spivpratsi-rf-blog">dev.ua</a> · <a href="https://dou.ua/forums/topic/47877/">DOU</a></p>
   </section>
   <section class="archive-item">
-    <h3>Ichkerian diaspora research</h3>
-    <p class="venue">Network research · 2019-2025</p>
-    <p>Long-running public and local evidence corpus around actors, factions, motivations, and diaspora networks.</p>
+    <h3>Чекаль / Wikipedia case</h3>
+    <p class="venue">Ручний пошук, перевірка і структурування джерел</p>
+    <p>Складний кейс ручного збору та звірки публічних матеріалів для енциклопедичного формату.</p>
+    <p><a href="https://web.archive.org/web/20260129202211/https://uk.wikipedia.org/wiki/Чекаль_Олексій_Георгійович">архівована сторінка</a></p>
   </section>
   <section class="archive-item">
-    <h3>Actor-profile automation</h3>
-    <p class="venue">OSINT pipeline · 2025-2026</p>
-    <p>Source health scoring, LLM extraction, contradiction detection, PostgreSQL/pgvector, and structured reporting.</p>
+    <h3>AI для OSINT і розвідки</h3>
+    <p class="venue">robot_dreams · 2026</p>
+    <p>Прикінцева стадія навчання, курсовий проєкт, топова позиція в рейтингу курсу.</p>
+    <p><a href="https://robotdreams.cc/uk/course/2631-ai-osint-intelligence">сторінка курсу</a> · <a href="https://github.com/NestorVolya/osint-homework-2026">навчальний GitHub-репозиторій</a></p>
   </section>
 </div>
 
 <div class="callout">
-This site is a public-facing layer. Raw exports, personal data, operational details, and sensitive source material are intentionally excluded from the published build.
+Це публічна, санітизована версія профілю. Закриті джерела, службові деталі, персональні дані третіх осіб і повні HR-додатки не публікуються.
 </div>
 
-[Read profile](/profile/) · [View cases](/cases/) · [Check verification links](/verification/)
+[Профіль](/profile/) · [Кейси](/cases/) · [Методи](/methods/) · [Коротке CV](/cv/) · [Публічні підтвердження](/verification/)

@@ -1,6 +1,6 @@
-﻿title: "Nestor Volya"
+title: "Nestor Volya"
 name: "Nestor Volya"
-description: "OSINT analyst profile, selected cases, methods, CV, and public verification links."
+description: "Публічний профіль OSINT-аналітика: кейси, методи, CV-резюме та відкриті підтвердження."
 url: "https://nestorvolya.github.io"
 baseurl: ""
 lang: "uk-UA"
@@ -10,9 +10,13 @@ permalink: pretty
 
 author:
   name: "Нестор Воля"
-  bio: "OSINT-аналітик · дослідник інформаційних операцій · AI-automation engineer"
+  bio: "OSINT-аналітик · дослідник інформаційних операцій · автоматизація AI/OSINT"
   location: "Ukraine"
   links:
+    - label: "Кейси"
+      url: "https://nestorvolya.github.io/cases"
+    - label: "GitHub"
+      url: "https://github.com/NestorVolya"
     - label: "DOU"
       url: "https://dou.ua/users/nestor-volya/"
     - label: "LinkedIn"
@@ -21,6 +25,8 @@ author:
       url: "https://www.youtube.com/channel/UCfZqkVkfPCYuBvdukNCU0ag"
     - label: "dev.ua"
       url: "https://dev.ua/blogs/posts/vidmovliaiutsia-vid-spivpratsi-rf-blog"
+    - label: "robot_dreams"
+      url: "https://robotdreams.cc/uk/course/2631-ai-osint-intelligence"
 
 exclude:
   - Gemfile
@@ -29,13 +35,13 @@ exclude:
   - node_modules/
 
 nav:
-  - title: "Profile"
+  - title: "Профіль"
     url: "/profile/"
-  - title: "Cases"
+  - title: "Кейси"
     url: "/cases/"
-  - title: "Methods"
+  - title: "Методи"
     url: "/methods/"
   - title: "CV"
     url: "/cv/"
-  - title: "Verification"
+  - title: "Підтвердження"
     url: "/verification/"
