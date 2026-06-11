@@ -242,6 +242,7 @@
     }
     .group-label:first-child { margin-top: 4px; }
     .group-note { font-size: 13px; color: var(--muted); margin: -8px 0 14px; }
+    .print-stack, .analytic-note { display: none; }
 
     @media (max-width: 900px) {
       .hero, .layout { grid-template-columns: 1fr; }
@@ -258,7 +259,8 @@
       .hero {
         background: white !important;
         color: #111 !important;
-        border: 2px solid #222;
+        border: none;
+        border-bottom: 1.5px solid #bbb;
         border-radius: 0;
         box-shadow: none;
         padding: 10px 12px;
@@ -314,6 +316,46 @@
 
       a { color: #064f8f; text-decoration: none; }
       .small { font-size: 8.5pt; }
+
+      /* Print-only horizontal stack block */
+      .no-print-stack { display: none !important; }
+      .print-stack {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 0;
+        border: 1px solid #999;
+        background: #ececec;
+        margin: 7px 0 0;
+        font-size: 7.5pt;
+        line-height: 1.3;
+        break-inside: avoid;
+      }
+      .ps-item {
+        flex: 1;
+        padding: 5px 7px;
+        border-right: 1px solid #bbb;
+      }
+      .ps-item:last-child { border-right: none; }
+      .ps-item strong {
+        display: block;
+        font-size: 7pt;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #333;
+        margin-bottom: 2px;
+        font-weight: 800;
+      }
+      @page { margin: 6mm 8mm; }
+      .analytic-note {
+        display: block;
+        font-size: 7.5pt;
+        color: #555;
+        font-style: italic;
+        text-align: right;
+        padding: 4px 2px 5px;
+        border-top: 1px solid #ccc;
+        margin-bottom: 6px;
+      }
     }
   </style>
 </head>
@@ -375,6 +417,15 @@
     </header>
     <div class="print-hint">Для PDF: кнопка зверху або Ctrl+P → Save as PDF.</div>
 
+    <div class="print-stack">
+      <div class="ps-item"><strong>OSINT</strong> Збір → перевірка → chain of custody: Wayback Machine, WHOIS/DNS, BuiltWith, urlscan, Google operators, Berkeley Protocol, source registry, Notion</div>
+      <div class="ps-item"><strong>Data / AI</strong> Python, FastAPI, PostgreSQL, pgvector, RAG, NER, Gemini, Claude, NotebookLM, Perplexity, agentic workflows</div>
+      <div class="ps-item"><strong>Automation</strong> Playwright, Crawl4AI, Jina, Exa, Tavily, n8n, API pipelines</div>
+      <div class="ps-item"><strong>Graphs</strong> Gephi, Neo4j, NetworkX, pyvis, PageRank, modularity</div>
+      <div class="ps-item"><strong>Runtime / VPS</strong> Docker, nginx, Traefik, SSL/TLS, Ubuntu, Git</div>
+    </div>
+    <div class="analytic-note">Джерельно-доказова логіка: джерело → витяг → перевірка → суперечності → звіт. Кожне твердження — конкретне джерело або явна прогалина.</div>
+
     <div class="layout">
       <aside>
         <section>
@@ -388,7 +439,7 @@
           </ul>
         </section>
 
-        <section>
+        <section class="no-print-stack">
           <h2>Практичний стек</h2>
           <ul class="stack-list">
             <li><strong>OSINT:</strong> Wayback Machine, WHOIS/DNS, BuiltWith, urlscan, Google operators, source registry.</li>
@@ -410,8 +461,8 @@
 
         <section>
           <h2>Військовий і управлінський досвід</h2>
-          <p><strong>2022-2026:</strong> доброволець з лютого 2022, заст. комбата з МПЗ у добробаті; ЗСУ з липня 2022; УБД, старший сержант; бойовий шлях: оборона Києва, Херсонщина / фарватер Дніпра, Новопавлівський напрямок (ДШВ); нині — мобілізаційний рекрутинг, топові результати серед частин ССО.</p>
-          <p><strong>Прес-офіцерський / медійний контур:</strong> ВІКНУ, курси прес-офіцерів; підготовка матеріалів, медіакомунікації, документування діяльності підрозділу, рекрутингова комунікація.</p>
+          <p><strong>2022-2026:</strong> доброволець з лютого 2022, заст. комбата з МПЗ у добробаті; ЗСУ (ССО) з липня 2022; УБД, старший сержант; бойовий шлях: оборона Києва, Херсонщина / фарватер Дніпра (ССО), Новопавлівський напрямок (ДШВ); нині — мобілізаційний рекрутинг, топові результати серед частин ССО.</p>
+          <p><strong>Прес-офіцерський / медійний контур:</strong> ВІКНУ, курси прес-офіцерів; підготовка матеріалів, медіакомунікації, документування діяльності підрозділу, рекрутингова комунікація (6-й Полк ССО).</p>
           <p><strong>2000-2009:</strong> IT-системи, управління, KPI, B2B, логістика, проєктний менеджмент; +92% продажів у 2006, TOP-3 по продуктовій лінійці Henkel.</p>
         </section>
       </aside>
@@ -455,7 +506,7 @@
           </div>
 
           <div class="case">
-            <div class="case-title">InfoOps / StratCom для підрозділу, 2024</div>
+            <div class="case-title">InfoOps / StratCom для 6-й Полк Рейнджери, 2024</div>
             <p>Тип: військова комунікація / рекрутинг / медіа.<br>
             Публічний маркер: <a href="https://bit.ly/Korni">bit.ly/Korni</a></p>
             <ul>
@@ -473,7 +524,7 @@
           </div>
 
           <div class="case">
-            <div class="case-title">Braschi / Russia Cristiana — network profiling</div>
+            <div class="case-title">Braschi / Russia Cristiana — network profiling (RU-Italy-UA)</div>
             <p>Мережеве OSINT-дослідження Francesco Braschi / Russia Cristiana / ПСТГУ / російських культурно-релігійних інституцій: actor profiling, network mapping, timeline reconstruction, source registry, role mapping.</p>
             <p>Матеріали: <a href="https://infovarta.notion.site/309d7fb5fd9a80b6b621c21ce233b8ba">Аналітичний звіт: верифікація гіпотези «Агент м'якої сили РФ»</a> · <a href="https://infovarta.notion.site/_-308d7fb5fd9a80198f40ee491df41d18">Francesco Braschi — OSINT profile</a> · <a href="https://infovarta.notion.site/v2-309d7fb5fd9a80689d69e4e2f7647bee">Хронологія візитів в Україну, 2010–2020</a> · <a href="https://infovarta.notion.site/OSINT-v4-309d7fb5fd9a80aab298f2abe0adc735">OSINT-досьє v4: Адольф Овчинніков</a>.</p>
           </div>
@@ -577,12 +628,6 @@
           </ul>
         </section>
 
-        <section>
-          <h2>Аналітичний підхід</h2>
-          <div class="note">
-            Працюю у джерельно-доказовій логіці: кожне твердження має походити з конкретного джерела або явно маркуватися як припущення / прогалина / непідтверджене. Ланцюжок: джерело → витяг → перевірка → суперечності → висновок → звіт.
-          </div>
-        </section>
       </div>
     </div>
   </main>
