@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CV — Корнієнко Олександр / Нестор Воля</title>
+  <style>
+    :root {
+      --bg: #f4f1eb;
+      --ink: #181818;
+      --muted: #57514a;
+      --line: #d8cfc0;
+      --panel: #fffaf2;
+      --dark: #111418;
+      --accent: #b2382f;
+      --accent2: #1e6f68;
+      --gold: #b88724;
+      --link: #064f8f;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      text-align: justify;
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.48;
+      letter-spacing: 0;
+    }
+
+    a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 28px 22px 64px;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    button {
+      border: 1px solid #2b2f35;
+      background: #1d232b;
+      color: #fff;
+      padding: 9px 13px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 650;
+    }
+
+    .hero {
+      background: var(--dark);
+      color: #f7efe3;
+      border-radius: 10px;
+      padding: 30px;
+      display: grid;
+      grid-template-columns: 1.55fr .95fr;
+      gap: 26px;
+      box-shadow: 0 18px 42px rgba(17, 20, 24, .22);
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 34px;
+      line-height: 1.05;
+      font-weight: 800;
+    }
+
+    .subtitle {
+      color: #d7c9b5;
+      font-size: 18px;
+      font-weight: 650;
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      margin: 0 0 12px;
+      color: #f2e7d6;
+      max-width: 760px;
+    }
+
+    .status-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .status-box {
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.07);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .label {
+      display: block;
+      color: #bcae9b;
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .status-box a { color: #f5d48a; }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+      margin-bottom: 18px;
+    }
+
+    .chip {
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.08);
+      color: #fff4df;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: .92fr 1.55fr;
+      gap: 22px;
+      margin-top: 24px;
+    }
+
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      margin: 0 0 13px;
+      font-size: 20px;
+      line-height: 1.15;
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 8px;
+    }
+
+    h3 {
+      margin: 18px 0 8px;
+      font-size: 16px;
+      color: #2a2723;
+    }
+
+    p { margin: 0 0 11px; }
+    ul { margin: 8px 0 0; padding-left: 20px; }
+    li { margin: 5px 0; }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px;
+      margin-top: 12px;
+    }
+
+    .metric {
+      border-left: 4px solid var(--accent2);
+      background: #f5eadb;
+      padding: 10px;
+      border-radius: 6px;
+      min-height: 70px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 20px;
+      line-height: 1.05;
+      color: #1f4743;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .case {
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+      margin-top: 14px;
+    }
+
+    .case:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+      margin-top: 0;
+    }
+
+    .case-title {
+      font-weight: 800;
+      color: #111;
+      font-size: 17px;
+      margin-bottom: 6px;
+    }
+
+    .note {
+      border-left: 4px solid var(--gold);
+      background: #f8edda;
+      border-radius: 6px;
+      padding: 12px;
+      color: #2d2922;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .role-list li strong,
+    .stack-list li strong {
+      color: #2b2926;
+    }
+
+    .print-hint {
+      color: var(--muted);
+      font-size: 12px;
+      text-align: right;
+      margin-top: 6px;
+    }
+
+    .group-label {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 5px;
+      margin: 22px 0 14px;
+    }
+    .group-label:first-child { margin-top: 4px; }
+    .group-note { font-size: 13px; color: var(--muted); margin: -8px 0 14px; }
+    .print-stack, .analytic-note { display: none; }
+
+    @media (max-width: 900px) {
+      .hero, .layout { grid-template-columns: 1fr; }
+      h1 { font-size: 29px; }
+      .page { padding: 16px 12px 40px; }
+    }
+
+    @media print {
+      body { background: white; font-size: 9.5pt; line-height: 1.35; text-align: justify; }
+      .page { max-width: none; padding: 6mm 8mm; }
+      .toolbar, .print-hint { display: none; }
+
+      .hero {
+        background: white !important;
+        color: #111 !important;
+        border: none;
+        border-bottom: 1.5px solid #bbb;
+        border-radius: 0;
+        box-shadow: none;
+        padding: 10px 0;
+        grid-template-columns: 1.55fr .95fr;
+        gap: 14px;
+      }
+      h1 { color: #111; font-size: 20px; margin: 0 0 3px; }
+      .subtitle { color: #333; font-size: 13px; margin-bottom: 8px; }
+      .hero p { color: #222; margin: 0 0 5px; font-size: 9pt; }
+      .status-grid { gap: 5px; }
+      .status-box { border: 1px solid #bbb; background: #f4f4f4; padding: 5px 7px; border-radius: 0; }
+      .label { color: #444; font-size: 9px; margin-bottom: 2px; }
+      .status-box a { color: #064f8f; }
+      .chips { gap: 4px; margin-top: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+      .chip { border: 1px solid #888; background: #eee; color: #222; padding: 2px 7px; font-size: 9px; border-radius: 3px; }
+
+      .layout {
+        display: grid;
+        grid-template-columns: .92fr 1.55fr;
+        gap: 14px;
+        margin-top: 10px;
+      }
+
+      section {
+        background: white;
+        border: none;
+        border-top: 1.5px solid #ccc;
+        border-radius: 0;
+        box-shadow: none;
+        margin-bottom: 6px;
+        padding: 7px 0 4px;
+        break-inside: avoid;
+      }
+      h2 { font-size: 11pt; margin: 0 0 6px; padding-bottom: 3px; border-bottom: 1.5px solid #ccc; }
+      h3 { font-size: 9.5pt; margin: 7px 0 3px; }
+      p { margin: 0 0 4px; }
+      ul { margin: 3px 0 0; padding-left: 16px; }
+      li { margin: 1px 0; }
+
+      .case { break-inside: avoid; border-top: 1px solid #ddd; padding-top: 6px; margin-top: 6px; }
+      .case:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+      .case-title { font-size: 10pt; margin-bottom: 3px; }
+      .kurs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 14px; }
+      .kurs-grid .case { font-size: 8pt; line-height: 1.3; padding-top: 5px; margin-top: 5px; }
+      .kurs-grid .case-title { font-size: 8.5pt; margin-bottom: 2px; }
+      .kurs-grid p, .kurs-grid .small { margin: 1px 0; font-size: 7.5pt; }
+
+      .metric-grid { grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 5px; }
+      .metric { background: #fff; border: 1px solid #ccc; border-left: 3px solid #555; padding: 5px; min-height: auto; }
+      .metric strong { font-size: 14px; }
+      .metric span { font-size: 9px; }
+
+      .note { padding: 7px; border-left: 3px solid #b88724; background: #fdf6e8; }
+      .group-label { margin: 10px 0 5px; padding-bottom: 3px; font-size: 10px; border-bottom: 1.5px solid #bbb; }
+      .group-note { font-size: 9px; margin: -2px 0 6px; }
+
+      a { color: #064f8f; text-decoration: none; }
+      .small { font-size: 8.5pt; }
+
+      .no-print-stack { display: none !important; }
+      .print-stack {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 0;
+        border: 1px solid #999;
+        background: #ececec;
+        margin: 7px 0 0;
+        font-size: 7.5pt;
+        line-height: 1.3;
+        break-inside: avoid;
+      }
+      .ps-item {
+        flex: 1;
+        padding: 5px 7px;
+        border-right: 1px solid #bbb;
+      }
+      .ps-item:last-child { border-right: none; }
+      .ps-item strong {
+        display: block;
+        font-size: 7pt;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #333;
+        margin-bottom: 2px;
+        font-weight: 800;
+      }
+      @page { margin: 6mm 8mm; }
+      .analytic-note {
+        display: block;
+        font-size: 7.5pt;
+        color: #555;
+        font-style: italic;
+        text-align: right;
+        padding: 4px 2px 5px;
+        border-top: 1px solid #ccc;
+        margin-bottom: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="toolbar">
+      <button onclick="window.print()">Зберегти PDF / друк</button>
+    </div>
+
+    <header class="hero">
+      <div>
+        <h1>Корнієнко Олександр / Нестор Воля</h1>
+        <div class="subtitle">OSINT · мережева розвідка · InfoOps · аналіз акторів і мереж впливу</div>
+        <p>OSINT-аналітик, дослідник інформаційних операцій і мереж іноземного впливу. Не чистий технар і не чистий аналітик — сильна сторона в поєднанні: OSINT, військовий контекст, actor profiling, виявлення координованої поведінки і технічна автоматизація збору та аналізу.</p>
+        <p>Практика ручного OSINT з 2000-х: корпоративні розслідування (антирейдерство 2006–2008), акторський аналіз (Braschi, Чекаль), RU-мережевий OSINT, графовий аналіз Telegram-мереж, довгострокова мережева робота з чеченською/ічкерійською діаспорою (2019–2025).</p>
+        <p>AI-шар: Python / FastAPI / PostgreSQL / RAG / NER — від автоматизованих пайплайнів збору до виявлення закономірностей у великих масивах даних.</p>
+        <p>Курс robot_dreams "AI для OSINT і розвідки": фінальна стадія, топова позиція в рейтингу.</p>
+        <div class="chips">
+          <span class="chip">OSINT</span>
+          <span class="chip">InfoOps</span>
+          <span class="chip">Network analysis</span>
+          <span class="chip">Actor profiling</span>
+          <span class="chip">InfoOps detection</span>
+          <span class="chip">AI automation</span>
+          <span class="chip">Python / FastAPI</span>
+          <span class="chip">RAG / NER</span>
+          <span class="chip">PostgreSQL / pgvector</span>
+          <span class="chip">Gephi / Neo4j</span>
+        </div>
+        <p>Громадська та медійна діяльність: ініціатива #інфоВАРТА, публікації dev.ua і DOU, YouTube-канал «Нестор Воля». Широка мережа суспільних контактів.</p>
+        <p>Освіта і навчання: магістр (інвестиційний менеджмент); курси прес-офіцерів ЗСУ / ВІКНУ, 2024; robot_dreams "AI для OSINT і розвідки", 2026 — топова позиція в рейтингу курсу, курсовий проєкт. 2000–2009: IT-системи, управління, KPI, B2B, логістика, проєктний менеджмент.</p>
+      </div>
+      <aside class="status-grid">
+        <div class="status-box">
+          <span class="label">Статус</span>
+          Доброволець з лютого 2022, заст. комбата з МПЗ у добробаті · ЗСУ з липня 2022 · УБД · старший сержант · ССО · оборона Києва · Херсонщина / фарватер Дніпра · Новопавлівський напрямок (ДШВ) · ВІКНУ, курси прес-офіцерів · допуск до держтаємниці
+        </div>
+        <div class="status-box">Київ</div>
+        <div class="status-box">+38097 817 0416 · Signal · WhatsApp</div>
+        <div class="status-box">
+          <span class="label">Профілі</span>
+          <a href="https://dou.ua/users/nestor-volya/topics/">DOU</a> ·
+          <a href="https://github.com/NestorVolya">GitHub</a> ·
+          <a href="https://linkedin.com/in/kornisan">LinkedIn</a> ·
+          <a href="https://www.facebook.com/nestorvolya">Facebook</a> ·
+          <a href="https://www.youtube.com/channel/UCfZqkVkfPCYuBvdukNCU0ag">YouTube</a>
+        </div>
+        <div class="status-box">
+          <span class="label">Кейси</span>
+          <a href="https://gist.github.com/NestorVolya/7997de7361e244ab9f1a1f9a3f818e9c">Braschi (звіт)</a> ·
+          <a href="https://dev.ua/blogs/posts/vidmovliaiutsia-vid-spivpratsi-rf-blog">Rentafont</a> ·
+          <a href="https://web.archive.org/web/20260129202211/https://uk.wikipedia.org/wiki/Чекаль_Олексій_Георгійович">Chekal</a>
+        </div>
+        <div class="status-box">
+          <span class="label">Громадська / медіа</span>
+          <a href="https://abetkarutenia.com.ua/infovarta/">#інфоВАРТА / Рутенія</a> ·
+          <a href="https://www.youtube.com/playlist?list=PLvWGYwWTV4rUegjlxb8jqkXMSvfujUjaz">Ічкерійська діаспора playlist</a>
+        </div>
+      </aside>
+    </header>
+    <div class="print-hint">Для PDF: кнопка зверху або Ctrl+P → Save as PDF.</div>
+
+    <div class="print-stack">
+      <div class="ps-item"><strong>OSINT</strong> Збір → перевірка → chain of custody: Wayback Machine, WHOIS/DNS, BuiltWith, urlscan, Google operators, Berkeley Protocol, source registry, Notion</div>
+      <div class="ps-item"><strong>Data / AI</strong> Python, FastAPI, PostgreSQL, pgvector, RAG, NER, Gemini, Claude, NotebookLM, Perplexity, LLM Guard, agentic workflows</div>
+      <div class="ps-item"><strong>Automation</strong> Playwright, Crawl4AI, Jina, Exa, Tavily, n8n, API pipelines</div>
+      <div class="ps-item"><strong>Graphs</strong> Gephi, Neo4j, NetworkX, pyvis, PageRank, modularity</div>
+      <div class="ps-item"><strong>Runtime / VPS</strong> Docker, nginx, Traefik, SSL/TLS, Ubuntu, Git</div>
+    </div>
+    <div class="analytic-note">Джерельно-доказова логіка: джерело → витяг → перевірка → суперечності → звіт. Кожне твердження — конкретне джерело або явна прогалина.</div>
+
+    <div class="layout">
+      <aside>
+        <section>
+          <h2>Цільові ролі</h2>
+          <ul class="role-list">
+            <li>OSINT-аналітик / дослідник інформаційних операцій.</li>
+            <li>Аналіз мереж іноземного впливу: actor profiling, network mapping, timeline reconstruction.</li>
+            <li>Верифікація та доказова робота: Berkeley Protocol, source registry, chain of custody.</li>
+            <li>Технічний OSINT / AI-автоматизація пайплайнів збору та аналізу.</li>
+            <li>Гібридна роль: OSINT + дані + intelligence product + військовий контекст.</li>
+          </ul>
+        </section>
+
+        <section class="no-print-stack">
+          <h2>Практичний стек</h2>
+          <ul class="stack-list">
+            <li><strong>OSINT:</strong> Wayback Machine, WHOIS/DNS, BuiltWith, urlscan, Google operators, source registry.</li>
+            <li><strong>Data / AI:</strong> Python, FastAPI, PostgreSQL, pgvector, SQLite, JSON Schema, RAG, NER, Gemini, Claude, NotebookLM, Perplexity, LLM Guard, agentic workflows (tool use, multi-step orchestration).</li>
+            <li><strong>Automation:</strong> Playwright, Crawl4AI, Jina, Exa, Tavily, n8n (agentic workflows), API pipelines, browser automation.</li>
+            <li><strong>Graphs:</strong> Gephi, Neo4j, NetworkX, pyvis, PageRank, modularity, weighted degree.</li>
+            <li><strong>Runtime / VPS:</strong> Docker, VPS Linux server (nginx, Traefik, Let's Encrypt, reverse proxy, SSL/TLS, контейнерна ізоляція), Ubuntu/Linux, Git/GitHub, smoke checks, backup-before-change discipline.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Практична цінність</h2>
+          <ul>
+            <li>Швидко розгорнути evidence-based OSINT-профіль по особі, організації або мережі.</li>
+            <li>Підготувати аналітичний звіт, інформаційну довідку або візуалізацію для командира / аналітичного підрозділу.</li>
+            <li>Виявляти закономірності координації та мережеві зв'язки у масивах публічних даних.</li>
+            <li>Побудувати повторюваний процес збору, перевірки, архівації й звітності.</li>
+            <li>Автоматизувати рутинні OSINT / document-analysis задачі через Python, API, бази даних і LLM.</li>
+            <li>Працювати з обмеженим залізом і бюджетом, підбираючи практичну архітектуру під наявні ресурси.</li>
+            <li>Не підміняти факти враженнями: розділяти джерело, припущення, висновок і прогалину.</li>
+          </ul>
+        </section>
+      </aside>
+
+      <div>
+        <section>
+          <h2>Ключова відповідність</h2>
+          <p><strong>OSINT-аналітик / мережева розвідка:</strong> збір з відкритих джерел, соціальні мережі, форуми, новинні сайти, реєстри, перевірка достовірності, аналітичні звіти, інформаційні довідки, візуалізації, робота з великими масивами даних.</p>
+          <p><strong>Аналіз мереж впливу / InfoOps-виявлення:</strong> actor profiling, network mapping, Gephi/Neo4j графи, виявлення координованої поведінки, класифікація ролей (source / retransmitter / amplifier / bridge), аналіз Telegram-каналів, clone-media операції.</p>
+          <p><strong>AI / технічний OSINT:</strong> Python, FastAPI, API, Playwright, NER, RAG-архітектура, векторний пошук, Docker, дата-пайплайни, інтеграція LLM у прикладні аналітичні процеси.</p>
+          <p><strong>Верифікація та доказова робота:</strong> Berkeley Protocol, chain of custody, геолокація, хронолокація, SHA-256 верифікація, source registry, Evidence Score — стандарти документування для використання в матеріалах з юридичним або оперативним значенням.</p>
+        </section>
+
+        <section>
+          <h2>Ключові проєкти й кейси</h2>
+
+          <div class="group-label">Незалежні проєкти</div>
+
+          <div class="case">
+            <div class="case-title">Braschi / Russia Cristiana — network profiling (RU-Italy-UA)</div>
+            <p>Мережеве OSINT-дослідження Francesco Braschi / Russia Cristiana / ПСТГУ / російських культурно-релігійних інституцій: actor profiling, network mapping, timeline reconstruction, source registry, role mapping. Висновок: 80–90% ймовірність вектора м'якої сили РФ, виключно OSINT-методи.</p>
+            <p>Матеріали: <a href="https://gist.github.com/NestorVolya/7997de7361e244ab9f1a1f9a3f818e9c">Аналітичний звіт (GitHub)</a> · <a href="https://infovarta.notion.site/_-308d7fb5fd9a80198f40ee491df41d18">Francesco Braschi — OSINT profile</a> · <a href="https://infovarta.notion.site/v2-309d7fb5fd9a80689d69e4e2f7647bee">Хронологія візитів в Україну, 2010–2020</a> · <a href="https://infovarta.notion.site/OSINT-v4-309d7fb5fd9a80aab298f2abe0adc735">OSINT-досьє v4: Адольф Овчинніков</a>.</p>
+          </div>
+
+          <div class="case">
+            <div class="case-title">Ічкерійська діаспора, 2019–2025 — HUMINT-суміжна мережева робота</div>
+            <p>Багаторічна мережева робота з чеченською/ічкерійською діаспорою: actor mapping, розуміння фракцій і ліній впливу, довгострокові контакти, публічні події, медіа.</p>
+            <p class="small"><a href="https://bit.ly/IchkeriaNestor">bit.ly/IchkeriaNestor</a> · <a href="https://www.youtube.com/playlist?list=PLvWGYwWTV4rUegjlxb8jqkXMSvfujUjaz">YouTube playlist</a></p>
+          </div>
+
+          <div class="case">
+            <div class="case-title">Чекаль / Wikipedia OSINT — ручний складний кейс</div>
+            <p>Критично важкий ручний OSINT-кейс: пошук, архіви, Wayback Machine, реконструкція таймлайну, матриця "слова vs дії", джерельна класифікація, оцінка рівня довіри до фактів, підготовка статті й аналітичного досьє.</p>
+            <p>Публічне підтвердження: <a href="https://web.archive.org/web/20260129202211/https://uk.wikipedia.org/wiki/Чекаль_Олексій_Георгійович">архівована стаття Wikipedia</a>, 170 верифікованих джерел.</p>
+          </div>
+
+          <div class="case">
+            <div class="case-title">Rentafont — корпоративний OSINT / інфраструктурні зв'язки з РФ</div>
+            <p>Публічне розслідування українського сервісу оренди шрифтів і його RF-зв'язків. Методи: Wayback Machine, WHOIS/DNS, MX/TXT/A records, <code>.ru</code> домени, BuiltWith, архіви ліцензій, Google operators.</p>
+            <p>Публікації: <a href="https://dev.ua/blogs/posts/vidmovliaiutsia-vid-spivpratsi-rf-blog">dev.ua</a> і <a href="https://dou.ua/forums/topic/47877/">DOU</a>.</p>
+          </div>
+
+          <div class="case">
+            <div class="case-title">HARON / tck-bot — solo-продукт для підтримки рішень</div>
+            <p>Створив автоматизовану систему підтримки рішень для мобілізаційного відбору 144 Центр ССО: Python / FastAPI / PostgreSQL / Docker. Маршрут: Signal-запит → WhatsApp-контрагент → PDF → AI-аналіз → висновок адміну. SLA-ескалації, реєстр кандидатів (<code>mobzakhody</code>), безпековий контур: ізоляція сервісів, шифрування артефактів.</p>
+          </div>
+
+          <div class="case">
+            <div class="case-title">Facebook scraping pipeline — service design (in progress)</div>
+            <p>Playwright-based collector публічних Facebook-сторінок (без авторизації). 4-phase архітектура: Collection → Semantic enrichment → Geo+time normalization → Clustering / coordination detection.</p>
+            <p class="small">Статус: service evaluation stage, isolated sidecar → production service candidate після bounded runtime test.</p>
+          </div>
+
+          <div class="group-label" style="break-before: page; page-break-before: always;">Курс robot_dreams — «AI для OSINT і розвідки» (2026)</div>
+          <p class="group-note">Практичні завдання курсу: OSINT-пайплайни, AI-автоматизація, верифікація, мережевий аналіз, ML-класифікація. Репозиторій: <a href="https://github.com/NestorVolya/osint-homework-2026">osint-homework-2026</a></p>
+
+          <div class="kurs-grid">
+          <div class="case">
+            <div class="case-title">Doppelganger (Italy / EU Elections)</div>
+            <p>OSINT-звіт по проросійській clone-media operation з фокусом на Італію. Актори: Social Design Agency + Structura National Technologies (санкції EU 2023, US Treasury 2024).</p>
+            <p>Методи: typosquatting (ANSA, La Stampa, La Repubblica), платна реклама Meta (98 оголошень 2023), 1&nbsp;300+ постів на X під час виборів до ЄП (4,6 млн переглядів), AI-generated content, VK-координація.</p>
+            <p class="small">Результат: 5 narrative-кластерів, 16 джерел у таблиці, HTML/MD-версії звіту.</p>
+            <p class="small">Репозиторій: <a href="https://github.com/NestorVolya/osint-homework-2026/tree/main/%D0%94%D0%97-11-Nestor-V">ДЗ-11-Nestor-V</a></p>
+          </div>
+
+          <div class="case">
+            <div class="case-title">Telegram / RU-сегмент — графовий аналіз інформаційної мережі</div>
+            <p>OSINT-дослідження проросійських і регіональних Telegram-каналів через GroupInt, Neo4j та Gephi. 15&nbsp;100 повідомлень (11&nbsp;781 з текстом); граф: 70 вузлів / 68 ребер → 60 / 58 після conservative deduplication.</p>
+            <p>Виявлено 3-4 community clusters; найсильніший weighted degree: 3404 (<code>Republic_Of_GaGauZia</code>); найвищий PageRank: 0.0168 (<code>primulinmd</code>); 4 синхронні exact-text вікна між <code>MoldovaPolitics</code> і <code>gagauznewsmd</code> у межах 5.3–18 хв.</p>
+            <p class="small">Висновки подані обережно: синхронність і повторюваність розглянуті як індикатори, а не як автоматичний доказ координації.</p>
+          </div>
+
+          <div class="case">
+            <div class="case-title">orthodox_news — незалежне Telegram-дослідження (in progress)</div>
+            <p>Окреме дослідження за методологією ДЗ-12, реальний об'єкт: <code>@orthodox_news</code> (Антифон — Православні Новини). GroupInt scrape → Neo4j → Gephi: 8&nbsp;000 повідомлень, 105 raw ENDORSES edges, GEXF-граф побудовано.</p>
+            <p class="small">В процесі: Gephi metrics, класифікація ролей (source / retransmitter / amplifier / bridge), pattern matching, мінізвіт.</p>
+          </div>
+
+          <div class="case">
+            <div class="case-title">Bot Detection — статистичний ML-аналіз акаунтів</div>
+            <p>Класифікація акаунтів соцмереж (людина / бот): 500 акаунтів (350 людей, 150 ботів), 5 ознак. Методи: logistic regression, K-Means + DBSCAN, Pearson/Spearman кореляція, feature engineering.</p>
+            <p class="small">Ключовий висновок: частота дублікатів і posting frequency — найсильніші дискримінатори. Паралель із OSINT source evaluation: duplication rate → шум, posting frequency → агрегатори, account age → глибина архіву.</p>
+            <p class="small">Репозиторій: <a href="https://github.com/NestorVolya/osint-homework-2026/tree/main/%D0%94%D0%97-17-Nestor-V">ДЗ-17-Nestor-V</a></p>
+          </div>
+
+          <div class="case">
+            <div class="case-title">Actor OSINT pipeline — курсовий проєкт (КР)</div>
+            <p>Фінальний проєкт курсу (standalone production version). Автоматизований пайплайн профілювання акторів: збір (Exa + Tavily), relevance gates, deduplication, timeline, statements, network links (NER + spaCy), geoclusters, Corpus Health Score, HTML-досьє, ZIP evidence archive. Docker-деплой, підтримка --seed / --seed_type.</p>
+          </div>
+
+          <div class="case">
+            <div class="case-title">Bucha / Maxar / Berkeley Protocol</div>
+            <p>Верифікація супутникового матеріалу Maxar (WorldView-3) по Бучі за Берклійським протоколом. Chain of custody: Maxar → AP → Reuters / NYT / Bellingcat / Amnesty. Геолокація: вул. Яблунська, точність &lt;3.5 м; хронолокація: вікно 9–30 березня 2022, ~19 березня, тіла зафіксовані за 11 днів до відходу РФ. Evidence Score 4.43/5, SHA-256 верифіковано.</p>
+            <p class="small">Репозиторій: <a href="https://github.com/NestorVolya/osint-homework-2026/tree/main/%D0%94%D0%97-20-Nestor-V">ДЗ-20-Nestor-V</a></p>
+          </div>
+
+          <div class="case">
+            <div class="case-title">ArkhamMirror SHATTERED — локальна OSINT-платформа</div>
+            <p>ArkhamMirror SHATTERED v0.1.0: production-рівень OSINT-платформа на Docker-стеку (FastAPI + PostgreSQL + pgvector). ~217&nbsp;000 рядків коду, 400+ API endpoints, 25 active shards.</p>
+            <p>Інтеграція MindsDB 26.0.1 + Gemini 2.5 Flash: SQL-запити до OSINT-реєстру (FACT / SOURCE / GAP / DISC / ENTITY), AI-агент <code>chekal_analyst</code>, hybrid search pgvector. Розгорнуто локально (Windows 10 Pro) — production-архітектура в resource-constrained середовищі.</p>
+            <p class="small">Репозиторій: <a href="https://github.com/NestorVolya/osint-homework-2026/tree/main/%D0%94%D0%97-03/dz-mindsdb-arkham-Nestor-V">ДЗ-03 / dz-mindsdb-arkham-Nestor-V</a></p>
+          </div>
+          </div><!-- /kurs-grid -->
+        </section>
+
+
+      </div>
+    </div>
+  </main>
+</body>
+</html>
