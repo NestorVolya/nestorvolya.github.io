@@ -132,6 +132,42 @@
       .doc-header { padding: 22px 18px; }
       .doc-header h1 { font-size: 22px; }
     }
+    .lb-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.9);
+      z-index: 1000;
+      cursor: zoom-out;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .lb-overlay.active { display: flex; }
+    .lb-overlay img {
+      max-width: 92vw;
+      max-height: 92vh;
+      border-radius: 4px;
+      box-shadow: 0 4px 60px rgba(0,0,0,.6);
+      cursor: default;
+      object-fit: contain;
+    }
+    .lb-close {
+      position: fixed;
+      top: 14px;
+      right: 20px;
+      color: #fff;
+      font-size: 38px;
+      cursor: pointer;
+      line-height: 1;
+      opacity: .7;
+      background: none;
+      border: none;
+      padding: 4px 10px;
+      z-index: 1001;
+    }
+    .lb-close:hover { opacity: 1; }
+    .img-gallery img, img.img-wide { cursor: zoom-in; }
   </style>
 </head>
 <body>
@@ -272,7 +308,6 @@
   <h2>Зйомки та фотоконтент</h2>
   <p>Співорганізатор зйомок на полігонах полку для контенту дописів і відео. Автор ідей, фото та відеоматеріалів для більшості оригінальних дописів у соціальних мережах Рейнджерів у червні–вересні 2024. Фотографування здійснювалось поза функціональних обов'язків, в поміч штатному фотографу.</p>
   <p>Понад <strong>20 авторських фотоальбомів</strong>; матеріали передано на КСССО для книги-календаря ССО на 2025 рік. Засновано архів «літопису» полку.</p>
-  <p><a href="https://photos.app.goo.gl/1Ji5QTs8njshR3jQA">Фотоальбоми (Google Photos)</a></p>
   <img src="assets/ranger-2024/image%202.png" alt="Зйомки на полігоні" class="img-wide">
   <img src="assets/ranger-2024/image%203.png" alt="Зйомки на полігоні" class="img-wide">
   <img src="assets/ranger-2024/image%205.png" alt="Дописи у соціальних мережах Рейнджерів" class="img-wide">
@@ -318,5 +353,23 @@
 </div>
 
 </main>
+<div class="lb-overlay" id="lb">
+  <button class="lb-close" id="lb-close">×</button>
+  <img id="lb-img" src="" alt="">
+</div>
+<script>
+  const lb = document.getElementById('lb');
+  const lbImg = document.getElementById('lb-img');
+  document.querySelectorAll('.img-gallery img, img.img-wide').forEach(img => {
+    img.addEventListener('click', () => {
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lb.classList.add('active');
+    });
+  });
+  lb.addEventListener('click', e => { if (e.target !== lbImg) lb.classList.remove('active'); });
+  document.getElementById('lb-close').addEventListener('click', () => lb.classList.remove('active'));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('active'); });
+</script>
 </body>
 </html>
