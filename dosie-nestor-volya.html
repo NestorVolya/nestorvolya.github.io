@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Нестор Воля — Профіль</title>
+  <style>
+    :root {
+      --bg: #f4f1eb;
+      --ink: #181818;
+      --muted: #57514a;
+      --line: #d8cfc0;
+      --panel: #fffaf2;
+      --dark: #111418;
+      --accent: #b2382f;
+      --accent2: #1e6f68;
+      --gold: #b88724;
+      --link: #064f8f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+    .page { max-width: 860px; margin: 0 auto; padding: 32px 24px 80px; }
+
+    .doc-header {
+      background: var(--dark);
+      color: #f7efe3;
+      border-radius: 10px;
+      padding: 32px 36px;
+      margin-bottom: 28px;
+    }
+    .doc-header h1 { margin: 0 0 6px; font-size: 28px; font-weight: 800; line-height: 1.1; }
+    .doc-header .subtitle { color: #d7c9b5; font-size: 16px; font-weight: 650; margin-bottom: 12px; }
+    .doc-header p { color: #f2e7d6; margin: 0 0 8px; font-size: 15px; }
+    .doc-header a { color: #f5d48a; }
+    .nav { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+    .nav a {
+      border: 1px solid rgba(255,255,255,.25);
+      background: rgba(255,255,255,.1);
+      color: #fff4df;
+      padding: 7px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .nav a:hover { background: rgba(255,255,255,.2); }
+
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+    }
+    h2 { margin: 0 0 16px; font-size: 20px; border-bottom: 2px solid var(--line); padding-bottom: 8px; }
+    h3 { margin: 20px 0 10px; font-size: 16px; color: #2a2723; }
+    p { margin: 0 0 12px; }
+    ul { margin: 8px 0 12px; padding-left: 22px; }
+    li { margin: 6px 0; }
+
+    .timeline-item {
+      border-left: 3px solid var(--line);
+      padding: 0 0 18px 18px;
+      margin-bottom: 6px;
+      position: relative;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 4px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent2);
+      border: 2px solid var(--bg);
+    }
+    .timeline-date {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 5px;
+    }
+
+    .case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+    .case-card {
+      background: #f0ece4;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 12px 14px;
+    }
+    .case-card a { display: block; font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+    .case-card p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .img-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 8px;
+      margin: 14px 0;
+    }
+    .img-gallery img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 6px;
+      display: block;
+    }
+
+    .contact-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+    .contact-row a {
+      background: #f0ece4;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 7px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--link);
+    }
+
+    .ranger-link {
+      display: block;
+      background: var(--dark);
+      color: #f5d48a;
+      border-radius: 8px;
+      padding: 14px 18px;
+      text-decoration: none;
+      font-weight: 700;
+      margin-top: 14px;
+      font-size: 15px;
+    }
+    .ranger-link:hover { opacity: .88; }
+
+    .page-footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      padding: 24px 0 0;
+      border-top: 1px solid var(--line);
+      margin-top: 10px;
+    }
+    .page-footer a { color: var(--link); }
+
+    @media (max-width: 640px) {
+      .case-grid { grid-template-columns: 1fr; }
+      .page { padding: 16px 14px 60px; }
+      .doc-header { padding: 22px 18px; }
+      .doc-header h1 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+<main class="page">
+
+<div class="doc-header">
+  <h1>Корнієнко Олександр / Нестор Воля</h1>
+  <div class="subtitle">OSINT-аналітик · громадський діяч · ССО ЗСУ</div>
+  <p>Старший сержант, 6-й Окремий Полк ССО «Рейнджер». Дослідник інформаційних операцій і мереж впливу. Медіа, комунікації, AI-автоматизація.</p>
+  <div class="nav">
+    <a href="cv-sso.html">CV (OSINT / SSO)</a>
+    <a href="ranger-nestor-volya-2024.html">Рейнджер 2024 →</a>
+    <a href="https://github.com/NestorVolya">GitHub</a>
+    <a href="https://www.youtube.com/channel/UCfZqkVkfPCYuBvdukNCU0ag">YouTube</a>
+  </div>
+</div>
+
+<section>
+  <h2>Довоєнна діяльність</h2>
+  <p>Активна волонтерська та громадська діяльність. Співзасновник <a href="https://abetkarutenia.com.ua/infovarta/">Громадської Ініціативи інфоВАРТА</a> — автор і ведучий репортажів та ефірів на <a href="https://www.youtube.com/channel/UCfZqkVkfPCYuBvdukNCU0ag">YouTube-каналі «Нестор Воля»</a>. Блогер, громадський діяч. Широка мережа суспільних контактів.</p>
+
+  <h3>Ключові ініціативи</h3>
+  <ul>
+    <li>Торгова марка «THERMOS» (склади-холодильники), Дніпро</li>
+    <li><a href="https://www.linkedin.com/in/kornisan/">Особистий бренд «Kornisan»</a> — інженерні послуги</li>
+    <li>Співзасновник Української Спілки Блогерів (УСБ), редактор Маніфесту (2020)</li>
+    <li>Співорганізатор <a href="https://www.facebook.com/MZU2021/posts/122463476708818">Маршу Захисників України</a>, редактор Засадничих Принципів (2021)</li>
+    <li>Популяризатор впровадження національної абетки <a href="https://uk.wikipedia.org/wiki/Рутенія_(шрифт)">«Рутенія»</a> — авторства лауреата Шевченківської премії В.&nbsp;Я.&nbsp;Чебаника (<a href="https://abetkarutenia.com.ua/">abetkarutenia.com.ua</a>)</li>
+    <li>Організатор подій, виставок, показів патріотичних фільмів в зоні ООС (<a href="https://bit.ly/pro-infoVARTA">інфоВАРТА</a>)</li>
+    <li>Автор OSINT-досліджень і статей: <a href="https://dev.ua/blogs/posts/vidmovliaiutsia-vid-spivpratsi-rf-blog">dev.ua</a> · <a href="https://dou.ua/forums/topic/47877/">DOU</a> · <a href="https://drukarnia.com.ua/infoVARTA">Drukarnia</a></li>
+  </ul>
+
+  <div class="img-gallery">
+    <img src="assets/ranger-2024/FB_IMG_1726600712590.jpg" alt="">
+  </div>
+</section>
+
+<section>
+  <h2>Військова служба</h2>
+
+  <div class="timeline-item">
+    <div class="timeline-date">Лютий 2022</div>
+    <p><strong>Оборона Києва.</strong> Заступник командира батальйону з морально-психологічного забезпечення ДФТГ «Вільна Україна».</p>
+    <div class="img-gallery">
+      <img src="assets/ranger-2024/275512821_666622411121277_1623373609957654717_n.jpg" alt="">
+      <img src="assets/ranger-2024/275643113_666621217788063_7145262465342568449_n.jpg" alt="">
+      <img src="assets/ranger-2024/318551397_841294106987439_4231725473509997937_n.jpg" alt="">
+      <img src="assets/ranger-2024/280173293_118332967537333_7243421180365991694_n.jpg" alt="">
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-date">Липень 2022 — 2023</div>
+    <p><strong>ССО ЗСУ.</strong> Добровільно мобілізувався. Старшина роти спеціального призначення — Миколаївщина та Херсонщина. УБД Нова Каховка, літо 2023.</p>
+    <p><a href="https://espreso.tv/nezabarom-kherson-bude-otocheniy-ukrainskimi-viyskami-ofitser-rukhu-oporu-vilna-ukraina-volya">Espreso TV: «Незабаром Херсон буде оточений» — офіцер руху опору «Вільна Україна»</a></p>
+    <div class="img-gallery">
+      <img src="assets/ranger-2024/290279382_732340894549428_3349918690639521429_n.jpg" alt="">
+      <img src="assets/ranger-2024/347779755_611063430952055_737908436051160264_n.jpg" alt="">
+      <img src="assets/ranger-2024/318189295_841573130292870_1777739036766723587_n.jpg" alt="">
+      <img src="assets/ranger-2024/20240601_093620.jpg" alt="">
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-date">Травень 2024 — тепер</div>
+    <p><strong>6-й Окремий Полк ССО «Рейнджер» (Хмельницький).</strong> Переведений за власною ініціативою. Червень–вересень 2024 — медійні комунікації, рекрутинг, зв'язки з громадськістю.</p>
+    <a href="ranger-nestor-volya-2024.html" class="ranger-link">→ Детальний звіт про діяльність у Рейнджері, 2024</a>
+  </div>
+</section>
+
+<section>
+  <h2>OSINT та дослідницька діяльність</h2>
+  <p>Практика ручного OSINT з 2000-х: корпоративні розслідування (антирейдерство 2006–2008), акторський аналіз, RU-мережевий OSINT, графовий аналіз Telegram-мереж, InfoOps.</p>
+
+  <div class="case-grid">
+    <div class="case-card">
+      <a href="https://gist.github.com/NestorVolya/7997de7361e244ab9f1a1f9a3f818e9c">Braschi / Russia Cristiana — Аналітичний звіт (GitHub)</a>
+      <p>Мережа впливу Браскі (2000–2026) · actor profiling · network mapping · джерельно-доказова логіка</p>
+    </div>
+    <div class="case-card">
+      <a href="https://dev.ua/blogs/posts/vidmovliaiutsia-vid-spivpratsi-rf-blog">Rentafont — dev.ua</a>
+      <p>Корпоративний OSINT: інфраструктурні зв'язки з РФ · WHOIS/DNS · Wayback</p>
+    </div>
+    <div class="case-card">
+      <a href="https://web.archive.org/web/20260129202211/https://uk.wikipedia.org/wiki/Чекаль_Олексій_Георгійович">Чекаль / Wikipedia OSINT</a>
+      <p>Ручний складний кейс · архівний аналіз · таймлайн · матриця протиріч</p>
+    </div>
+    <div class="case-card">
+      <a href="https://github.com/NestorVolya/osint-homework-2026">Курс robot_dreams — GitHub</a>
+      <p>AI для OSINT: Actor pipeline · ArkhamMirror · Telegram · Berkeley Protocol · Doppelganger</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Контакти та посилання</h2>
+  <div class="contact-row">
+    <a href="cv-sso.html">CV</a>
+    <a href="https://github.com/NestorVolya">GitHub</a>
+    <a href="https://www.linkedin.com/in/kornisan/">LinkedIn</a>
+    <a href="https://dou.ua/forums/topic/47877/">DOU</a>
+    <a href="https://www.youtube.com/channel/UCfZqkVkfPCYuBvdukNCU0ag">YouTube</a>
+    <a href="https://www.facebook.com/nestorvolya">Facebook</a>
+  </div>
+  <p style="margin-top:12px;">+38 097 817 0416 · Signal · WhatsApp</p>
+</section>
+
+<div class="page-footer">
+  <a href="cv-sso.html">CV (OSINT / SSO / AI)</a> &nbsp;·&nbsp;
+  <a href="ranger-nestor-volya-2024.html">Рейнджер 2024 →</a> &nbsp;·&nbsp;
+  <a href="https://nestorvolya.github.io">nestorvolya.github.io</a>
+</div>
+
+</main>
+</body>
+</html>
