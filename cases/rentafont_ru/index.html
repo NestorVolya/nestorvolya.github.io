@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rentafont.RU — OSINT-розслідування | Нестор Воля</title>
+  <style>
+    :root {
+      --bg: #f4f1eb;
+      --ink: #181818;
+      --muted: #57514a;
+      --line: #d8cfc0;
+      --panel: #fffaf2;
+      --dark: #111418;
+      --accent: #b2382f;
+      --accent2: #1e6f68;
+      --gold: #b88724;
+      --link: #064f8f;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+    .page {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 28px 22px 80px;
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-btn {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .nav-btn:hover { border-color: var(--muted); text-decoration: none; }
+
+    .nav-tag {
+      font-size: 13px;
+      color: var(--muted);
+      padding: 6px 0;
+    }
+
+    header {
+      margin-bottom: 36px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--line);
+    }
+
+    h1 {
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin: 0 0 10px;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .meta span { margin: 0 6px; color: var(--line); }
+
+    .subtitle {
+      font-size: 17px;
+      color: var(--muted);
+      margin: 6px 0 14px;
+      font-weight: 400;
+      line-height: 1.3;
+    }
+
+    /* TL;DR summary block */
+    .summary-block {
+      background: var(--panel);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 22px 26px;
+      margin-bottom: 52px;
+    }
+
+    .summary-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin: 0 0 14px;
+    }
+
+    .summary-block h2 {
+      font-size: 19px;
+      font-weight: 800;
+      margin: 0 0 12px;
+      color: var(--ink);
+    }
+
+    .summary-block h3 {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      margin: 20px 0 7px;
+    }
+
+    .summary-block p {
+      margin: 0 0 10px;
+      font-size: 15px;
+    }
+
+    .summary-block ul {
+      margin: 0 0 10px;
+      padding-left: 20px;
+    }
+
+    .summary-block li {
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+
+    /* Full case body */
+    .case-body {
+      border-top: 1px solid var(--line);
+      padding-top: 44px;
+    }
+
+    .case-body-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin: 0 0 32px;
+    }
+
+    h3.sh {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent2);
+      margin: 44px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h3.sh:first-of-type { margin-top: 0; }
+
+    h4.sub {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 26px 0 8px;
+    }
+
+    .case-body p { margin: 0 0 14px; }
+
+    .case-body ul,
+    .case-body ol {
+      margin: 0 0 14px;
+      padding-left: 22px;
+    }
+
+    .case-body li { margin-bottom: 6px; }
+
+    code {
+      background: rgba(0,0,0,.07);
+      border-radius: 3px;
+      padding: 1px 5px;
+      font-size: .88em;
+      font-family: "Consolas", monospace;
+    }
+
+    /* Hypothesis boxes */
+    .hypothesis {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 12px;
+      background: #fff;
+    }
+
+    .hypothesis strong {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* Publications section */
+    .pubs {
+      border-top: 1px solid var(--line);
+      padding-top: 32px;
+      margin-top: 52px;
+    }
+
+    .pubs-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin: 0 0 14px;
+    }
+
+    .pubs ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .pubs li { margin-bottom: 6px; }
+
+    /* Inline evidence screenshots */
+    figure.evidence {
+      margin: 18px 0 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    figure.evidence a { display: block; }
+
+    figure.evidence img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    figure.evidence figcaption {
+      font-size: 13px;
+      color: var(--muted);
+      padding: 8px 14px;
+      border-top: 1px solid var(--line);
+      line-height: 1.4;
+    }
+
+    /* Gallery grid */
+    .gallery-section {
+      border-top: 1px solid var(--line);
+      padding-top: 32px;
+      margin-top: 52px;
+    }
+
+    .gallery-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin: 0 0 18px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 10px;
+    }
+
+    .gallery a {
+      display: block;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+
+    .gallery a:hover { border-color: var(--muted); text-decoration: none; }
+
+    .gallery img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .gallery a:hover img { opacity: .88; transition: opacity .15s; }
+
+    /* Words vs Actions timeline table */
+    .timeline {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin: 20px 0 28px;
+    }
+
+    .timeline th {
+      text-align: left;
+      background: var(--dark);
+      color: #f2e7d6;
+      padding: 9px 14px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .timeline th:first-child { border-radius: 6px 0 0 0; }
+    .timeline th:last-child { border-radius: 0 6px 0 0; }
+
+    .timeline td {
+      padding: 9px 14px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      line-height: 1.45;
+    }
+
+    .timeline tr:last-child td { border-bottom: none; }
+    .timeline tr:nth-child(even) td { background: rgba(0,0,0,.025); }
+
+    .timeline .col-date {
+      white-space: nowrap;
+      font-weight: 700;
+      color: var(--muted);
+      font-size: 13px;
+      width: 110px;
+    }
+
+    .timeline .col-words { color: var(--accent2); }
+    .timeline .col-actions { color: var(--accent); }
+
+    .timeline em { font-style: normal; font-weight: 700; }
+
+    /* Paradox highlight box */
+    .paradox-box {
+      background: #fff6f0;
+      border: 1px solid #e8b090;
+      border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 24px 0;
+    }
+
+    .paradox-box .p-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--accent);
+      margin: 0 0 10px;
+    }
+
+    .paradox-box p {
+      margin: 0 0 8px;
+      font-size: 15px;
+    }
+
+    .paradox-box p:last-child { margin: 0; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <nav>
+    <a class="nav-btn" href="/">← Головна</a>
+    <a class="nav-btn" href="/cv-sso.html">CV</a>
+    <span class="nav-tag">Кейс · OSINT due diligence</span>
+  </nav>
+
+  <header>
+    <h1>Rentafont.RU — OSINT-розслідування</h1>
+    <p class="subtitle">Зв'язки з рф-ринком: інфраструктура і цифровий слід</p>
+    <p class="meta">
+      2023–2024
+      <span>·</span>
+      Автор: <a href="/">Нестор Воля</a>
+    </p>
+  </header>
+
+  <!-- TL;DR / Executive summary -->
+  <div class="summary-block">
+    <p class="summary-label">Короткий огляд</p>
+    <h2>Що досліджувалось і що знайдено</h2>
+
+    <h3>Загальний огляд</h3>
+    <p>Rentafont — сервіс оренди та дистрибуції шрифтів, який публічно позиціонувався як український продукт, але впродовж 2013–2023 років зберігав довготривалі технічні, ринкові та партнерські зв'язки з російським середовищем. Кейс розглядався як OSINT-based due diligence у контексті українських дискусій про національний державний шрифт і ширшу відмову від російського технічного та культурного продукту після повномасштабного вторгнення 2022 року.</p>
+
+    <h3>Завдання</h3>
+    <ul>
+      <li>Яким був реальний масштаб інтеграції Rentafont з російськими компаніями, медіа та технічною інфраструктурою у 2013–2023 роках?</li>
+      <li>Чи відповідали публічні заяви власника про припинення співпраці з РФ після 24.02.2022 спостережуваним доменним, DNS, інтеграційним і ринковим даним?</li>
+      <li>Чи створювало це репутаційний і політичний ризик для українських державних або культурних ініціатив у разі залучення сервісу в символічній «національній» ролі?</li>
+    </ul>
+
+    <h3>Метод</h3>
+    <p>Стандартний OSINT-цикл: збір, кореляція, валідація та повторна перевірка. Джерела: WHOIS-історія для <code>rentafont.ru</code>, аналіз DNS/MX/NS/SOA для <code>rentafont.com</code>, <code>rentafont.com.ua</code> і <code>tilda.rentafont.com</code>, веб-архіви, дані BuiltWith, хостингові сліди з myip.ms, публічні заяви власника в DOU, Facebook і Medium. Окремий елемент — технічний peer review у DOU-треді для перевірки спірних технічних тверджень щодо контролю над <code>tilda.rentafont.com</code>.</p>
+
+    <h3>Ключові знахідки</h3>
+    <ul>
+      <li>Домен <code>rentafont.ru</code> зареєстрований у грудні 2012 року і залишався активним після початку повномасштабної війни; WHOIS-записи показують продовження у грудні 2022 року до 5 грудня 2023 року.</li>
+      <li>Хостингові сліди свідчать, що домен працював щонайменше до серпня 2023 року — технічна відмова від <code>.ru</code> не відбулася одразу після 24.02.2022.</li>
+      <li>У сервісі зберігалися сліди старої інфраструктури, пов'язаної з російськими сервісами, включно з Yandex-пов'язаними поштовими конфігураціями та допоміжними піддоменами, які Євген Садко визнавав як спадок старої архітектури.</li>
+      <li>Субдомен <code>tilda.rentafont.com</code> залишався окремою технічною проблемою; публічна технічна дискусія показала, що версія про його «захоплення росіянами» є технічно малоймовірною без втрати контролю над основним доменом.</li>
+      <li>За даними BuiltWith, у лютому 2022 року віджет Rentafont використовувався приблизно на 7&thinsp;700 сайтах у РФ проти близько 500 сайтів в Україні — співвідношення 20–25:1 на користь російського ринку.</li>
+      <li>У публічному сліді зафіксовано зв'язки з Tilda, Paratype, «РОСМЭН», «Известия» та іншими акторами російського ринку; Євген Садко також визнавав зв'язки з рос. студіями, що почалася ще до 2014 року.</li>
+    </ul>
+
+    <h3>Аналітична оцінка</h3>
+    <p>Сукупність технічних, ринкових та історичних даних свідчить, що Rentafont був глибоко інтегрований у російський ринок та інфраструктурне середовище, а не лише мав епізодичні зв'язки з РФ. Гіпотеза про швидкий і повний розрив після 24.02.2022 не підтвердилася; дані підтримують висновок про затриманий і частковий вихід із російського контуру, сліди якого зберігалися щонайменше до 2023 року.</p>
+    <p>Ключовою проблемою виявився не декларований намір власника, а розрив між публічними заявами та спостережуваним цифровим слідом. Для державних, культурних та ідентичнісно чутливих ініціатив це створювало репутаційний ризик у разі позиціонування сервісу як «національного» партнера без прозорого розкриття його історії.</p>
+  </div>
+
+  <!-- Full case narrative -->
+  <div class="case-body">
+    <p class="case-body-label">Повний кейс</p>
+
+    <h3 class="sh">Передумови <small style="font-size:14px;font-weight:400;color:var(--muted)">(Background)</small></h3>
+    <p>Rentafont — сервіс оренди й продажу шрифтів, який працює через веб-інтерфейс (<code>rentafont.com</code>, <code>rentafont.com.ua</code>) та інтеграції з іншими платформами й спеціальним клієнтським застосунком. У 2010-х роках сервіс позиціонував себе як «український» продукт із юридичною прив'язкою до американської юрисдикції, водночас будуючи значну частину каталогу та клієнтської бази на російському ринку.</p>
+    <p>Після повномасштабного вторгнення РФ проти України у 2022 році в Україні загострилася дискусія про відмову від російського технічного й культурного продукту, зокрема шрифтів, у державній та публічній комунікації. Верховна Рада розглядала питання відмови від шрифтів російського походження, а професійна спільнота обговорювала можливі моделі національного державного шрифту й роль абетки «Рутенія».</p>
+    <p>У листопаді 2023 року в Українському кризовому медіа-центрі відбувся круглий стіл «Національний державний шрифт — яким йому бути?», який започаткував ширшу дискусію за участі істориків, мистецтвознавців, дизайнерів, юристів і представників академічних інституцій. У цьому контексті залучення сервісів із тривалими зв'язками з російським ринком до робочих процесів, пов'язаних із формуванням української шрифтової політики, потребувало окремої перевірки їхнього цифрового сліду.</p>
+    <p>Євген Садко публічно заявляв, що після 24.02.2022 співпраця з російськими структурами припинена, російські шрифти зняті, а домен у зоні <code>.ru</code> більше не продовжується. На цьому тлі було ініційовано OSINT-дослідження як процедуру due diligence: перевірити, наскільки ці заяви відповідають фактичному стану доменної, технічної та ринкової інфраструктури сервісу і яким був реальний характер та тривалість його інтеграції з російським середовищем.</p>
+
+    <h3 class="sh">Завдання <small style="font-size:14px;font-weight:400;color:var(--muted)">(Objectives)</small></h3>
+    <ol>
+      <li>Встановити характер і масштаб зв'язків сервісу Rentafont з російськими компаніями, медіа та технічною інфраструктурою у 2013–2023 роках.</li>
+      <li>Перевірити, наскільки публічні заяви Садка про припинення співпраці після 2022 року узгоджуються з даними відкритих джерел (WHOIS, DNS, веб-архіви, інтеграції, ринок).</li>
+      <li>Оцінити репутаційні та політичні ризики залучення сервісу й пов'язаних із ним осіб до українських державних і гуманітарних проєктів, зокрема до ініціатив, пов'язаних із національним державним шрифтом та гуманітарною безпекою.</li>
+    </ol>
+
+    <h3 class="sh">Робочі гіпотези <small style="font-size:14px;font-weight:400;color:var(--muted)">(Working Hypotheses)</small></h3>
+    <p>На старті були сформульовані дві робочі гіпотези:</p>
+    <div class="hypothesis">
+      <p><strong>H1</strong> — після 24.02.2022 сервіс Rentafont у короткий термін припинив співпрацю з російськими структурами, зняв російські шрифти з оренди й продажу, відмовився від домена в зоні <code>.ru</code> та ліквідував технічні залежності від російських сервісів; фактичний цифровий слід відповідає цим заявам.</p>
+    </div>
+    <div class="hypothesis">
+      <p><strong>H2</strong> — попри публічні заяви, частина технічних, ринкових і партнерських зв'язків із РФ продовжувала існувати у 2022–2023 роках (продовження домена <code>rentafont.ru</code>, збереження інтеграції через <code>tilda.rentafont.com</code>, наявність залишкових MX-записів на російські сервіси, домінування російського ринку).</p>
+    </div>
+    <p>Завданням було за допомогою відкритих джерел верифікувати, яка з гіпотез краще узгоджується з фактичними даними.</p>
+
+    <h3 class="sh">Методологія <small style="font-size:14px;font-weight:400;color:var(--muted)">(Methodology)</small></h3>
+
+    <h4 class="sub">Предмет дослідження <small style="font-size:12px;font-weight:400;color:var(--muted)">(Scope)</small></h4>
+    <p>До предмету дослідження входили:</p>
+    <ul>
+      <li>доменна та DNS-інфраструктура (історія доменів, NS/MX/SOA-записи, делегація субдоменів);</li>
+      <li>ринкова присутність і географія використання віджета Rentafont;</li>
+      <li>партнерські й клієнтські зв'язки, особливо в російському середовищі;</li>
+      <li>публічні заяви й комунікації щодо співпраці з РФ, змін після 2014 та 2022 років.</li>
+    </ul>
+    <p>Питання художньої цінності шрифтів і внутрішніх творчих суперечок не розглядалися.</p>
+
+    <h4 class="sub">Збір даних та інструменти <small style="font-size:12px;font-weight:400;color:var(--muted)">(Collection and tools)</small></h4>
+    <p>Збір даних здійснювався через:</p>
+    <ul>
+      <li><strong>WHOIS History / Domain Research Suite</strong> — історичні записи домена <code>rentafont.ru</code> за 2012–2024 роки, включно з датами створення, продовження, змінами власника й статусів.</li>
+      <li><strong>DNS-інспектори</strong> (intodns.com та інші) для аналізу NS/MX/SOA, делегації субдоменів <code>rentafont.com</code>, <code>rentafont.com.ua</code>, <code>tilda.rentafont.com</code> та допоміжних піддоменів.</li>
+      <li><strong>BuiltWith</strong> — статистика використання віджета Rentafont за країнами, тренди 2013–2022 років, співвідношення користувачів у РФ та Україні.</li>
+      <li><strong>myip.ms</strong> — IP-адреси та зміни хостингу домена <code>rentafont.ru</code> (зокрема IP 95.217.73.163 станом на 6 серпня 2023 року).</li>
+      <li><strong>web.archive.org</strong> — знімки сайтів Rentafont, сторінок партнерів (Tilda, Paratype, російські медіа) та пізніше — сторінок українських інституцій, де сервіс згадувався як партнер.</li>
+      <li><strong>Публічні платформи</strong> — форуми DOU, Facebook, Medium, де Євген Садко та сторонні спеціалісти обговорювали доменну інфраструктуру, піддомени й політику співпраці з РФ.</li>
+    </ul>
+
+    <h4 class="sub">Верифікація та peer review</h4>
+    <p>Перевірка інформації будувалася на:</p>
+    <ul>
+      <li><strong>Багатоджерельності</strong> — ключові твердження (продовження домена, структура DNS, співпраця з партнерами) підтверджувалися щонайменше двома-трьома незалежними джерелами.</li>
+      <li><strong>Ітеративності</strong> — після появи нових даних (заяви Садка, технічні коментарі DevOps-спільноти) гіпотези переглядалися, а дані перевірялися повторно.</li>
+      <li><strong>Розділенні фактів і оцінок</strong> — фактичні артефакти (WHOIS, DNS-звіти, архіви) фіксувалися окремо, а репутаційні оцінки формувалися як похідний шар.</li>
+    </ul>
+    <p>Особливу роль відіграв peer review у технічних спільнотах: дискусії на DOU дозволили залучити зовнішніх фахівців для оцінки правдоподібності окремих технічних тверджень (зокрема щодо контролю над <code>tilda.rentafont.com</code>).</p>
+
+    <h3 class="sh">Знахідки <small style="font-size:14px;font-weight:400;color:var(--muted)">(Findings)</small></h3>
+
+    <h4 class="sub">1. Домени та інфраструктура</h4>
+    <p>Історичні записи показують, що домен <code>rentafont.ru</code> був зареєстрований 5 грудня 2012 року й регулярно продовжувався до 2023 року. На 1 січня 2022 року він був оплачений до 5 грудня 2022 року, а 6 грудня 2022 року — продовжений до 5 грудня 2023 року, тобто вже після початку повномасштабної війни. Домен залишався активним щонайменше до серпня 2023 року, про що свідчать записи myip.ms щодо IP 95.217.73.163.</p>
+
+    <figure class="evidence">
+      <a href="img/whois-domaintools-expires-2023-12-05.jpg" target="_blank">
+        <img src="img/whois-domaintools-expires-2023-12-05.jpg" alt="DomainTools WHOIS — rentafont.ru expire date 2023-12-05" loading="lazy">
+      </a>
+      <figcaption>DomainTools WHOIS: <code>rentafont.ru</code> продовжено у грудні 2022 до 05.12.2023 — реєстратор REGRU-RU</figcaption>
+    </figure>
+
+    <figure class="evidence">
+      <a href="img/myipms-rentafont-ru-06aug2023.jpg" target="_blank">
+        <img src="img/myipms-rentafont-ru-06aug2023.jpg" alt="myip.ms — rentafont.ru активний 06.08.2023" loading="lazy">
+      </a>
+      <figcaption>myip.ms: <code>rentafont.ru</code> на IP 95.217.73.163 (Hetzner, Nimecchyna) — 6 серпня 2023, 17 місяців після публічних обіцянок</figcaption>
+    </figure>
+
+    <p>Лише після завершення оплаченого періоду в грудні 2023 року домен не був продовжений попереднім власником і в січні 2024 року був перереєстрований на REG.RU як новий запис — що відповідає сценарію, коли домен переходить під контроль реєстратора після відмови власника його підтримувати.</p>
+    <p>Основні домени сервісу — <code>rentafont.com</code> і <code>rentafont.com.ua</code> — обслуговувалися через окремі конфігурації NS/MX; в окремих періодах фіксувалися MX-записи, пов'язані з російським поштовим сервісом Yandex, як частина старої інфраструктури. Існували також допоміжні піддомени (<code>vernacular</code>, <code>mx</code>, <code>mx2</code>), які не завжди вчасно очищувалися від залежностей від російських сервісів.</p>
+
+    <figure class="evidence">
+      <a href="img/viewdns-rentafont-ua-mx-yandex-jan2024.jpg" target="_blank">
+        <img src="img/viewdns-rentafont-ua-mx-yandex-jan2024.jpg" alt="ViewDNS — rentafont.com.ua MX = mx.yandex.net, январь 2024" loading="lazy">
+      </a>
+      <figcaption>ViewDNS.info (15.01.2024): <code>rentafont.com.ua</code> MX = mx.yandex.net (пріоритет 10) — Яндекс-пошта в DNS майже через два роки після початку вторгнення</figcaption>
+    </figure>
+
+    <h4 class="sub">2. Піддомен tilda.rentafont.com</h4>
+    <p>Піддомен <code>tilda.rentafont.com</code> використовувався як інтеграційний вузол між Rentafont і конструктором сайтів Tilda для доставки веб-шрифтів на сайти користувачів. Євген Садко стверджував, що після 2022 року «втратив контроль» над цим піддоменом, а російська сторона «якось» зберегла його у себе.</p>
+    <p>Аналіз NS/SOA-записів та обговорення з DevOps-фахівцями показали, що власник основного домена <code>rentafont.com</code> загалом зберігає контроль над субдоменами, навіть якщо делегує їх на інші сервери; технічна спільнота дійшла висновку, що піддомен не може бути «вкрадений» без втрати контролю над самим доменом. Водночас Садко визнав, що зі «старих» сайтів на Tilda все ще надходили запити до цього піддомену (близько 100 на день), що підтверджує наявність активного інтеграційного сліду й після 2022 року.</p>
+
+    <figure class="evidence">
+      <a href="img/urlscan-tilda-rentafont-ru-vs-ua.jpg" target="_blank">
+        <img src="img/urlscan-tilda-rentafont-ru-vs-ua.jpg" alt="urlscan.io — tilda.rentafont.com: 2408 .ru сайтів vs 79 .ua" loading="lazy">
+      </a>
+      <figcaption>urlscan.io: через <code>tilda.rentafont.com</code> шрифти завантажуються на 2&thinsp;408 сайтів у зоні .ru проти 79 .ua — початок 2023 р.</figcaption>
+    </figure>
+
+    <h4 class="sub">3. Ринкова присутність</h4>
+    <p>За даними BuiltWith, на лютий 2022 року віджет Rentafont використовувався приблизно на 7&thinsp;700 російських сайтах і близько 500 українських, тобто співвідношення користувачів РФ до українських становило близько 20–25:1. У деяких рейтингах сервіс входив до числа найпопулярніших провайдерів веб-шрифтів у РФ.</p>
+
+    <figure class="evidence">
+      <a href="img/builtwith-russia-7711-sites-feb2022.jpg" target="_blank">
+        <img src="img/builtwith-russia-7711-sites-feb2022.jpg" alt="BuiltWith — Rentafont 7711 сайтів у Росії, лютий 2022" loading="lazy">
+      </a>
+      <figcaption>BuiltWith (лютий 2022): віджет Rentafont — 7&thinsp;711 сайтів у РФ проти ~500 в Україні</figcaption>
+    </figure>
+
+    <h4 class="sub">4. Партнери та клієнти</h4>
+    <p>У відкритих джерелах були задокументовані зв'язки сервісу з Tilda, Paratype, видавництвом «РОСМЭН», газетою «Известия» та іншими російськими структурами. Євген Садко публічно визнавав, що з 2013 року співпрацював із російськими шрифтовими студіями, а частину каталогу сервісу на старті формували саме їхні роботи; припинення співпраці та зняття російських шрифтів із сервісу він прив'язував до періоду після 2022 року.</p>
+
+    <figure class="evidence">
+      <a href="img/izvestia-iz-ru-rentafont-ru-webfonts.png" target="_blank">
+        <img src="img/izvestia-iz-ru-rentafont-ru-webfonts.png" alt="iz.ru — виклик rentafont.ru/assets/webfonts.js у вихідному коді" loading="lazy">
+      </a>
+      <figcaption>iz.ru («Известия»): у вихідному коді сторінки прямий виклик <code>rentafont.ru/assets/webfonts.js</code></figcaption>
+    </figure>
+
+    <figure class="evidence">
+      <a href="img/composite-izvestia-kremlin-partners-mar2022.jpg" target="_blank">
+        <img src="img/composite-izvestia-kremlin-partners-mar2022.jpg" alt="Composite: Известия, Kremlin Kitchen, партнери Rentafont" loading="lazy">
+      </a>
+      <figcaption>Composite: «Известия», «Kremlin Kitchen» (путінська кухня-медіапроєкт), сторінка партнерів Rentafont — березень 2022</figcaption>
+    </figure>
+
+    <h4 class="sub">5. Публічні заяви vs. технічні артефакти</h4>
+
+    <p>Євген Садко формував публічний образ сервісу як українського та антиросійського. Паралельний аналіз цифрового сліду дозволяє зіставити ці заяви з верифікованими артефактами за датами.</p>
+
+    <figure class="evidence">
+      <a href="img/sadko-fb-28feb2022-promise.jpg" target="_blank">
+        <img src="img/sadko-fb-28feb2022-promise.jpg" alt="Євген Садко Facebook 28.02.2022 — обіцянка зняти російські шрифти" loading="lazy">
+      </a>
+      <figcaption>Facebook Євгена Садка, 28 лютого 2022 — публічне оголошення про припинення співпраці з РФ та зняття шрифтів із сервісу</figcaption>
+    </figure>
+
+    <table class="timeline">
+      <thead>
+        <tr>
+          <th class="col-date">Дата</th>
+          <th class="col-words">Слова (публічні заяви)</th>
+          <th class="col-actions">Справи (цифровий слід)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="col-date">2017–2021</td>
+          <td class="col-words">Rentafont = "міжнародний маркетплейс, юридично американський, засновники — українці". Садко (01.2021): "2020 рік — найкращий і найуспішніший для Rentafont і для <em>українських шрифторобів</em>".</td>
+          <td class="col-actions">Tilda Telegram (10.2017): "шрифти надано сервісом Rentafont — безкоштовно для користувачів Tilda". Tilda Telegram (04.2018): звертається до <em>російських</em> користувачів — рекомендує Rentafont як альтернативу Google Fonts при блокуванні. Відношення .ru/.ua ≈ 20–25:1.</td>
+        </tr>
+        <tr>
+          <td class="col-date">28.02.2022<br><small>(+4 дні після вторгнення)</small></td>
+          <td class="col-words">FB: "<em>Прямо зараз кожен рубль податків кожного росіянина іде на обстріли мого міста</em>". "Зараз ми працюємо над швидким способом зняти з продажу шрифти, чиї правовласники мають економічні зв'язки з рф". Обіцяє донейшн від продажу шрифтів.</td>
+          <td class="col-actions">—</td>
+        </tr>
+        <tr>
+          <td class="col-date">Грудень 2022<br><small>(9.5 міс. пізніше)</small></td>
+          <td class="col-words">—</td>
+          <td class="col-actions">DomainTools / WHOIS: <code>rentafont.ru</code> <em>продовжено</em> до 05.12.2023. Реєстратор: REGRU-RU. Домен залишається активним після всіх обіцянок.</td>
+        </tr>
+        <tr>
+          <td class="col-date">02.03.2023</td>
+          <td class="col-words">Садко для Speka: Golos від Paratype = "<em>фашистський шрифт на замовлення гестапо</em>". "Ці росіяни отримали гроші" — засуджує тих, хто заробляє на рф-ринку. Власний бот Rentafont публікує "Список рос. шрифторобів": критерій бойкоту — "<em>платить податки в рф</em>".</td>
+          <td class="col-actions"><code>rentafont.ru</code> активний. <code>tilda.rentafont.com</code> — 2&thinsp;408 .ru сайтів проти 79 .ua. Terms of Service сайту — виключно рос. мовою, <code>rentafont.ru</code> вказаний у тексті.</td>
+        </tr>
+        <tr>
+          <td class="col-date">11.03.2023<br><small>(9 днів потому)</small></td>
+          <td class="col-words">—</td>
+          <td class="col-actions">Paratype (info.paratype.ru): арт-директор рекомендує Rentafont як опцію для Tilda — <em>через 9 днів після того, як Садко назвав Paratype "прокремлівськими"</em>. Партнерський зв'язок зберігається.</td>
+        </tr>
+        <tr>
+          <td class="col-date">01.07.2023</td>
+          <td class="col-words">—</td>
+          <td class="col-actions">Wayback Machine: <code>rentafont.ru</code> → HTTP 301 redirect → <code>rentafont.com</code>. Домен живий.</td>
+        </tr>
+        <tr>
+          <td class="col-date">06.08.2023</td>
+          <td class="col-words">—</td>
+          <td class="col-actions">myip.ms: останній відомий IP <code>rentafont.ru</code> = 95.217.73.163 (Hetzner, Німеччина). Статус: "Temporary Down or Permanently Deleted by the Owner" — тобто домен щойно деактивовано, <em>через 17 місяців після обіцянок</em>.</td>
+        </tr>
+        <tr>
+          <td class="col-date">12.12.2023</td>
+          <td class="col-words">—</td>
+          <td class="col-actions">Telegram: бот <code>Rentafont_ru</code> активно надсилає пропозиції купити шрифти (Kyiv, Skaryna, Rutenia тощо).</td>
+        </tr>
+        <tr>
+          <td class="col-date">15.01.2024</td>
+          <td class="col-words">—</td>
+          <td class="col-actions">ViewDNS.info: <code>rentafont.com.ua</code> MX = <em>mx.yandex.net</em> (пріоритет 10). Яндекс-пошта залишається в DNS майже через два роки після вторгнення.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="paradox-box">
+      <p class="p-label">Ключове протиріччя</p>
+      <p>2 березня 2023 Садко публічно засуджує тих, хто "отримав рублі від Росії" і встановлює критерій власного бойкоту: <em>"платить податки в рф"</em>. За цим критерієм Rentafont підпадав під власний бойкот — реєстраційний збір за <code>rentafont.ru</code> сплачувався до REGRU-RU (рос. реєстратор) аж до грудня 2023 року. Водночас через 9 днів після найгострішої публічної заяви партнер Paratype рекомендує Rentafont рос. аудиторії, а домен .ru залишається активним ще 5 місяців.</p>
+      <p>Дослідження не стверджує навмисної співпраці з агресором після 24.02.2022. Зафіксований факт інший: терміни деактивації вимірюються не тижнями (як можна було очікувати із заяв), а 12–22 місяцями — і відбуваються паралельно з найгострішими публічними деклараціями.</p>
+    </div>
+
+    <figure class="evidence">
+      <a href="img/rentafont-bot-boycott-criteria.jpg" target="_blank">
+        <img src="img/rentafont-bot-boycott-criteria.jpg" alt="Rentafont бот — список критеріїв бойкоту рос. шрифторобів" loading="lazy">
+      </a>
+      <figcaption>Telegram-бот Rentafont (березень 2023): список критеріїв бойкоту — серед них "<em>платить податки в рф</em>", критерій, що застосовується до самого сервісу</figcaption>
+    </figure>
+
+    <figure class="evidence">
+      <a href="img/sadko-speka-mar2023-vs-rentafont-ru-jul2023.jpg" target="_blank">
+        <img src="img/sadko-speka-mar2023-vs-rentafont-ru-jul2023.jpg" alt="Садко для Speka березень 2023 vs. rentafont.ru липень 2023" loading="lazy">
+      </a>
+      <figcaption>Composite: коментар Євгена Садка для Speka (березень 2023) — і технічна реальність <code>rentafont.ru</code> в липні 2023, через 5 місяців після заяви</figcaption>
+    </figure>
+
+    <figure class="evidence">
+      <a href="img/paratype-blog-mar2023-recommends-rentafont.jpg" target="_blank">
+        <img src="img/paratype-blog-mar2023-recommends-rentafont.jpg" alt="Paratype blog 11.03.2023 — рекомендує Rentafont" loading="lazy">
+      </a>
+      <figcaption>Paratype (info.paratype.ru), 11.03.2023 — арт-директор рекомендує Rentafont для Tilda через 9 днів після того, як Садко назвав Paratype «прокремлівськими»</figcaption>
+    </figure>
+
+    <p>Після оприлюднення OSINT-матеріалів Євген Садко у публічних поясненнях підтвердив продовження домена <code>.ru</code> у 2022 році (посилаючись на технічну залежність бекенду), визнав історичну співпрацю з рос. студіями та наявність технічних залишків (Yandex MX, застарілі скрипти). Центральні артефакти не були спростовані; запропоновано іншу інтерпретацію мотивів — але не самих фактів.</p>
+
+    <h3 class="sh">Оцінка <small style="font-size:14px;font-weight:400;color:var(--muted)">(Assessment)</small></h3>
+    <p>Сукупність доменної історії, DNS-даних, ринкової статистики та публічних заяв показує, що Rentafont у 2013–2023 роках був глибоко інтегрований у російський ринок і технічну інфраструктуру, навіть при одночасному позиціонуванні як «український» сервіс. Гіпотеза H1 про швидкий і повний розрив зв'язків після 24.02.2022 не підтвердилася: домен <code>rentafont.ru</code> був продовжений у грудні 2022 року, працював принаймні до середини 2023 року, а інтеграційний слід Tilda та інші технічні залишки зберігалися й надалі.</p>
+    <p>Гіпотеза H2 — про поступовий і неповний вихід із російського контуру — отримала значне підтвердження. Дослідження не стверджує продовження повномасштабної комерційної співпраці на довоєнному рівні після 2022 року, але засвідчує тривалу присутність сервісу в російському цифровому середовищі та затримку з деактивацією пов'язаних доменів і інтеграцій.</p>
+    <p>З погляду репутаційного й політичного ризику це означає, що залучення Rentafont як символічного або «національного» партнера у проєктах, пов'язаних із державним шрифтом, є чутливим рішенням і потребує окремої, прозорої аргументації. Причина полягає не лише в історичній співпраці, а в розриві між публічними деклараціями та фактичним цифровим слідом у критичний період.</p>
+
+    <h3 class="sh">Вплив та наслідки <small style="font-size:14px;font-weight:400;color:var(--muted)">(Impact and Follow-up)</small></h3>
+
+    <h4 class="sub">Короткостроковий вплив (2023–2024)</h4>
+    <p>У 2023–2024 роках результати дослідження були використані як аналітична основа для оцінки доцільності участі окремих сервісів і фахівців у публічних заходах, пов'язаних із національним шрифтом та гуманітарною безпекою. Це дозволило організаторам дискусій опиратися не лише на репутаційне враження, а на зафіксований цифровий слід сервісу, його доменну історію та ринкову поведінку.</p>
+
+    <h4 class="sub">Реакція сервісу</h4>
+    <p>Публічна реакція Садка, який підтвердив факти продовження домена <code>.ru</code>, історичної співпраці з російськими студіями й частини технічних залишків, виконала роль додаткового джерела даних і підтвердження ключових артефактів. Це перетворило кейс із разового викриття на ітеративне розслідування, де первинні висновки уточнювалися з урахуванням нових фактів і пояснень.</p>
+
+    <h4 class="sub">Відкладений інституційний ефект (2026)</h4>
+    <p>У 2026 році, в контексті виставкового проєкту «Чебаник Incognitus» у Музеї книги і друкарства України, веб-архіви фіксують зміну в публічній комунікації: знімок сторінки від 25 травня 2026 року показує логотип Rentafont серед партнерів або організаторів, тоді як у версії від 4 червня 2026 року логотип відсутній. Це свідчить, що питання участі сервісу в гуманітарно чутливих проєктах залишалося актуальним і через кілька років, а раніше зібраний OSINT-масив продовжував впливати на рішення інституцій щодо партнерств.</p>
+
+    <h4 class="sub">Значення для OSINT-практики</h4>
+    <p>Кейс демонструє, як стандартні інструменти OSINT (WHOIS, DNS, веб-архіви, market-intel, публічні дискусії) можуть бути інтегровані у процедуру due diligence для гуманітарно чутливих тем і як результати такого дослідження можуть мати як короткостроковий, так і відкладений вплив на рішення державних і культурних інституцій. Він також показує, що ефективний аналітичний продукт — це не лише опис фактів, а й побудова підтверджуваної часової лінії, верифікація спірних тверджень через peer review та документування змін поведінки об'єкта після публікації.</p>
+  </div>
+
+  <!-- Publications -->
+  <div class="pubs">
+    <p class="pubs-label">Публікації</p>
+    <ul>
+      <li><a href="https://dev.ua/blogs/posts/vidmovliaiutsia-vid-spivpratsi-rf-blog">dev.ua — «Відмовляються від співпраці з РФ»</a></li>
+      <li><a href="https://dou.ua/forums/topic/47877/">DOU — тред з технічним peer review</a></li>
+    </ul>
+  </div>
+
+  <!-- Evidence gallery -->
+  <div class="gallery-section">
+    <p class="gallery-label">Докази та скріни</p>
+    <div class="gallery">
+      <a href="img/sadko-fb-jan2021-best-year.jpg" target="_blank">
+        <img src="img/sadko-fb-jan2021-best-year.jpg" alt="Садко FB Січень 2021 — найкращий рік для Rentafont" loading="lazy">
+      </a>
+      <a href="img/tilda-telegram-2017-2018-russia.jpg" target="_blank">
+        <img src="img/tilda-telegram-2017-2018-russia.jpg" alt="Tilda Telegram 2017–2018 — Rentafont для рос. аудиторії" loading="lazy">
+      </a>
+      <a href="img/rentafont-ru-telegram-bot-dec2023.jpg" target="_blank">
+        <img src="img/rentafont-ru-telegram-bot-dec2023.jpg" alt="Telegram-бот Rentafont_ru — грудень 2023, активний" loading="lazy">
+      </a>
+      <a href="img/tos-russian-only-may2023.jpg" target="_blank">
+        <img src="img/tos-russian-only-may2023.jpg" alt="Terms of Service — виключно рос. мовою, Wayback May 2023" loading="lazy">
+      </a>
+      <a href="img/wayback-rentafont-ru-jul2023-redirect.png" target="_blank">
+        <img src="img/wayback-rentafont-ru-jul2023-redirect.png" alt="Wayback Machine — rentafont.ru 301 redirect липень 2023" loading="lazy">
+      </a>
+      <a href="img/wayback-calendar-rentafont-ua-2017-2024.jpg" target="_blank">
+        <img src="img/wayback-calendar-rentafont-ua-2017-2024.jpg" alt="Wayback calendar — rentafont.com.ua активне наповнення 2017–2024" loading="lazy">
+      </a>
+      <a href="img/wayback-partners-page-may2023-paratype.png" target="_blank">
+        <img src="img/wayback-partners-page-may2023-paratype.png" alt="Wayback — сторінка партнерів Rentafont, травень 2023: Paratype + Serebro" loading="lazy">
+      </a>
+      <a href="img/nmap-tilda-rentafont-ip.png" target="_blank">
+        <img src="img/nmap-tilda-rentafont-ip.png" alt="HackerTarget Nmap — tilda.rentafont.com IP scan" loading="lazy">
+      </a>
+      <a href="img/izvestia-pobeda75-tilda-2020.jpg" target="_blank">
+        <img src="img/izvestia-pobeda75-tilda-2020.jpg" alt="iz.ru pobeda75 — сайт на Tilda з шрифтами Rentafont, 2020" loading="lazy">
+      </a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
