@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Проєкт Nestor Volya — аналітична записка | Нестор Воля</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    :root {
+      --bg:#f4f1eb; --ink:#181818; --muted:#57514a; --line:#d8cfc0;
+      --panel:#fffaf2; --dark:#111418; --accent:#b2382f; --accent2:#1e6f68;
+      --gold:#b88724; --link:#064f8f;
+    }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:"Segoe UI",Arial,sans-serif; line-height:1.6; }
+    a { color:var(--link); text-decoration-thickness:1px; text-underline-offset:2px; }
+    .page { max-width:800px; margin:0 auto; padding:28px 22px 80px; }
+
+    nav { display:flex; gap:10px; margin-bottom:36px; flex-wrap:wrap; align-items:center; }
+    .nav-btn { border:1px solid var(--line); background:var(--panel); color:var(--ink); padding:7px 14px; border-radius:6px; font-weight:600; text-decoration:none; font-size:14px; }
+    .nav-btn:hover { border-color:var(--muted); text-decoration:none; }
+    .nav-tag { font-size:13px; color:var(--muted); padding:6px 0; }
+
+    header { margin-bottom:36px; padding-bottom:24px; border-bottom:2px solid var(--line); }
+    h1 { font-size:30px; font-weight:800; line-height:1.1; margin:0 0 8px; }
+    .subtitle { font-size:17px; color:var(--muted); margin:0 0 12px; font-weight:400; }
+    .meta { color:var(--muted); font-size:14px; margin:0; }
+    .meta span { margin:0 6px; color:var(--line); }
+
+    h2.sh { font-size:22px; font-weight:800; color:var(--accent2); margin:52px 0 16px; padding-bottom:8px; border-bottom:1px solid var(--line); }
+    h3.sub { font-size:16px; font-weight:700; margin:26px 0 8px; color:var(--ink); }
+    p { margin:0 0 14px; }
+    ul { margin:0 0 14px; padding-left:22px; }
+    li { margin-bottom:6px; }
+    code { background:rgba(0,0,0,.07); border-radius:3px; padding:1px 5px; font-size:.88em; font-family:Consolas,monospace; }
+
+    .info-box { background:var(--panel); border-left:3px solid var(--accent2); border-radius:0 8px 8px 0; padding:16px 22px; margin:20px 0; }
+    .info-box p { margin:0 0 8px; }
+    .info-box p:last-child { margin:0; }
+
+    /* Stats */
+    .stats-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(122px,1fr)); gap:12px; margin:24px 0; }
+    .stat-box { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:18px 10px 14px; text-align:center; }
+    .stat-num { font-size:40px; font-weight:800; color:var(--accent); line-height:1; display:block; }
+    .stat-label { font-size:12px; color:var(--muted); margin-top:6px; line-height:1.3; }
+
+    /* Mermaid */
+    .diagram-wrap { background:#fff; border:1px solid var(--line); border-radius:8px; padding:20px 12px; margin:20px 0; overflow-x:auto; }
+
+    /* Timeline */
+    .tl { position:relative; padding-left:30px; margin:20px 0; }
+    .tl::before { content:''; position:absolute; left:7px; top:6px; bottom:6px; width:2px; background:var(--line); }
+    .tl-item { position:relative; margin-bottom:20px; }
+    .tl-item::before { content:''; position:absolute; left:-27px; top:7px; width:12px; height:12px; border-radius:50%; background:var(--accent2); border:2px solid var(--bg); }
+    .tl-item.hi::before { background:var(--accent); }
+    .tl-date { font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.07em; }
+    .tl-text { font-size:15px; margin-top:3px; }
+    .tag { display:inline-block; font-size:10px; font-weight:700; padding:2px 7px; border-radius:4px; margin-left:5px; vertical-align:middle; color:#fff; }
+    .tag-new { background:var(--accent); }
+    .tag-live { background:var(--accent2); }
+    .tag-pub { background:var(--gold); }
+
+    /* AI/Human bars */
+    .split-wrap { margin:20px 0; }
+    .split-row { display:grid; grid-template-columns:190px 1fr 60px; align-items:center; gap:10px; margin-bottom:9px; }
+    .split-label { font-size:13px; color:var(--ink); }
+    .split-track { background:rgba(0,0,0,.09); border-radius:4px; height:22px; overflow:hidden; }
+    .split-bar { height:100%; background:var(--accent2); display:flex; align-items:center; padding-left:8px; min-width:4px; transition:width 1s ease; }
+    .split-bar span { color:#fff; font-size:11px; font-weight:700; white-space:nowrap; }
+    .split-pct { font-size:13px; color:var(--muted); text-align:right; }
+    .split-legend { display:flex; gap:18px; font-size:13px; color:var(--muted); margin-top:10px; }
+    .leg-dot { display:inline-block; width:11px; height:11px; border-radius:3px; margin-right:5px; vertical-align:middle; }
+
+    /* Tables */
+    .data-table { width:100%; border-collapse:collapse; font-size:14px; margin:20px 0; }
+    .data-table th { background:var(--dark); color:#f2e7d6; padding:9px 14px; font-size:11px; text-transform:uppercase; letter-spacing:.06em; text-align:left; font-weight:700; }
+    .data-table th:first-child { border-radius:6px 0 0 0; }
+    .data-table th:last-child { border-radius:0 6px 0 0; }
+    .data-table td { padding:9px 14px; border-bottom:1px solid var(--line); vertical-align:top; line-height:1.45; }
+    .data-table tr:last-child td { border-bottom:none; }
+    .data-table tr:nth-child(even) td { background:rgba(0,0,0,.025); }
+    .data-table .num { font-weight:700; color:var(--accent2); }
+    .data-table .total td { font-weight:700; border-top:2px solid var(--line); }
+
+    .badge { display:inline-block; font-size:10px; font-weight:700; padding:2px 7px; border-radius:4px; vertical-align:middle; color:#fff; }
+    .b-live { background:var(--accent2); }
+    .b-pub { background:var(--gold); }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <nav>
+    <a class="nav-btn" href="/">← Головна</a>
+    <span class="nav-tag">Аналітична записка · Проєкт</span>
+  </nav>
+
+  <header>
+    <h1>Проєкт Nestor Volya</h1>
+    <p class="subtitle">Аналітична записка: що зроблено, як і навіщо</p>
+    <p class="meta">Червень 2026<span>·</span>Автор: <a href="/">Нестор Воля</a></p>
+  </header>
+
+  <!-- МЕТА -->
+  <h2 class="sh">Мета записки <small style="font-size:14px;font-weight:400;color:var(--muted)">(Purpose)</small></h2>
+  <p>Цей документ описує проєкт Nestor Volya — систематичну роботу з побудови публічного аналітичного профілю OSINT-аналітика разом із портфоліо верифікованих кейсів. Його завдання — дати зовнішньому читачу (рекрутер, партнер, колега) повне уявлення про масштаб і якість роботи та пояснити, яку роль у ній відіграло партнерство з AI.</p>
+  <p>Записка не є CV або cover letter. Вона ближча до <em>project retrospective</em>: рішення, підходи, труднощі, результати.</p>
+
+  <!-- ІДЕЯ -->
+  <h2 class="sh">Ідея <small style="font-size:14px;font-weight:400;color:var(--muted)">(Core Idea)</small></h2>
+  <p>Аналітик безпеки стикається з парадоксом: найважливіша частина його роботи непублічна — класифікована, неатрибутована або невидима для зовнішнього спостерігача. Стандартне CV не показує ані методологію, ані доказову базу, ані масштаб дослідження.</p>
+  <div class="info-box">
+    <p><strong>Ідея проєкту:</strong> побудувати верифіковане публічне досьє аналітика — де кожна заявлена навичка підкріплена реальним артефактом, доступним за посиланням. CV посилається на кейс. Кейс містить докази. Докази — публічні та зберігаються.</p>
+    <p>Замість «вмію OSINT» — <a href="/cases/rentafont_ru/">розслідування з 20 доказовими артефактами, хронологічним аналізом і технічним peer review у DevOps-спільноті</a>.</p>
+  </div>
+
+  <!-- КОНТЕКСТ -->
+  <h2 class="sh">Контекст і точка старту <small style="font-size:14px;font-weight:400;color:var(--muted)">(Context)</small></h2>
+  <p>Аналітик з досвідом у відкритій розвідці, медіа та цифровій безпеці. Практика накопичувалась роками у вигляді розрізнених матеріалів: нотатки, досьє, публікації. Зв'язаної публічної ідентичності між кейсами не було.</p>
+  <p><strong>Точка старту:</strong> окремі публікації (dev.ua, DOU), YouTube-плейлист, кілька Gist-звітів — без єдиного hub'а, без CV з прямими посиланнями на докази, без систематичного портфоліо.</p>
+  <p><strong>Задача:</strong> за мінімальний час побудувати цілісну публічну структуру, готову для подачі у military / defense / аналітичні інституції.</p>
+
+  <!-- ЩО СТВОРЕНО -->
+  <h2 class="sh">Що створено <small style="font-size:14px;font-weight:400;color:var(--muted)">(Deliverables)</small></h2>
+
+  <div class="stats-grid">
+    <div class="stat-box"><span class="stat-num" data-target="7">0</span><div class="stat-label">OSINT-кейсів у роботі</div></div>
+    <div class="stat-box"><span class="stat-num" data-target="1">0</span><div class="stat-label">кейс-стаді опублікований</div></div>
+    <div class="stat-box"><span class="stat-num" data-target="2">0</span><div class="stat-label">CV-варіанти live</div></div>
+    <div class="stat-box"><span class="stat-num" data-target="6">0</span><div class="stat-label">сторінок Pages</div></div>
+    <div class="stat-box"><span class="stat-num" data-target="20">0</span><div class="stat-label">доказових артефактів</div></div>
+    <div class="stat-box"><span class="stat-num" data-target="100">0</span><div class="stat-label">файлів у проєкті</div></div>
+  </div>
+
+  <ul>
+    <li><strong>CV:</strong> 2 варіанти з різними аудиторіями (SSO/AI/OSINT; розвідка/ГУР) — HTML з live посиланнями на кейси, PDF для відправки.</li>
+    <li><strong>Кейс-стаді Rentafont:</strong> повне OSINT-розслідування — narrative, хронологічна таблиця «Слова vs. Справи», 11 inline evidence + 9 gallery артефактів, парадокс-бокс із ключовим протиріччям.</li>
+    <li><strong>GitHub Pages:</strong> 6 live-сторінок — дві версії CV, дос'є, профіль ranger, кейс-стаді.</li>
+    <li><strong>Внутрішня документація:</strong> стратегія, OPSEC-правила, аудити, черга кейсів, пошуковий профіль вакансій.</li>
+    <li><strong>Фото-база:</strong> 20 семантично названих OSINT-артефактів (WHOIS, DNS, Wayback, BuiltWith, скріни публічних заяв).</li>
+  </ul>
+
+  <!-- ВІЗУАЛІЗАЦІЯ -->
+  <h2 class="sh">Візуалізація <small style="font-size:14px;font-weight:400;color:var(--muted)">(Visualization)</small></h2>
+
+  <h3 class="sub">Архітектура проєкту</h3>
+  <div class="diagram-wrap">
+    <div class="mermaid">
+flowchart LR
+  subgraph PROJ["Проєктна база"]
+    direction TB
+    CASES["20_cases\n7 OSINT-кейсів"]
+    OUTPUT["case_studies\nпортфоліо"]
+    CVDOC["cv_dossier\nCV variants"]
+    VAC["90_vacancies\nfit-аналіз"]
+    CASES --> OUTPUT
+    VAC --> CVDOC
+  end
+  subgraph PAGES["GitHub Pages · live"]
+    direction TB
+    SSO["cv-sso.html"]
+    GUR["cv-gur.html"]
+    RENT["cases/rentafont_ru"]
+  end
+  OUTPUT --> RENT
+  CVDOC --> SSO
+  CVDOC --> GUR
+  RENT -.->|"Повний кейс"| SSO
+  RENT -.->|"Повний кейс"| GUR
+    </div>
+  </div>
+
+  <h3 class="sub">Хронологія</h3>
+  <div class="tl">
+    <div class="tl-item">
+      <div class="tl-date">2019–2024</div>
+      <div class="tl-text">Накопичення OSINT-матеріалів: Ічкерійська діаспора, Rentafont, HARON, Braschi / Russia Cristiana, Чекаль, Буча — розрізнені кейси без спільної публічної структури</div>
+    </div>
+    <div class="tl-item hi">
+      <div class="tl-date">Березень 2024</div>
+      <div class="tl-text">Перші публікації Rentafont-розслідування: <a href="https://dev.ua/blogs/posts/vidmovliaiutsia-vid-spivpratsi-rf-blog">dev.ua</a> та <a href="https://dou.ua/forums/topic/47877/">DOU</a>, технічний peer review у DevOps-спільноті <span class="tag tag-pub">pub</span></div>
+    </div>
+    <div class="tl-item hi">
+      <div class="tl-date">11 червня 2026</div>
+      <div class="tl-text">CV v2 — повний rewrite у HTML + PDF. Дві версії: SSO/AI та ГУР. OPSEC-cleanup, evidence-based формулювання навичок <span class="tag tag-new">new</span></div>
+    </div>
+    <div class="tl-item hi">
+      <div class="tl-date">12–13 червня 2026</div>
+      <div class="tl-text">GitHub Pages запущено: cv-sso, cv-gur, дос'є, ranger. Архівація PII і OPSEC-матеріалів. Структура case studies. Аудит проєкту <span class="tag tag-live">live</span></div>
+    </div>
+    <div class="tl-item hi">
+      <div class="tl-date">14 червня 2026</div>
+      <div class="tl-text">Rentafont кейс-стаді → GitHub Pages. 20 фото → semantic ASCII names. CV отримують прямі посилання на кейс із трьох точок входу <span class="tag tag-new">new</span></div>
+    </div>
+  </div>
+
+  <!-- ОБСЯГ -->
+  <h2 class="sh">Обсяг і масштаб <small style="font-size:14px;font-weight:400;color:var(--muted)">(Scale)</small></h2>
+  <ul>
+    <li><strong>~100+ файлів</strong> у проєктній базі (7 директорій + архів)</li>
+    <li><strong>6 live URL</strong> на GitHub Pages</li>
+    <li><strong>708 рядків</strong> HTML/CSS у кейс-стаді Rentafont</li>
+    <li><strong>20 семантично названих артефактів</strong> — WHOIS, DNS, Wayback, BuiltWith, скріни</li>
+    <li><strong>9 рядків хронологічної таблиці</strong> «Слова vs. Справи» — кожен із датою та джерелом</li>
+    <li><strong>2 інтенсивні сесії</strong> (13–14 червня 2026) — від нуля до повної публікації</li>
+  </ul>
+
+  <!-- ПРОЦЕС -->
+  <h2 class="sh">Процес: розподіл праці <small style="font-size:14px;font-weight:400;color:var(--muted)">(Process)</small></h2>
+  <p>Чіткий розподіл: людина відповідає за <strong>фактуру і рішення</strong>, AI — за <strong>виконання і структуру</strong>. Жоден артефакт не публікувався без editorial review.</p>
+
+  <div class="split-wrap">
+    <div class="split-row">
+      <div class="split-label">HTML/CSS розробка</div>
+      <div class="split-track"><div class="split-bar" style="width:90%"><span>AI · 90%</span></div></div>
+      <div class="split-pct">90% AI</div>
+    </div>
+    <div class="split-row">
+      <div class="split-label">Файлова організація</div>
+      <div class="split-track"><div class="split-bar" style="width:82%"><span>AI · 82%</span></div></div>
+      <div class="split-pct">82% AI</div>
+    </div>
+    <div class="split-row">
+      <div class="split-label">Структура документів</div>
+      <div class="split-track"><div class="split-bar" style="width:70%"><span>AI · 70%</span></div></div>
+      <div class="split-pct">70% AI</div>
+    </div>
+    <div class="split-row">
+      <div class="split-label">Редакторський контроль</div>
+      <div class="split-track"><div class="split-bar" style="width:20%"><span></span></div></div>
+      <div class="split-pct" style="color:var(--gold)">20% AI</div>
+    </div>
+    <div class="split-row">
+      <div class="split-label">Рішення про контент</div>
+      <div class="split-track"><div class="split-bar" style="width:15%"><span></span></div></div>
+      <div class="split-pct" style="color:var(--gold)">15% AI</div>
+    </div>
+    <div class="split-row">
+      <div class="split-label">Верифікація фактів</div>
+      <div class="split-track"><div class="split-bar" style="width:5%"><span></span></div></div>
+      <div class="split-pct" style="color:var(--accent)">5% AI</div>
+    </div>
+    <div class="split-row">
+      <div class="split-label">OSINT-дослідження</div>
+      <div class="split-track"><div class="split-bar" style="width:1%"></div></div>
+      <div class="split-pct" style="color:var(--accent)">0% AI</div>
+    </div>
+    <div class="split-legend">
+      <span><span class="leg-dot" style="background:var(--accent2)"></span>AI</span>
+      <span><span class="leg-dot" style="background:var(--line)"></span>Людина</span>
+    </div>
+  </div>
+
+  <h3 class="sub">Ітераційний цикл</h3>
+  <p>Людина формулює задачу → AI генерує структуру або код → людина верифікує → AI впроваджує правки → публікація. Цикл повторюється 5–15 ітерацій на задачу залежно від складності.</p>
+
+  <!-- ЯКІСТЬ -->
+  <h2 class="sh">Якісні характеристики <small style="font-size:14px;font-weight:400;color:var(--muted)">(Quality)</small></h2>
+  <ul>
+    <li><strong>OPSEC-дисципліна:</strong> PII, внутрішня інфраструктура, імена третіх осіб — у захищених локальних файлах; публічні артефакти прочищені.</li>
+    <li><strong>Citation hygiene:</strong> внутрішні посилання (<code>[file:XX][web:XX]</code>) вилучені з усіх публічних текстів перед публікацією.</li>
+    <li><strong>Naming conventions:</strong> усі файли — семантичні ASCII-назви (не hash, не кирилиця); локальна і публічна структури синхронізовані.</li>
+    <li><strong>Узгодженість оформлення:</strong> єдина CSS-схема (<code>--accent</code>, <code>--accent2</code>, <code>--gold</code>) на всіх Pages-сторінках.</li>
+    <li><strong>Принцип розділення:</strong> проєктна база = source of truth; GitHub Pages = тільки публікація.</li>
+    <li><strong>Заголовки розділів:</strong> українська + (English) у дужках — стандарт для всіх публічних матеріалів проєкту.</li>
+  </ul>
+
+  <!-- БЕЗ AI -->
+  <h2 class="sh">Оцінка трудозатрат без AI <small style="font-size:14px;font-weight:400;color:var(--muted)">(AI Impact)</small></h2>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Задача</th>
+        <th>Без AI</th>
+        <th>З AI</th>
+        <th>Приріст</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>6 HTML/CSS сторінок Pages</td>
+        <td>3–5 днів</td>
+        <td>~4 год</td>
+        <td class="num">×8–10</td>
+      </tr>
+      <tr>
+        <td>Кейс-стаді Rentafont (HTML + 20 фото)</td>
+        <td>2–3 дні</td>
+        <td>~3 год</td>
+        <td class="num">×6–8</td>
+      </tr>
+      <tr>
+        <td>Перейменування 20 фото + видалення дублів</td>
+        <td>3–5 год</td>
+        <td>~15 хв</td>
+        <td class="num">×12–20</td>
+      </tr>
+      <tr>
+        <td>Очищення citations (50+ у файлі)</td>
+        <td>2–4 год</td>
+        <td>~5 хв</td>
+        <td class="num">×24–48</td>
+      </tr>
+      <tr>
+        <td>Аудит і документація</td>
+        <td>1–2 дні</td>
+        <td>~1.5 год</td>
+        <td class="num">×6–8</td>
+      </tr>
+      <tr>
+        <td>OPSEC-cleanup + архівація</td>
+        <td>4–8 год</td>
+        <td>~45 хв</td>
+        <td class="num">×6–10</td>
+      </tr>
+      <tr class="total">
+        <td>Загалом</td>
+        <td>~10–15 роб. днів</td>
+        <td>2 сесії (2 дні)</td>
+        <td class="num">×5–8</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>AI не замінює аналітика. Він усуває операційне навантаження — код, перейменування, структурування, очищення, документування — і повертає час на те, що потребує людського судження: збір джерел, верифікацію фактів, оцінку ризиків.</p>
+
+  <!-- ПОСИЛАННЯ -->
+  <h2 class="sh">Сторінки проєкту <small style="font-size:14px;font-weight:400;color:var(--muted)">(Project Links)</small></h2>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Сторінка</th>
+        <th>URL</th>
+        <th>Статус</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Головна</td>
+        <td><a href="https://nestorvolya.github.io/">nestorvolya.github.io</a></td>
+        <td><span class="badge b-live">live</span></td>
+      </tr>
+      <tr>
+        <td>CV — SSO / AI / OSINT</td>
+        <td><a href="https://nestorvolya.github.io/cv-sso.html">cv-sso.html</a></td>
+        <td><span class="badge b-live">live</span></td>
+      </tr>
+      <tr>
+        <td>CV — Розвідка / ГУР</td>
+        <td><a href="https://nestorvolya.github.io/cv-gur.html">cv-gur.html</a></td>
+        <td><span class="badge b-live">live</span></td>
+      </tr>
+      <tr>
+        <td>Дос'є аналітика</td>
+        <td><a href="https://nestorvolya.github.io/dosie-nestor-volya.html">dosie-nestor-volya.html</a></td>
+        <td><span class="badge b-live">live</span></td>
+      </tr>
+      <tr>
+        <td>Ranger профіль (2024)</td>
+        <td><a href="https://nestorvolya.github.io/ranger-nestor-volya-2024.html">ranger-nestor-volya-2024.html</a></td>
+        <td><span class="badge b-live">live</span></td>
+      </tr>
+      <tr>
+        <td>Кейс: Rentafont.RU — OSINT-розслідування</td>
+        <td><a href="https://nestorvolya.github.io/cases/rentafont_ru/">cases/rentafont_ru/</a></td>
+        <td><span class="badge b-live">live</span></td>
+      </tr>
+      <tr>
+        <td>Публікація dev.ua — Rentafont</td>
+        <td><a href="https://dev.ua/blogs/posts/vidmovliaiutsia-vid-spivpratsi-rf-blog">dev.ua →</a></td>
+        <td><span class="badge b-pub">pub</span></td>
+      </tr>
+      <tr>
+        <td>DOU — peer review тред</td>
+        <td><a href="https://dou.ua/forums/topic/47877/">dou.ua →</a></td>
+        <td><span class="badge b-pub">pub</span></td>
+      </tr>
+      <tr>
+        <td>Braschi / Russia Cristiana — Gist-звіт</td>
+        <td><a href="https://gist.github.com/NestorVolya/7997de7361e244ab9f1a1f9a3f818e9c">gist.github.com →</a></td>
+        <td><span class="badge b-pub">pub</span></td>
+      </tr>
+      <tr>
+        <td>Ічкерійська діаспора — YouTube</td>
+        <td><a href="https://www.youtube.com/channel/UCfZqkVkfPCYuBvdukNCU0ag">youtube.com →</a></td>
+        <td><span class="badge b-pub">pub</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'neutral', flowchart: { curve: 'basis', padding: 20 } });
+
+  // Animated counters on scroll into view
+  const statsGrid = document.querySelector('.stats-grid');
+  if (statsGrid) {
+    const obs = new IntersectionObserver(entries => {
+      if (!entries[0].isIntersecting) return;
+      obs.disconnect();
+      document.querySelectorAll('.stat-num[data-target]').forEach(el => {
+        const target = parseInt(el.dataset.target);
+        const suffix = target === 100 ? '+' : '';
+        let val = 0;
+        const step = target / (800 / 16);
+        const t = setInterval(() => {
+          val += step;
+          if (val >= target) { el.textContent = target + suffix; clearInterval(t); }
+          else { el.textContent = Math.floor(val); }
+        }, 16);
+      });
+    }, { threshold: 0.4 });
+    obs.observe(statsGrid);
+  }
+</script>
+</body>
+</html>
