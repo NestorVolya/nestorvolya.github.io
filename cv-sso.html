@@ -31,6 +31,7 @@
     }
 
     a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+    sup { line-height: 0; }
 
     .page {
       max-width: 1120px;
@@ -363,6 +364,11 @@
         margin-bottom: 6px;
       }
     }
+
+    #notes ol { font-size: 14px; line-height: 1.6; }
+    #notes li { margin: 10px 0; color: var(--muted); border-radius: 5px; padding: 4px 8px; transition: background 0.3s; }
+    #notes li a { color: var(--link); word-break: break-all; }
+    #notes li:target { background: rgba(184, 135, 36, 0.18); outline: 2px solid var(--gold); }
   </style>
 </head>
 <body>
@@ -378,7 +384,7 @@
         <p>OSINT-аналітик, дослідник інформаційних операцій і практик AI-автоматизації. Не чистий технар і не чистий аналітик — сильна сторона в поєднанні: OSINT, військовий контекст, рекрутинг, медіа, управління і технічна автоматизація.</p>
         <p>Практика ручного OSINT з 2000-х: корпоративні розслідування (антирейдерство 2006–2008), акторський аналіз (Braschi, Чекаль), RU-мережевий OSINT, графовий аналіз Telegram-мереж.</p>
         <p>AI-шар: Python / FastAPI / PostgreSQL / RAG / NER — від автоматизованих пайплайнів збору до production-систем підтримки рішень.</p>
-        <p>Курс robot_dreams "AI для OSINT і розвідки": фінальна стадія, топова позиція в рейтингу.</p>
+        <p>Курс robot_dreams "AI для OSINT і розвідки": фінальна стадія, топова позиція в рейтингу.<sup><a href="#fn1" id="fnref1">1</a></sup></p>
         <div class="chips">
           <span class="chip">OSINT</span>
           <span class="chip">InfoOps</span>
@@ -415,7 +421,7 @@
         <div class="status-box">
           <span class="label">Кейси</span>
           <a href="https://nestorvolya.github.io/cases/rentafont_ru/">Rentafont</a> ·
-          <a href="https://infovarta.notion.site/_-308d7fb5fd9a80198f40ee491df41d18">Braschi</a> ·
+          <a href="https://nestorvolya.github.io/cases/braschi_rc/">Braschi</a> ·
           <a href="https://web.archive.org/web/20260129202211/https://uk.wikipedia.org/wiki/Чекаль_Олексій_Георгійович">Chekal</a>
         </div>
         <div class="status-box">
@@ -493,18 +499,13 @@
             <p>Створив автоматизовану систему підтримки рішень для мобілізаційного відбору 144 Центр ССО: Python / FastAPI / PostgreSQL / Docker. Маршрут: Signal-запит → WhatsApp-контрагент → PDF → AI-аналіз → висновок адміну. SLA-ескалації, реєстр кандидатів (<code>mobzakhody</code>), безпековий контур: ізоляція сервісів, шифрування артефактів.</p>
           </div>
 
-          <div class="case">
-            <div class="case-title">Braschi / Russia Cristiana — network profiling (RU-Italy-UA)</div>
-            <p>Мережеве OSINT-дослідження Francesco Braschi / Russia Cristiana / ПСТГУ / російських культурно-релігійних інституцій: actor profiling, network mapping, timeline reconstruction, source registry, role mapping.</p>
-            <p>Матеріали: <a href="https://gist.github.com/NestorVolya/7997de7361e244ab9f1a1f9a3f818e9c">Аналітичний звіт (GitHub)</a> · <a href="https://infovarta.notion.site/_-308d7fb5fd9a80198f40ee491df41d18">Francesco Braschi — OSINT profile</a> · <a href="https://infovarta.notion.site/v2-309d7fb5fd9a80689d69e4e2f7647bee">Хронологія візитів в Україну, 2010–2020</a> · <a href="https://infovarta.notion.site/OSINT-v4-309d7fb5fd9a80aab298f2abe0adc735">OSINT-досьє v4: Адольф Овчинніков</a>.</p>
-          </div>
 
           <div class="case">
             <div class="case-title">PR і рекрутинг 6-го полку «Рейнджер», 2024</div>
             <p>Тип: військова комунікація / рекрутинг / медіа.<br>
             Публічний маркер: <a href="ranger-nestor-volya-2024.html">ranger-nestor-volya-2024.html</a></p>
             <ul>
-              <li>5 рекрутингових кампаній у 5 містах;</li>
+              <li>5 рекрутингових кампаній у 5 містах;<sup><a href="#fn2" id="fnref2">2</a></sup></li>
               <li>~140 медіаконтактів, 25 авторських фотоальбомів;</li>
               <li>взаємодія з регіональними ЗМІ, ОВА, волонтерами, командирами;</li>
               <li>підготовка структурованих внутрішніх і публічних комунікаційних матеріалів.</li>
@@ -518,9 +519,15 @@
           </div>
 
           <div class="case">
+            <div class="case-title"><a href="https://nestorvolya.github.io/cases/braschi_rc/">Russia Cristiana / Braschi — OSINT-розслідування (RU-Italy-UA)</a></div>
+            <p>Мережеве дослідження Francesco Braschi і фонду Russia Cristiana: 67 років операції м'якої сили, «дзеркальні конференції» Серіате↔Москва, систематичне стирання України з культурної карти, мережа в Україні (Чекаль, Сігов, Центр св. Климента). Методи: actor profiling, network mapping, timeline reconstruction.</p>
+            <p><a href="https://nestorvolya.github.io/cases/braschi_rc/">→ Повний кейс</a> · <a href="https://gist.github.com/NestorVolya/7997de7361e244ab9f1a1f9a3f818e9c">Аналітичний звіт (GitHub)</a> · <a href="https://infovarta.notion.site/_-308d7fb5fd9a80198f40ee491df41d18">Braschi — Notion</a> · <a href="https://infovarta.notion.site/OSINT-v4-309d7fb5fd9a80aab298f2abe0adc735">Овчинніков — Notion</a></p>
+          </div>
+
+          <div class="case">
             <div class="case-title">Чекаль / Wikipedia OSINT — ручний складний кейс</div>
             <p>Критично важкий ручний OSINT-кейс: пошук, архіви, Wayback Machine, реконструкція таймлайну, матриця "слова vs дії", джерельна класифікація, оцінка рівня довіри до фактів, підготовка статті й аналітичного досьє.</p>
-            <p>Публічне підтвердження: <a href="https://web.archive.org/web/20260129202211/https://uk.wikipedia.org/wiki/Чекаль_Олексій_Георгійович">архівована стаття Wikipedia</a>, 170 верифікованих джерел.</p>
+            <p>Публічне підтвердження: <a href="https://web.archive.org/web/20260129202211/https://uk.wikipedia.org/wiki/Чекаль_Олексій_Георгійович">архівована стаття Wikipedia</a>, 170 верифікованих джерел.<sup><a href="#fn3" id="fnref3">3</a></sup></p>
           </div>
 
           <div class="case">
@@ -546,14 +553,14 @@
 
           <div class="case">
             <div class="case-title">ArkhamMirror SHATTERED — локальна OSINT-платформа</div>
-            <p>ArkhamMirror SHATTERED v0.1.0: production-рівень OSINT-платформа на Docker-стеку (FastAPI + PostgreSQL + pgvector). ~217 000 рядків коду, 400+ API endpoints, 25 active shards.</p>
+            <p>ArkhamMirror SHATTERED v0.1.0: production-рівень OSINT-платформа на Docker-стеку (FastAPI + PostgreSQL + pgvector). ~217 000 рядків коду, 400+ API endpoints, 25 active shards.<sup><a href="#fn4" id="fnref4">4</a></sup></p>
             <p>Інтеграція MindsDB 26.0.1 + Gemini 2.5 Flash: SQL-запити до OSINT-реєстру (FACT / SOURCE / GAP / DISC / ENTITY), AI-агент <code>chekal_analyst</code>, hybrid search pgvector. Розгорнуто локально (Windows 10 Pro) — production-архітектура в resource-constrained середовищі.</p>
             <p class="small">Репозиторій: <a href="https://github.com/NestorVolya/osint-homework-2026/tree/main/%D0%94%D0%97-03/dz-mindsdb-arkham-Nestor-V">ДЗ-03 / dz-mindsdb-arkham-Nestor-V</a></p>
           </div>
 
           <div class="case">
             <div class="case-title">Telegram / RU-сегмент — графовий аналіз інформаційної мережі</div>
-            <p>OSINT-дослідження проросійських і регіональних Telegram-каналів через GroupInt, Neo4j та Gephi. 15 100 повідомлень (11 781 з текстом); граф: 70 вузлів / 68 ребер → 60 / 58 після conservative deduplication.</p>
+            <p>OSINT-дослідження проросійських і регіональних Telegram-каналів через GroupInt, Neo4j та Gephi. 15 100 повідомлень (11 781 з текстом); граф: 70 вузлів / 68 ребер → 60 / 58 після conservative deduplication.<sup><a href="#fn5" id="fnref5">5</a></sup></p>
             <p>Виявлено 3-4 community clusters; найсильніший weighted degree: 3404 (<code>Republic_Of_GaGauZia</code>); найвищий PageRank: 0.0168 (<code>primulinmd</code>); 4 синхронні exact-text вікна між <code>MoldovaPolitics</code> і <code>gagauznewsmd</code> у межах 5.3-18 хв.</p>
             <p class="small">Висновки подані обережно: синхронність і повторюваність розглянуті як індикатори, а не як автоматичний доказ координації.</p>
           </div>
@@ -566,21 +573,21 @@
 
           <div class="case">
             <div class="case-title">Bot Detection — статистичний ML-аналіз акаунтів</div>
-            <p>Класифікація акаунтів соцмереж (людина / бот): 500 акаунтів (350 людей, 150 ботів), 5 ознак. Методи: logistic regression, K-Means + DBSCAN, Pearson/Spearman кореляція, feature engineering.</p>
+            <p>Класифікація акаунтів соцмереж (людина / бот): 500 акаунтів (350 людей, 150 ботів), 5 ознак. Методи: logistic regression, K-Means + DBSCAN, Pearson/Spearman кореляція, feature engineering.<sup><a href="#fn6" id="fnref6">6</a></sup></p>
             <p class="small">Ключовий висновок: частота дублікатів і posting frequency — найсильніші дискримінатори. Паралель із OSINT source evaluation: duplication rate → шум, posting frequency → агрегатори, account age → глибина архіву.</p>
             <p class="small">Репозиторій: <a href="https://github.com/NestorVolya/osint-homework-2026/tree/main/%D0%94%D0%97-17-Nestor-V">ДЗ-17-Nestor-V</a></p>
           </div>
 
           <div class="case">
             <div class="case-title">Bucha / Maxar / Berkeley Protocol</div>
-            <p>Верифікація супутникового матеріалу Maxar (WorldView-3) по Бучі за Берклійським протоколом. Chain of custody: Maxar → AP → Reuters / NYT / Bellingcat / Amnesty. Геолокація: вул. Яблунська, точність &lt;3.5 м; хронолокація: вікно 9–30 березня 2022, ~19 березня, тіла зафіксовані за 11 днів до відходу РФ. Evidence Score 4.43/5, SHA-256 верифіковано.</p>
+            <p>Верифікація супутникового матеріалу Maxar (WorldView-3) по Бучі за Берклійським протоколом. Chain of custody: Maxar → AP → Reuters / NYT / Bellingcat / Amnesty. Геолокація: вул. Яблунська, точність &lt;3.5 м; хронолокація: вікно 9–30 березня 2022, ~19 березня, тіла зафіксовані за 11 днів до відходу РФ. Evidence Score 4.43/5, SHA-256 верифіковано.<sup><a href="#fn7" id="fnref7">7</a></sup></p>
             <p class="small">Репозиторій: <a href="https://github.com/NestorVolya/osint-homework-2026/tree/main/%D0%94%D0%97-20-Nestor-V">ДЗ-20-Nestor-V</a></p>
           </div>
 
           <div class="case">
             <div class="case-title">Doppelganger (Italy / EU Elections)</div>
             <p>OSINT-звіт по проросійській clone-media operation з фокусом на Італію. Актори: Social Design Agency + Structura National Technologies (санкції EU 2023, US Treasury 2024).</p>
-            <p>Методи: typosquatting (ANSA, La Stampa, La Repubblica), платна реклама Meta (98 оголошень 2023), 1 300+ постів на X під час виборів до ЄП (4,6 млн переглядів), AI-generated content, VK-координація.</p>
+            <p>Методи: typosquatting (ANSA, La Stampa, La Repubblica), платна реклама Meta (98 оголошень 2023), 1 300+ постів на X під час виборів до ЄП (4,6 млн переглядів),<sup><a href="#fn8" id="fnref8">8</a></sup> AI-generated content, VK-координація.</p>
             <p class="small">Результат: 5 narrative-кластерів, 16 джерел у таблиці, HTML/MD-версії звіту.</p>
             <p class="small">Репозиторій: <a href="https://github.com/NestorVolya/osint-homework-2026/tree/main/%D0%94%D0%97-11-Nestor-V">ДЗ-11-Nestor-V</a></p>
           </div>
@@ -590,6 +597,20 @@
 
       </div>
     </div>
+
+    <section id="notes">
+      <h2>Примітки</h2>
+      <ol>
+        <li id="fn1">Курс robot_dreams «AI для OSINT і розвідки» — репозиторій курсових робіт // GitHub : [репозиторій]. — 2026. — URL: <a href="https://github.com/NestorVolya/osint-homework-2026">https://github.com/NestorVolya/osint-homework-2026</a> (дата звернення: 15.06.2026). Дані щодо позиції в рейтингу — особистий архів автора. <a href="#fnref1" aria-label="Повернутися до місця в тексті">↩︎</a></li>
+        <li id="fn2">Детальний звіт про PR і рекрутинг 6-го полку ССО «Рейнджер», 2024 // nestorvolya.github.io : [вебсайт]. — 2024. — URL: <a href="https://nestorvolya.github.io/ranger-nestor-volya-2024.html">https://nestorvolya.github.io/ranger-nestor-volya-2024.html</a> (дата звернення: 15.06.2026). <a href="#fnref2" aria-label="Повернутися до місця в тексті">↩︎</a></li>
+        <li id="fn3">Чекаль Олексій Георгійович // Вікіпедія : [вебсайт]. — Архівна копія 29.01.2026. — URL: <a href="https://web.archive.org/web/20260129202211/https://uk.wikipedia.org/wiki/Чекаль_Олексій_Георгійович">https://web.archive.org/web/20260129202211/https://uk.wikipedia.org/wiki/Чекаль_Олексій_Георгійович</a> (дата звернення: 15.06.2026). <a href="#fnref3" aria-label="Повернутися до місця в тексті">↩︎</a></li>
+        <li id="fn4">ArkhamMirror SHATTERED (ДЗ-03) // GitHub : [репозиторій]. — 2026. — URL: <a href="https://github.com/NestorVolya/osint-homework-2026/tree/main/%D0%94%D0%97-03/dz-mindsdb-arkham-Nestor-V">https://github.com/NestorVolya/osint-homework-2026/tree/main/ДЗ-03/dz-mindsdb-arkham-Nestor-V</a> (дата звернення: 15.06.2026). <a href="#fnref4" aria-label="Повернутися до місця в тексті">↩︎</a></li>
+        <li id="fn5">Графовий аналіз Telegram-мереж (ДЗ-12) // GitHub : [репозиторій]. — 2026. — URL: <a href="https://github.com/NestorVolya/osint-homework-2026">https://github.com/NestorVolya/osint-homework-2026</a> (дата звернення: 15.06.2026). Дані дослідження — особистий архів автора. <a href="#fnref5" aria-label="Повернутися до місця в тексті">↩︎</a></li>
+        <li id="fn6">Bot Detection — ML-аналіз акаунтів (ДЗ-17) // GitHub : [репозиторій]. — 2026. — URL: <a href="https://github.com/NestorVolya/osint-homework-2026/tree/main/%D0%94%D0%97-17-Nestor-V">https://github.com/NestorVolya/osint-homework-2026/tree/main/ДЗ-17-Nestor-V</a> (дата звернення: 15.06.2026). <a href="#fnref6" aria-label="Повернутися до місця в тексті">↩︎</a></li>
+        <li id="fn7">Bucha / Maxar / Berkeley Protocol (ДЗ-20) // GitHub : [репозиторій]. — 2026. — URL: <a href="https://github.com/NestorVolya/osint-homework-2026/tree/main/%D0%94%D0%97-20-Nestor-V">https://github.com/NestorVolya/osint-homework-2026/tree/main/ДЗ-20-Nestor-V</a> (дата звернення: 15.06.2026). <a href="#fnref7" aria-label="Повернутися до місця в тексті">↩︎</a></li>
+        <li id="fn8">Doppelganger (ДЗ-11) // GitHub : [репозиторій]. — 2026. — URL: <a href="https://github.com/NestorVolya/osint-homework-2026/tree/main/%D0%94%D0%97-11-Nestor-V">https://github.com/NestorVolya/osint-homework-2026/tree/main/ДЗ-11-Nestor-V</a> (дата звернення: 15.06.2026). <a href="#fnref8" aria-label="Повернутися до місця в тексті">↩︎</a></li>
+      </ol>
+    </section>
   </main>
 </body>
 </html>

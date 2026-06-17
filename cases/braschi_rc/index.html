@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Russia Cristiana — OSINT-розслідування | nestorvolya.github.io</title>
+  <style>
+    :root {
+      --bg: #f4f1eb;
+      --ink: #181818;
+      --muted: #57514a;
+      --line: #d8cfc0;
+      --panel: #fffaf2;
+      --dark: #111418;
+      --accent: #b2382f;
+      --accent2: #1e6f68;
+      --gold: #b88724;
+      --link: #064f8f;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+    sup { line-height: 0; }
+
+    .page {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 28px 22px 80px;
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-btn {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .nav-btn:hover { border-color: var(--muted); text-decoration: none; }
+
+    .nav-tag {
+      font-size: 13px;
+      color: var(--muted);
+      padding: 6px 0;
+    }
+
+    header {
+      margin-bottom: 36px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--line);
+    }
+
+    h1 {
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin: 0 0 10px;
+    }
+
+    .subtitle {
+      font-size: 17px;
+      color: var(--muted);
+      margin: 6px 0 14px;
+      font-weight: 400;
+      line-height: 1.3;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .meta span { margin: 0 6px; color: var(--line); }
+
+    /* TL;DR */
+    .summary-block {
+      background: var(--panel);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 22px 26px;
+      margin-bottom: 52px;
+    }
+
+    .summary-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin: 0 0 14px;
+    }
+
+    .summary-block h2 {
+      font-size: 19px;
+      font-weight: 800;
+      margin: 0 0 12px;
+      color: var(--ink);
+    }
+
+    .summary-block h3 {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      margin: 20px 0 7px;
+    }
+
+    .summary-block p { margin: 0 0 10px; font-size: 15px; }
+    .summary-block ul { margin: 0 0 10px; padding-left: 20px; }
+    .summary-block li { margin-bottom: 6px; font-size: 15px; }
+
+    /* Case body */
+    .case-body {
+      border-top: 1px solid var(--line);
+      padding-top: 44px;
+    }
+
+    .case-body-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin: 0 0 32px;
+    }
+
+    h3.sh {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent2);
+      margin: 44px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h3.sh:first-of-type { margin-top: 0; }
+
+    h4.sub {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 26px 0 8px;
+    }
+
+    .case-body p { margin: 0 0 14px; }
+    .case-body ul, .case-body ol { margin: 0 0 14px; padding-left: 22px; }
+    .case-body li { margin-bottom: 6px; }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 22px;
+      font-size: 14px;
+    }
+
+    th {
+      background: var(--dark);
+      color: #f7efe3;
+      padding: 9px 12px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td { background: rgba(0,0,0,.025); }
+
+    .td-date { white-space: nowrap; color: var(--muted); font-size: 13px; font-weight: 600; }
+    .td-flag { font-size: 16px; }
+    .td-warn { color: var(--accent); font-weight: 700; }
+
+    /* Warning / key finding box */
+    .warn-box {
+      background: #fff8f0;
+      border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 16px 0 20px;
+      font-size: 15px;
+    }
+
+    .warn-box strong { color: var(--accent); }
+
+    /* Network diagram */
+    .network-box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+      overflow-x: auto;
+    }
+
+    /* Cross-link to related case */
+    .cross-link {
+      background: #fdf8ec;
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 40px 0 20px;
+      font-size: 15px;
+    }
+
+    .cross-link strong { color: var(--gold); font-size: 12px; text-transform: uppercase; letter-spacing: .07em; display: block; margin-bottom: 6px; }
+
+    /* Public materials */
+    .pubs {
+      border-top: 1px solid var(--line);
+      padding-top: 32px;
+      margin-top: 52px;
+    }
+
+    .pubs-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin: 0 0 14px;
+    }
+
+    .pubs ul { margin: 0; padding-left: 20px; }
+    .pubs li { margin-bottom: 8px; }
+
+    /* ДСТУ footnotes */
+    .fn-section {
+      border-top: 1px solid var(--line);
+      padding-top: 28px;
+      margin-top: 52px;
+    }
+
+    .fn-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin: 0 0 14px;
+    }
+
+    .fn-list {
+      font-size: 13px;
+      color: var(--muted);
+      padding-left: 20px;
+      margin: 0;
+    }
+
+    .fn-list li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .fn-list li:target {
+      background: #fef8e1;
+      border-radius: 4px;
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+
+    .fn-list a { color: var(--link); word-break: break-all; }
+    .fn-back { font-size: 12px; margin-left: 4px; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <nav>
+    <a class="nav-btn" href="/">← Головна</a>
+    <a class="nav-btn" href="/cv-sso.html">CV SSO</a>
+    <a class="nav-btn" href="/cv-gur.html">CV ГУР</a>
+    <span class="nav-tag">Портфоліо кейсів</span>
+  </nav>
+
+  <header>
+    <h1>Russia Cristiana — OSINT-розслідування</h1>
+    <p class="subtitle">Мережа м'якої сили: Браскі, Овчинніков, Україна</p>
+    <p class="meta">
+      Мережевий OSINT<span>·</span>2026<span>·</span>40+ джерел (4 мови: 🇮🇹🇬🇧🇷🇺🇺🇦)<span>·</span>Автор: <a href="/">Нестор Воля</a>
+    </p>
+  </header>
+
+  <!-- TL;DR -->
+  <div class="summary-block">
+    <div class="summary-label">Висновки спочатку</div>
+    <h2>Короткий огляд (Executive Summary)</h2>
+    <p>Виявлено багаторівневу інституційну мережу навколо <strong>Francesco Braschi</strong> (Biblioteca Ambrosiana, Мілан) та фонду <strong>Russia Cristiana</strong> (засн. 1957), що функціонує в Україні з 2007 р. Ядром мережі є Центр св. Климента (Київ) під керівництвом проф. НаУКМА <strong>Костянтина Сігова</strong>. Технічний архітектор — харківський дизайнер <strong>Олексій Чекаль</strong>, автор графічного стилю ПЦУ.</p>
+    <h3>3 критичні знахідки</h3>
+    <ul>
+      <li><strong>67 років системної операції м'якої сили.</strong> RC — це не аматорський проект, а інституціоналізована мережа з нерухомістю в Москві (КЦ «Покровські ворота», 2004), постійним штатом і прямим доступом до еліт РПЦ та Ватикану.</li>
+      <li><strong>Стирання України.</strong> Всі 20+ виставок Meeting di Rimini (1982–2018) — виключно «руська» тематика. Жодної виставки про Україну як окрему культурну одиницю за 44 роки.</li>
+      <li><strong>Чекаль — випадок «кажуть одне, роблять інше».</strong> Публічно: автор логотипу ПЦУ, проукраїнські заяви. Фактично: під час повномасштабної війни (2022–2025) — дизайн для московських інституцій.</li>
+    </ul>
+  </div>
+
+  <!-- Case body -->
+  <div class="case-body">
+    <div class="case-body-label">Повне дослідження</div>
+
+    <!-- §1 -->
+    <h3 class="sh">§ 1. Фонд Russia Cristiana <small style="font-size:14px;font-weight:400;color:var(--muted)">(Organization)</small></h3>
+
+    <p>Фонд <em>Russia Cristiana</em> (раніше — Centro Studi Russia Cristiana) заснований у <strong>1957 році</strong> в Мілані католицьким священником о. Романо Скальфі (1923–2016). Початкова мета — «розкрити для християн Заходу сутність літургійної традиції та культури слов'янських народів».<sup><a href="#fn1" id="fnref1">1</a></sup></p>
+
+    <p><strong>Ідеологічний фундамент.</strong> Скальфі відвідав СРСР «40–50 разів» починаючи з 1970 р., під контролем КДБ (сам називав агента «ангел-охоронець»).<sup><a href="#fn2" id="fnref2">2</a></sup> Його передсмертний завіт: <em>«Любите Россию, несмотря ни на что»</em>.<sup><a href="#fn1" id="fnref1b">1</a></sup></p>
+
+    <p>База фонду — Вілла Амбівері, м. Серіате (Бергамо, Іт.): іконописна школа (з 1978 р., перша в Італії), домова церква, видавництво «La Casa di Matriona», альбоми-календарі (42 випуски).</p>
+
+    <h4 class="sub">КЦ «Покровські ворота» — оперативна база в Москві</h4>
+
+    <p>У <strong>2004 р.</strong> RC відкрила Культурний центр «Покровські ворота» (колишній особняк Боткіних, Покровка, 27 — у радянський час там розміщувався слідчий відділ НКВС).<sup><a href="#fn3" id="fnref3">3</a></sup> Статистика: 200 заходів/рік, 10 тис. відвідувачів. Директор — Жан-Франсуа Тірі (Бельгія); наукова співробітниця — <strong>Джованна Парравічіні</strong>, одночасно аташе з культури Посольства Ватикану в РФ.</p>
+
+    <div class="warn-box">
+      <strong>⚠ Потрійне підпорядкування Парравічіні:</strong> Ватикан + Russia Cristiana + фактично — платформа для РПЦ. Вона ж перекладачка Овчинникова, куратор 36 з 42 альбомів-календарів, організатор «дзеркальних конференцій» у Москві.
+    </div>
+
+    <p>Після смерті Скальфі (25.12.2016) <strong>Франческо Браскі</strong> очолив фонд. Браскі — водночас: президент RC, віце-префект Biblioteca Ambrosiana (Мілан), проф. Università Cattolica del Sacro Cuore, директор Класу славістики Accademia Ambrosiana.</p>
+
+    <!-- §2 -->
+    <h3 class="sh">§ 2. Виставки Meeting di Rimini <small style="font-size:14px;font-weight:400;color:var(--muted)">(Exhibitions)</small></h3>
+
+    <p>Meeting di Rimini — щорічний фестиваль руху Comunione e Liberazione, 800 тис.+ відвідувачів/рік. Russia Cristiana присутня з <strong>1982 року</strong> — <strong>44 роки</strong> безперервної присутності (до 2018+).<sup><a href="#fn6" id="fnref6">6</a></sup></p>
+
+    <table>
+      <thead>
+        <tr><th>Рік</th><th>Назва виставки</th><th>Ключовий зміст</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="td-date">1982</td><td>L'icona immagine dell'invisibile</td><td>Перша виставка ікон. Школа іконопису Серіате</td></tr>
+        <tr><td class="td-date">1986</td><td>Samizdat</td><td>Самвидав країн Схід. Європи; цитата Солженіцина</td></tr>
+        <tr><td class="td-date">1988</td><td>Mille anni di fede nella Rus'</td><td>1000-ліття Хрещення — подається як «русская» подія (Україна відсутня)</td></tr>
+        <tr><td class="td-date">1993</td><td>Bagliori russi dell'oriente cristiano</td><td><strong class="td-warn">27 фресок-копій А.М. Овчинникова</strong> + ікони Пскова XV–XVI ст.</td></tr>
+        <tr><td class="td-date">1997</td><td>Fedor Dostoevskij</td><td>Найбільша виставка Meeting того року</td></tr>
+        <tr><td class="td-date">2006</td><td>Padre Aleksandr Men'</td><td>О. Олександр Мень — убитий священик</td></tr>
+        <tr><td class="td-date">2008</td><td>Vivere senza menzogna. Solženicyn</td><td>Солженіцин; спільно з Фондом Солженіцина (Москва)</td></tr>
+        <tr><td class="td-date">2013</td><td>«Свет сияет во тьме» (ПСТГУ)</td><td><strong class="td-warn">Дизайн: Олексій Чекаль</strong>; студенти Харків/Київ у Москві</td></tr>
+        <tr><td class="td-date">2014</td><td>Виставка «Свідчення про Київ»</td><td>Куратор: К. Сігов; RC використовує Київ як тему</td></tr>
+        <tr><td class="td-date">2018</td><td>Amare la Russia nonostante tutto</td><td>Пам'яті Скальфі. Слоган — дослівний повтор його завіту</td></tr>
+      </tbody>
+    </table>
+
+    <div class="warn-box">
+      <strong>⚠ Ключовий аналітичний патерн:</strong> За 44 роки (1982–2018+) — жодної виставки про Україну як окрему культурну одиницю. Хрещення 988 р. подається як «русская» подія; все східнохристиянське мистецтво — «русское». Наратив RC: «Захід і Схід — єдиний простір» = Росія є «Схід», України не існує.
+    </div>
+
+    <!-- §3 -->
+    <h3 class="sh">§ 3. Конференції: «дзеркальний» формат <small style="font-size:14px;font-weight:400;color:var(--muted)">(Conferences)</small></h3>
+
+    <p>RC проводила щорічні академічні конференції в Серіате (Бергамо) з 1997 р. З <strong>2012 р.</strong> — «дзеркальний» формат: одночасно в Італії та Москві.<sup><a href="#fn7" id="fnref7">7</a></sup></p>
+
+    <table>
+      <thead>
+        <tr><th>Рік</th><th>Тема</th><th>Місця</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="td-date">1997–2009</td><td>Богословські та культурологічні теми</td><td>Серіате</td></tr>
+        <tr><td class="td-date">2010</td><td>«Богословіє общенія» — <strong>перша рос. мовна програма</strong></td><td>Серіате; Браскі + О. Філоненко</td></tr>
+        <tr><td class="td-date">2012</td><td>East~West: crisis as challenge</td><td><strong class="td-warn">Мілан + Москва</strong> (перший дзеркальний)</td></tr>
+        <tr><td class="td-date">2013</td><td>Identity, alterity, universality</td><td><strong class="td-warn">Серіате + Москва</strong></td></tr>
+        <tr><td class="td-date">2014</td><td>Tolstoj and his time</td><td><strong class="td-warn">Бергамо + Москва</strong></td></tr>
+        <tr><td class="td-date">2016</td><td>Il dono inatteso della misericordia</td><td><strong class="td-warn">Серіате + Москва</strong></td></tr>
+        <tr><td class="td-date">2018</td><td>Uomini liberi. Культура самвидаву</td><td><strong class="td-warn">Серіате + Москва</strong>; за участю «Меморіал», Архангельський</td></tr>
+        <tr><td class="td-date">2020</td><td>Una Rete che imprigiona... Pandemia</td><td>Онлайн</td></tr>
+      </tbody>
+    </table>
+
+    <div class="warn-box">
+      <strong>⚠ Висновок:</strong> «Дзеркальний» формат означає стабільне фінансування делегацій, інституційну підтримку РПЦ/ПСТГУ і формалізовану мережу контактів — щонайменше 2012–2018 рр. без перерви.
+    </div>
+
+    <!-- §4 -->
+    <h3 class="sh">§ 4. Мережа акторів <small style="font-size:14px;font-weight:400;color:var(--muted)">(Network)</small></h3>
+
+    <h4 class="sub">Адольф Овчинніков (1931–2021) — вузол рекрутменту</h4>
+    <p>Художник-реставратор ВХНРЦ ім. Грабаря. Куратор виставки ікон у Ватикані (1989–90). Іконопис у школі Серіате протягом 7 років (1990-ті). Написав іконостас для домової церкви вілли Амбівері. Виставка 27 фресок на Meeting 1993.<sup><a href="#fn4" id="fnref4">4</a></sup></p>
+
+    <p><strong>Ключова точка:</strong> 2005 р. — поїздка до Сирії з Олексієм Чекалем (вивчення візантійських фресок). Це момент входу Чекаля в мережу RC.</p>
+
+    <h4 class="sub">Джованна Парравічіні — центральний вузол</h4>
+    <p>Одночасно: аташе з культури Посольства Ватикану в РФ; наук. співробітниця КЦ «Покровські ворота»; куратор/гол. редактор альбомів-календарів RC (36/42); перекладачка Овчинникова; організатор московських конференцій.<sup><a href="#fn5" id="fnref5">5</a></sup></p>
+
+    <h4 class="sub">Костянтин Сігов — організатор в Україні</h4>
+    <p>Проф. НаУКМА, директор видавництва «Дух і Літера», засновник Центру св. Климента (Київ, 2007) — головний організаційний хаб мережі RC в Україні. Особистий друг Браскі («дорогой отец Франческо», 2016). Прямих проросійських заяв не виявлено.</p>
+
+    <h4 class="sub">Олексій Чекаль — технічний архітектор</h4>
+
+    <p>Харківський дизайнер (нар. 1973). Вхід у мережу RC: 2007 — дизайн сайту Центру св. Климента. Дизайн виставки ПСТГУ на Meeting di Rimini 2013. <strong>2018 — логотип і графічний стиль ПЦУ</strong> (Об'єднавчий собор).</p>
+
+    <p><strong>2021–2025 — дизайнер виставок Будинку російського зарубіжжя ім. Солженіцина</strong> (Москва, партнер «Русского міра»): квітень 2022 — дизайн у Феодорівському соборі РПЦ (Санкт-Петербург), через 6 тижнів після вторгнення; квітень 2025 — виставка у ПСТГУ.</p>
+
+    <p>Самовиправдання: «неофітські помилки». Проблема: 47–52 роки, 20+ років досвіду, виставка 2025 не «інерція».</p>
+
+    <div class="warn-box">
+      <strong>⚠</strong> Автор графічного стилю ПЦУ + дизайнер партнера «Русского міра» — одночасно, під час війни. Класичний «кажуть одне, роблять інше».
+    </div>
+
+    <h4 class="sub">Мережева діаграма</h4>
+    <div class="network-box">
+      <img src="img/braschi-network-diagram.png" alt="Мережева схема: Браскі — Ватикан — Russia Cristiana — Москва — Україна" style="width:100%;height:auto;display:block;border-radius:6px;">
+    </div>
+
+    <!-- §5 -->
+    <h3 class="sh">§ 5. Таймлайн Браскі <small style="font-size:14px;font-weight:400;color:var(--muted)">(Timeline)</small></h3>
+
+    <table>
+      <thead>
+        <tr><th>Дата</th><th class="td-flag"></th><th>Подія</th><th>Контакти</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="td-date">~2005</td><td>🇷🇺</td><td>Перші контакти з ПСТГУ, Москва</td><td>—</td></tr>
+        <tr><td class="td-date">2010.08</td><td>🇺🇦</td><td>VIII Київський літній богословський ін-т (лектор), Лишня</td><td>К. Сігов</td></tr>
+        <tr><td class="td-date">2010.10</td><td>🇮🇹</td><td>Конф. RC «Богословіє общенія» — <strong>перша рос. мовна програма</strong></td><td>О. Філоненко(?)</td></tr>
+        <tr><td class="td-date">2013.03</td><td>🇷🇺</td><td>Семінар ПСТГУ: іт. + укр. студенти (Харків/Київ) у Москві</td><td>Ректор ПСТГУ</td></tr>
+        <tr><td class="td-date">2013.07</td><td>🇺🇦</td><td>XI КЛБІ, Лишня</td><td>О. Філоненко</td></tr>
+        <tr><td class="td-date">2013.08</td><td>🇮🇹</td><td>Виставка «Свет сияет во тьме» (ПСТГУ), Ріміні; дизайн: Чекаль<sup><a href="#fn8" id="fnref8">8</a></sup></td><td>Чекаль, ПСТГУ</td></tr>
+        <tr><td class="td-date">2014.08</td><td>🇮🇹</td><td>Виставка «Свідчення про Київ», Ріміні</td><td>К. Сігов</td></tr>
+        <tr><td class="td-date">2015.06</td><td>🇮🇹</td><td>Прийом митр. Іларіона (Алфєєва) в Амброзіані</td><td>Іларіон Алфєєв</td></tr>
+        <tr><td class="td-date">2015.09</td><td>🇺🇦</td><td><strong class="td-warn">Конференція з Іларіоном у Києві — під час АТО!</strong></td><td>Іларіон Алфєєв</td></tr>
+        <tr><td class="td-date">2016.04</td><td>🇺🇦</td><td>«Дух і Літера», Київ</td><td>К. Сігов</td></tr>
+        <tr><td class="td-date">2017.03</td><td>🇷🇺</td><td>Концерт-свідчення про Скальфі, КЦ «Покровські ворота»<sup><a href="#fn1" id="fnref1c">1</a></sup></td><td>Парравічіні, хор RC</td></tr>
+        <tr><td class="td-date">2022.03</td><td>🇷🇺</td><td><strong class="td-warn">Конф. РПЦ (Ярославль) — під час боїв за Київ!</strong><sup><a href="#fn12" id="fnref12">12</a></sup></td><td>РПЦ</td></tr>
+        <tr><td class="td-date">2022.11.14</td><td>🇷🇺</td><td><strong class="td-warn">Лист ректору ПСТГУ Воробйову</strong> — ініціатива відновлення співпраці</td><td>В. Воробйов</td></tr>
+        <tr><td class="td-date">2024.02</td><td>🇷🇺</td><td><strong class="td-warn">Фестиваль ПСТГУ, Москва — сюжет НТВ</strong><sup><a href="#fn13" id="fnref13">13</a></sup></td><td>П. Хондзінський</td></tr>
+        <tr><td class="td-date">2024.12</td><td>🇷🇺</td><td>Виставка Овчинникова в «Покровських воротах»<sup><a href="#fn4" id="fnref4b">4</a></sup></td><td>Парравічіні, Горматюк</td></tr>
+      </tbody>
+    </table>
+
+    <!-- §6 -->
+    <h3 class="sh">§ 6. Браскі в часі війни <small style="font-size:14px;font-weight:400;color:var(--muted)">(Wartime Activity)</small></h3>
+
+    <p>Після 24.02.2022 Russia Cristiana та особисто Браскі <strong>не припинили</strong> жодної діяльності в РФ. Навпаки — активізувалися:</p>
+
+    <ol>
+      <li><strong>Березень 2022</strong> — участь у конференції РПЦ (Ярославль) під час боїв за Київ.</li>
+      <li><strong>14 листопада 2022</strong> — особистий лист ректору ПСТГУ з ініціативою «відновлення співпраці» і «планування стажувань».</li>
+      <li><strong>Лютий 2024</strong> — візит до Москви (фестиваль ПСТГУ); використаний НТВ як символічний «прорив культурної блокади» Росії.</li>
+      <li><strong>Грудень 2024</strong> — RC продовжує роботу в Москві: виставка Овчинникова в «Покровських воротах».</li>
+    </ol>
+
+    <div class="warn-box">
+      <strong>⚠ Висновок:</strong> Діяльність RC у Росії в 2022–2024 рр. — не пасивна присутність, а активна участь у формуванні образу «відкритої» Росії для іноземної аудиторії. Ярославль 2022 + лист Воробйову + НТВ 2024 = системна допомога в протидії ізоляції РФ.
+    </div>
+
+    <!-- §7 -->
+    <h3 class="sh">§ 7. Аналітичні висновки <small style="font-size:14px;font-weight:400;color:var(--muted)">(Conclusions)</small></h3>
+
+    <h4 class="sub">67 років системної операції м'якої сили</h4>
+    <p>Russia Cristiana — не аматорський культурний проект. Факти: 44 роки безперервної присутності на Meeting di Rimini (1982+); КЦ «Покровські ворота» — нерухомість у центрі Москви (відреставрована, куплена); 8+ штатних співробітників; щорічні конференції в двох країнах (2012–2018); альбоми-календарі на 5 мовах; паралельний доступ до Ватикану та РПЦ через одну людину (Парравічіні).</p>
+
+    <h4 class="sub">«Svyataya Rus'» — системне стирання України</h4>
+    <p>Жодного випуску альбомів-календарів про Україну. Всі 20+ виставок — «русская» тематика від Сибіру до Києва. Виставка 1988 «Mille anni di fede nella Rus'» — 1000-ліття Хрещення як «русская» подія. Парравічіні: «Захід і Схід — єдиний християнський простір, який говорить однією мовою». Наратив RC: Україна = частина «Русі» (в їхньому розумінні — Росії), не окрема культурна сутність.</p>
+
+    <h4 class="sub">Мережа Овчинніков → Чекаль → ПЦУ</h4>
+    <p>Точка входу Чекаля в мережу RC — Сирія 2005 з Овчинниковим. Через цей зв'язок: дизайн матеріалів ПСТГУ (2013), дизайн сайту Центру св. Климента, зрештою — логотип ПЦУ (2018). Один і той самий дизайнер формує візуальний код і для проукраїнської православної структури, і для московських інституцій одночасно.</p>
+
+  </div><!-- /case-body -->
+
+  <!-- Cross-link -->
+  <div class="cross-link">
+    <strong>→ Суміжні кейси</strong>
+    <strong><a href="/cases/rentafont_ru/">Rentafont.RU — OSINT-розслідування</a></strong> — інфраструктурні зв'язки з РФ: WHOIS, DNS, MX (Yandex), домени .ru, партнерська мережа.<br>
+    <strong>Олексій Чекаль — OSINT-дослідження</strong> (готується): повний аналіз висловлювань і дій 2016–2025, матриця «слова vs справи».
+  </div>
+
+  <!-- Public materials -->
+  <div class="pubs">
+    <div class="pubs-label">Публічні матеріали</div>
+    <ul>
+      <li>OSINT-профіль: <a href="https://infovarta.notion.site/_-308d7fb5fd9a80198f40ee491df41d18" target="_blank" rel="noopener">Francesco Braschi — Notion →</a><sup><a href="#fn9" id="fnref9">9</a></sup></li>
+      <li>OSINT-досьє v4: <a href="https://infovarta.notion.site/OSINT-v4-309d7fb5fd9a80aab298f2abe0adc735" target="_blank" rel="noopener">Адольф Овчинніков — Notion →</a><sup><a href="#fn10" id="fnref10">10</a></sup></li>
+      <li>Звіт «Українська мережа Браскі»: <a href="https://gist.github.com/NestorVolya/7997de7361e244ab9f1a1f9a3f818e9c" target="_blank" rel="noopener">GitHub Gist →</a><sup><a href="#fn11" id="fnref11">11</a></sup></li>
+    </ul>
+  </div>
+
+  <!-- ДСТУ footnotes -->
+  <div class="fn-section">
+    <div class="fn-label">Примітки</div>
+    <ol class="fn-list">
+      <li id="fn1">«Россия для отца Романо Скальфи была именно Святой Русью» [Електронний ресурс] / Благовест-Инфо. — 19.03.2017. — URL: <a href="https://blagovest-info.ru/index.php?ss=2&s=4&id=77337" target="_blank" rel="noopener">https://blagovest-info.ru/index.php?ss=2&s=4&id=77337</a> (дата звернення: 15.02.2026). <a href="#fnref1" class="fn-back" aria-label="Повернутися">↩︎</a></li>
+      <li id="fn2">«Отец Романо Скальфи: Прошу друзей любить Россию несмотря ни на что» [Електронний ресурс] / Благовест-Инфо. — 02.2017. — URL: <a href="https://blagovest-info.ru/index.php?ss=2&s=4&id=71900" target="_blank" rel="noopener">https://blagovest-info.ru/index.php?ss=2&s=4&id=71900</a> (дата звернення: 15.02.2026). <a href="#fnref2" class="fn-back" aria-label="Повернутися">↩︎</a></li>
+      <li id="fn3">«Культурный центр "Покровские ворота" отметил 15-летие» [Електронний ресурс] / Благовест-Инфо. — 11.2019. — URL: <a href="https://blagovest-info.ru/index.php?ss=2&s=4&id=85665" target="_blank" rel="noopener">https://blagovest-info.ru/index.php?ss=2&s=4&id=85665</a> (дата звернення: 15.02.2026). <a href="#fnref3" class="fn-back" aria-label="Повернутися">↩︎</a></li>
+      <li id="fn4">«Итальянские страницы творчества А.Н. Овчинникова и его учеников» [Електронний ресурс] / Благовест-Инфо. — 12.2024. — URL: <a href="https://blagovest-info.ru/index.php?ss=2&s=4&id=109992" target="_blank" rel="noopener">https://blagovest-info.ru/index.php?ss=2&s=4&id=109992</a> (дата звернення: 15.02.2026). <a href="#fnref4" class="fn-back" aria-label="Повернутися">↩︎</a></li>
+      <li id="fn5">«Икона — свидетельство вселенскости христианства» [Електронний ресурс] / Благовест-Инфо. — 11.2018. — URL: <a href="https://blagovest-info.ru/index.php?ss=2&s=4&id=80386" target="_blank" rel="noopener">https://blagovest-info.ru/index.php?ss=2&s=4&id=80386</a> (дата звернення: 15.02.2026). <a href="#fnref5" class="fn-back" aria-label="Повернутися">↩︎</a></li>
+      <li id="fn6">Russia Cristiana — Catalog of Exhibitions [Електронний ресурс] // russiacristiana.org : [вебсайт]. — URL: <a href="https://www.russiacristiana.org/exhibitions/" target="_blank" rel="noopener">https://www.russiacristiana.org/exhibitions/</a> (дата звернення: 15.02.2026). <a href="#fnref6" class="fn-back" aria-label="Повернутися">↩︎</a></li>
+      <li id="fn7">Russia Cristiana — Conferences [Електронний ресурс] // russiacristiana.org : [вебсайт]. — URL: <a href="https://www.russiacristiana.org/foundation/" target="_blank" rel="noopener">https://www.russiacristiana.org/foundation/</a> (дата звернення: 15.02.2026). <a href="#fnref7" class="fn-back" aria-label="Повернутися">↩︎</a></li>
+      <li id="fn8">«Международный семинар ПСТГУ объединил итальянских и украинских студентов» [Електронний ресурс] / Russkiy Mir Foundation. — 03.2013. — URL: <a href="https://russkiymir.ru/" target="_blank" rel="noopener">https://russkiymir.ru/</a> (дата звернення: 15.02.2026). Архівна копія — особистий архів автора. <a href="#fnref8" class="fn-back" aria-label="Повернутися">↩︎</a></li>
+      <li id="fn9">OSINT-профіль: Francesco Braschi [Електронний ресурс] / InfoVarta (Notion). — URL: <a href="https://infovarta.notion.site/_-308d7fb5fd9a80198f40ee491df41d18" target="_blank" rel="noopener">https://infovarta.notion.site/_-308d7fb5fd9a80198f40ee491df41d18</a> (дата звернення: 15.02.2026). <a href="#fnref9" class="fn-back" aria-label="Повернутися">↩︎</a></li>
+      <li id="fn10">OSINT-досьє v4: Адольф Овчинніков [Електронний ресурс] / InfoVarta (Notion). — URL: <a href="https://infovarta.notion.site/OSINT-v4-309d7fb5fd9a80aab298f2abe0adc735" target="_blank" rel="noopener">https://infovarta.notion.site/OSINT-v4-309d7fb5fd9a80aab298f2abe0adc735</a> (дата звернення: 15.02.2026). <a href="#fnref10" class="fn-back" aria-label="Повернутися">↩︎</a></li>
+      <li id="fn11">Нестор Воля. Українська мережа Francesco Braschi: OSINT-звіт v2.0 [Електронний ресурс] / GitHub Gist. — 2026. — URL: <a href="https://gist.github.com/NestorVolya/7997de7361e244ab9f1a1f9a3f818e9c" target="_blank" rel="noopener">https://gist.github.com/NestorVolya/7997de7361e244ab9f1a1f9a3f818e9c</a> (дата звернення: 15.06.2026). <a href="#fnref11" class="fn-back" aria-label="Повернутися">↩︎</a></li>
+      <li id="fn12">Ярославська єпархія РПЦ: анонс конференції, березень 2022 [Електронний ресурс] / yareparhia.ru. — URL: <a href="https://yareparhia.ru/" target="_blank" rel="noopener">https://yareparhia.ru/</a> (дата звернення: 15.02.2026). Архівна копія — особистий архів автора. <a href="#fnref12" class="fn-back" aria-label="Повернутися">↩︎</a></li>
+      <li id="fn13">ПСТГУ: Фестиваль 2024; сюжет НТВ [Електронний ресурс] / pstgu.ru. — 02.2024. — URL: <a href="https://pstgu.ru/" target="_blank" rel="noopener">https://pstgu.ru/</a> (дата звернення: 15.02.2026). Архівна копія — особистий архів автора. <a href="#fnref13" class="fn-back" aria-label="Повернутися">↩︎</a></li>
+    </ol>
+  </div>
+
+</div><!-- /page -->
+
+</body>
+</html>

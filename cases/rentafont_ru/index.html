@@ -363,6 +363,24 @@
     }
 
     .paradox-box p:last-child { margin: 0; }
+
+    .cross-link {
+      background: #fdf8ec;
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 40px 0 20px;
+      font-size: 15px;
+    }
+    .cross-link strong { color: var(--gold); font-size: 12px; text-transform: uppercase; letter-spacing: .07em; display: block; margin-bottom: 6px; }
+
+    sup { line-height: 0; }
+    #notes { border-top: 1px solid var(--line); padding-top: 32px; margin-top: 52px; }
+    #notes h2 { font-size: 20px; font-weight: 800; margin: 0 0 16px; }
+    #notes ol { font-size: 14px; line-height: 1.6; padding-left: 22px; }
+    #notes li { margin: 10px 0; color: var(--muted); border-radius: 5px; padding: 4px 8px; transition: background 0.3s; }
+    #notes li a { color: var(--link); word-break: break-all; }
+    #notes li:target { background: rgba(184, 135, 36, 0.18); outline: 2px solid var(--gold); }
   </style>
 </head>
 <body>
@@ -370,7 +388,8 @@
 
   <nav>
     <a class="nav-btn" href="/">← Головна</a>
-    <a class="nav-btn" href="/cv-sso.html">CV</a>
+    <a class="nav-btn" href="/cv-sso.html">CV SSO</a>
+    <a class="nav-btn" href="/cv-gur.html">CV ГУР</a>
     <span class="nav-tag">Кейс · OSINT due diligence</span>
   </nav>
 
@@ -404,11 +423,11 @@
 
     <h3>Ключові знахідки</h3>
     <ul>
-      <li>Домен <code>rentafont.ru</code> зареєстрований у грудні 2012 року і залишався активним після початку повномасштабної війни; WHOIS-записи показують продовження у грудні 2022 року до 5 грудня 2023 року.</li>
-      <li>Хостингові сліди свідчать, що домен працював щонайменше до серпня 2023 року — технічна відмова від <code>.ru</code> не відбулася одразу після 24.02.2022.</li>
+      <li>Домен <code>rentafont.ru</code> зареєстрований у грудні 2012 року і залишався активним після початку повномасштабної війни; WHOIS-записи показують продовження у грудні 2022 року до 5 грудня 2023 року.<sup><a href="#fn1" id="fnref1">1</a></sup></li>
+      <li>Хостингові сліди свідчать, що домен працював щонайменше до серпня 2023 року<sup><a href="#fn2" id="fnref2">2</a></sup> — технічна відмова від <code>.ru</code> не відбулася одразу після 24.02.2022.</li>
       <li>У сервісі зберігалися сліди старої інфраструктури, пов'язаної з російськими сервісами, включно з Yandex-пов'язаними поштовими конфігураціями та допоміжними піддоменами, які Євген Садко визнавав як спадок старої архітектури.</li>
       <li>Субдомен <code>tilda.rentafont.com</code> залишався окремою технічною проблемою; публічна технічна дискусія показала, що версія про його «захоплення росіянами» є технічно малоймовірною без втрати контролю над основним доменом.</li>
-      <li>За даними BuiltWith, у лютому 2022 року віджет Rentafont використовувався приблизно на 7&thinsp;700 сайтах у РФ проти близько 500 сайтів в Україні — співвідношення 20–25:1 на користь російського ринку.</li>
+      <li>За даними BuiltWith, у лютому 2022 року віджет Rentafont використовувався приблизно на 7&thinsp;700 сайтах у РФ проти близько 500 сайтів в Україні — співвідношення 20–25:1 на користь російського ринку.<sup><a href="#fn3" id="fnref3">3</a></sup></li>
       <li>У публічному сліді зафіксовано зв'язки з Tilda, Paratype, «РОСМЭН», «Известия» та іншими акторами російського ринку; Євген Садко також визнавав зв'язки з рос. студіями, що почалася ще до 2014 року.</li>
     </ul>
 
@@ -496,7 +515,7 @@
     </figure>
 
     <p>Лише після завершення оплаченого періоду в грудні 2023 року домен не був продовжений попереднім власником і в січні 2024 року був перереєстрований на REG.RU як новий запис — що відповідає сценарію, коли домен переходить під контроль реєстратора після відмови власника його підтримувати.</p>
-    <p>Основні домени сервісу — <code>rentafont.com</code> і <code>rentafont.com.ua</code> — обслуговувалися через окремі конфігурації NS/MX; в окремих періодах фіксувалися MX-записи, пов'язані з російським поштовим сервісом Yandex, як частина старої інфраструктури. Існували також допоміжні піддомени (<code>vernacular</code>, <code>mx</code>, <code>mx2</code>), які не завжди вчасно очищувалися від залежностей від російських сервісів.</p>
+    <p>Основні домени сервісу — <code>rentafont.com</code> і <code>rentafont.com.ua</code> — обслуговувалися через окремі конфігурації NS/MX; в окремих періодах фіксувалися MX-записи, пов'язані з російським поштовим сервісом Yandex, як частина старої інфраструктури. Існували також допоміжні піддомени (<code>vernacular</code>, <code>mx</code>, <code>mx2</code>), які не завжди вчасно очищувалися від залежностей від російських сервісів.<sup><a href="#fn4" id="fnref4">4</a></sup></p>
 
     <figure class="evidence">
       <a href="img/viewdns-rentafont-ua-mx-yandex-jan2024.jpg" target="_blank">
@@ -507,7 +526,7 @@
 
     <h4 class="sub">2. Піддомен tilda.rentafont.com</h4>
     <p>Піддомен <code>tilda.rentafont.com</code> використовувався як інтеграційний вузол між Rentafont і конструктором сайтів Tilda для доставки веб-шрифтів на сайти користувачів. Євген Садко стверджував, що після 2022 року «втратив контроль» над цим піддоменом, а російська сторона «якось» зберегла його у себе.</p>
-    <p>Аналіз NS/SOA-записів та обговорення з DevOps-фахівцями показали, що власник основного домена <code>rentafont.com</code> загалом зберігає контроль над субдоменами, навіть якщо делегує їх на інші сервери; технічна спільнота дійшла висновку, що піддомен не може бути «вкрадений» без втрати контролю над самим доменом. Водночас Садко визнав, що зі «старих» сайтів на Tilda все ще надходили запити до цього піддомену (близько 100 на день), що підтверджує наявність активного інтеграційного сліду й після 2022 року.</p>
+    <p>Аналіз NS/SOA-записів та обговорення з DevOps-фахівцями показали, що власник основного домена <code>rentafont.com</code> загалом зберігає контроль над субдоменами, навіть якщо делегує їх на інші сервери; технічна спільнота дійшла висновку, що піддомен не може бути «вкрадений» без втрати контролю над самим доменом. Водночас Садко визнав, що зі «старих» сайтів на Tilda все ще надходили запити до цього піддомену (близько 100 на день), що підтверджує наявність активного інтеграційного сліду й після 2022 року.<sup><a href="#fn5" id="fnref5">5</a></sup></p>
 
     <figure class="evidence">
       <a href="img/urlscan-tilda-rentafont-ru-vs-ua.jpg" target="_blank">
@@ -517,7 +536,7 @@
     </figure>
 
     <h4 class="sub">3. Ринкова присутність</h4>
-    <p>За даними BuiltWith, на лютий 2022 року віджет Rentafont використовувався приблизно на 7&thinsp;700 російських сайтах і близько 500 українських, тобто співвідношення користувачів РФ до українських становило близько 20–25:1. У деяких рейтингах сервіс входив до числа найпопулярніших провайдерів веб-шрифтів у РФ.</p>
+    <p>За даними BuiltWith, на лютий 2022 року віджет Rentafont використовувався приблизно на 7&thinsp;700 російських сайтах і близько 500 українських, тобто співвідношення користувачів РФ до українських становило близько 20–25:1.<sup><a href="#fn3" id="fnref3b">3</a></sup> У деяких рейтингах сервіс входив до числа найпопулярніших провайдерів веб-шрифтів у РФ.</p>
 
     <figure class="evidence">
       <a href="img/builtwith-russia-7711-sites-feb2022.jpg" target="_blank">
@@ -664,9 +683,14 @@
   <div class="pubs">
     <p class="pubs-label">Публікації</p>
     <ul>
-      <li><a href="https://dev.ua/blogs/posts/vidmovliaiutsia-vid-spivpratsi-rf-blog">dev.ua — «Відмовляються від співпраці з РФ»</a></li>
-      <li><a href="https://dou.ua/forums/topic/47877/">DOU — тред з технічним peer review</a></li>
+      <li><a href="https://dev.ua/blogs/posts/vidmovliaiutsia-vid-spivpratsi-rf-blog">dev.ua — «Відмовляються від співпраці з РФ»</a><sup><a href="#fn6" id="fnref6">6</a></sup></li>
+      <li><a href="https://dou.ua/forums/topic/47877/">DOU — тред з технічним peer review</a><sup><a href="#fn7" id="fnref7">7</a></sup></li>
     </ul>
+  </div>
+
+  <div class="cross-link">
+    <strong>→ Суміжний кейс</strong>
+    <strong><a href="/cases/braschi_rc/">Russia Cristiana — OSINT-розслідування</a></strong> — мережа м'якої сили: Francesco Braschi, Олексій Чекаль (дизайнер ПЦУ), Центр св. Климента; зв'язки Італія–Москва–Україна.
   </div>
 
   <!-- Evidence gallery -->
@@ -702,6 +726,19 @@
       </a>
     </div>
   </div>
+
+  <section id="notes">
+    <h2>Примітки</h2>
+    <ol>
+      <li id="fn1">Виписка WHOIS: <code>rentafont.ru</code> продовжено до 05.12.2023, реєстратор REGRU-RU // DomainTools : [вебсайт]. — 2023. — URL: <a href="https://whois.domaintools.com/rentafont.ru">https://whois.domaintools.com/rentafont.ru</a> (дата звернення: 15.06.2026). Архівний знімок — особистий архів автора. <a href="#fnref1" aria-label="Повернутися до місця в тексті">↩︎</a></li>
+      <li id="fn2">Хостинговий слід <code>rentafont.ru</code> на IP 95.217.73.163 (Hetzner), 06.08.2023 // myip.ms : [вебсайт]. — 2023. — URL: <a href="https://www.myip.ms/">https://www.myip.ms/</a> (дата звернення: 15.06.2026). Скріншот — особистий архів автора. <a href="#fnref2" aria-label="Повернутися до місця в тексті">↩︎</a></li>
+      <li id="fn3">Статистика використання віджета Rentafont за країнами, лютий 2022: ~7 711 сайтів РФ vs ~500 UA // BuiltWith : [вебсайт]. — 2022. — URL: <a href="https://builtwith.com/websites/rentafont.com">https://builtwith.com/websites/rentafont.com</a> (дата звернення: 15.06.2026). Знімок стану — особистий архів автора. <a href="#fnref3" aria-label="Повернутися до місця в тексті">↩︎</a></li>
+      <li id="fn4">DNS/MX-записи <code>rentafont.com.ua</code>: MX = mx.yandex.net (пріоритет 10), 15.01.2024 // ViewDNS.info : [вебсайт]. — 2024. — URL: <a href="https://viewdns.info/">https://viewdns.info/</a> (дата звернення: 15.06.2026). Скріншот — особистий архів автора. <a href="#fnref4" aria-label="Повернутися до місця в тексті">↩︎</a></li>
+      <li id="fn5">Розподіл сайтів з <code>tilda.rentafont.com</code> за доменними зонами: 2 408 (.ru) vs 79 (.ua), початок 2023 // urlscan.io : [вебсайт]. — 2023. — URL: <a href="https://urlscan.io/search/#page.domain%3Atilda.rentafont.com">https://urlscan.io/search/#page.domain:tilda.rentafont.com</a> (дата звернення: 15.06.2026). Скріншот — особистий архів автора. <a href="#fnref5" aria-label="Повернутися до місця в тексті">↩︎</a></li>
+      <li id="fn6">Відмовляються від співпраці з РФ: хто і чому / dev.ua. — 2023. — URL: <a href="https://dev.ua/blogs/posts/vidmovliaiutsia-vid-spivpratsi-rf-blog">https://dev.ua/blogs/posts/vidmovliaiutsia-vid-spivpratsi-rf-blog</a> (дата звернення: 15.06.2026). <a href="#fnref6" aria-label="Повернутися до місця в тексті">↩︎</a></li>
+      <li id="fn7">Rentafont.RU — OSINT-розслідування: тред з технічним peer review / DOU. — URL: <a href="https://dou.ua/forums/topic/47877/">https://dou.ua/forums/topic/47877/</a> (дата звернення: 15.06.2026). <a href="#fnref7" aria-label="Повернутися до місця в тексті">↩︎</a></li>
+    </ol>
+  </section>
 
 </div>
 </body>
