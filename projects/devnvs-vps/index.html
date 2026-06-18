@@ -281,7 +281,7 @@
 
   <header>
     <h1>devNVS/VPS — production-adjacent AI infrastructure</h1>
-    <p class="subtitle">Особистий dev/staging стек: агентна система, OSINT API, автоматизація</p>
+    <p class="subtitle">Власна інфраструктура для AI-сервісів і OSINT-автоматизації: від локальної розробки до безперервного розгортання на сервері</p>
     <p class="meta">
       DevOps · solo-build<span>·</span>2025–2026<span>·</span><a href="mailto:devnvs@pm.me">devnvs@pm.me</a><span>·</span>Автор: <a href="/">Нестор Воля</a>
     </p>
@@ -293,8 +293,8 @@
     <h2>Три ключові рішення</h2>
     <ul>
       <li><strong>Розділення ролей: devNVS = розробка, VPS = 24/7 сервіси.</strong> Локальна станція — тільки для планування, кодингу і сесій. Все що має працювати постійно — на VPS.</li>
-      <li><strong>Мережева ізоляція: кожен проєкт = окрема Docker network.</strong> Явний cross-network доступ тільки через data/shared шари. Без implicit зв'язків між проєктами.</li>
-      <li><strong>Data core durable, producer-agnostic.</strong> PostgreSQL + pgvector = structured truth. Raw artifacts поза БД. Проєкти-producer замінні; дані залишаються.</li>
+      <li><strong>Мережева ізоляція: кожен проєкт = окрема Docker-мережа.</strong> Явні міжмережеві зв'язки — тільки через data/shared шари. Без неявних зв'язків між проєктами.</li>
+      <li><strong>Дані стійкі й незалежні від виробника.</strong> PostgreSQL + pgvector = єдина структурована база. Необроблені матеріали поза БД. Проєкти-виробники змінюються; дані залишаються.</li>
     </ul>
   </div>
 
@@ -305,7 +305,7 @@
     <!-- §1 -->
     <h3 class="sh">§ 1. Архітектурна модель <small style="font-size:14px;font-weight:400;color:var(--muted)">(Architecture)</small></h3>
 
-    <p>Система складається з двох вузлів з чітко розділеними ролями. devNVS — локальна Windows-станція, на якій відбувається вся розробка, планування і управління. VPS (Linux KVM) — remote dev/staging runtime для 24/7 сервісів.</p>
+    <p>Система складається з двох вузлів з чітко розділеними ролями. devNVS — локальна Windows-станція, на якій відбувається вся розробка, планування і управління. VPS (Linux KVM) — віддалений сервер для безперервних сервісів і виконання задач.</p>
 
     <table>
       <thead>
@@ -326,13 +326,13 @@
     </table>
 
     <div class="note-box">
-      <strong>Локальні LLM не плануються.</strong> GPU/VRAM локальної станції недостатній для продуктивної роботи. Cloud-first: дорогі LLM-виклики тільки для reasoning/synthesis, дешеві — для routing/classification.
+      <strong>Локальні LLM не плануються.</strong> Відеокарта станції (GTS 450, 969 МБ відеопам'яті) не тягне навіть 7B-модель. Купувати GPU під dev-стек економічно не виправдано. Хмарний підхід: дорогі моделі — тільки для аналізу і синтезу, дешеві — для маршрутизації і класифікації.
     </div>
 
     <!-- §2 -->
     <h3 class="sh">§ 2. VPS service stack <small style="font-size:14px;font-weight:400;color:var(--muted)">(Services)</small></h3>
 
-    <p>Всі сервіси запущені в Docker Compose. Traefik — єдина точка входу з wildcard TLS. Сервіси згруповані в ізольовані мережі; explicit cross-network доступ тільки між явно пов'язаними шарами.</p>
+    <p>Всі сервіси запущені в Docker Compose. Traefik — єдина точка входу із захистом TLS. Сервіси згруповані в ізольовані мережі; явні міжмережеві зв'язки — тільки між пов'язаними шарами.</p>
 
     <table>
       <thead>
@@ -383,21 +383,21 @@ flowchart TB
     <!-- §3 -->
     <h3 class="sh">§ 3. Data architecture <small style="font-size:14px;font-weight:400;color:var(--muted)">(Data)</small></h3>
 
-    <p><code>osint-base</code> — durable OSINT data core: схема, API, скрипти. На VPS mirrored через git і доступний через PostgreSQL / OSINT API. Проєкти-producer записують дані через approved API, а не напряму в схему.</p>
+    <p><code>osint-base</code> — стійке ядро OSINT-даних: схема, API, скрипти. На VPS синхронізується через git і доступний через PostgreSQL / OSINT API. Проєкти-виробники записують дані через узгоджений API, а не напряму в схему.</p>
 
     <table>
       <thead>
         <tr><th>Шар</th><th>Сховище</th><th>Правило</th></tr>
       </thead>
       <tbody>
-        <tr><td class="td-label">Structured truth</td><td>PostgreSQL + pgvector</td><td>FACT / SOURCE / GAP / DISC / ENTITY через API</td></tr>
-        <tr><td class="td-label">Raw artifacts</td><td>External (GDrive)</td><td>Не дублюються в БД; зберігаються як посилання</td></tr>
+        <tr><td class="td-label">Структурована база</td><td>PostgreSQL + pgvector</td><td>FACT / SOURCE / GAP / DISC / ENTITY через API</td></tr>
+        <tr><td class="td-label">Необроблені матеріали</td><td>External (GDrive)</td><td>Не дублюються в БД; зберігаються як посилання</td></tr>
         <tr><td class="td-label">Secrets</td><td>Local <code>.env</code> (не в image)</td><td>Не комітяться; не в logs; не в image</td></tr>
       </tbody>
     </table>
 
     <div class="note-box">
-      <strong>Принцип: проєкти замінні, дані durable.</strong> <code>osint-base</code> не залежить від конкретного producer-проєкту. Сьогодні один pipeline — завтра інший; data core і API contract залишаються.
+      <strong>Принцип: проєкти замінні, дані стійкі.</strong> <code>osint-base</code> не залежить від конкретного проєкту-виробника. Сьогодні один пайплайн — завтра інший; база даних і API-контракт залишаються.
     </div>
 
     <!-- §4 -->
@@ -415,17 +415,17 @@ flowchart TB
         </tr>
         <tr>
           <td class="td-label">OSINT API + n8n</td>
-          <td>OSINT pipeline API (FastAPI + PostgreSQL); n8n як workflow adapter для автоматизації збору й обробки. Не центральна шина — per-project adapter.</td>
+          <td>OSINT pipeline API (FastAPI + PostgreSQL); n8n як адаптер автоматизації збору й обробки. Не центральна шина — окремий адаптер для проєкту.</td>
           <td class="td-done">Active</td>
         </tr>
         <tr>
           <td class="td-label">Hermes Agent</td>
-          <td>AI orchestration layer: Claude Code як primary agent, Hermes як deployed контейнер для автономних задач і skills.</td>
+          <td>Рівень оркестрування AI: Claude Code як основний агент, Hermes — розгорнутий контейнер для автономних задач.</td>
           <td class="td-done">Active</td>
         </tr>
         <tr>
           <td class="td-label">Crawl4AI + Ollama</td>
-          <td>Shared tools: web scraping і local LLM для routing / cheap inference. Cloud-first — Ollama для задач де latency важливіша за якість.</td>
+          <td>Спільні інструменти: збір даних із вебу і локальна LLM для швидкого виведення. Ollama — для задач де затримка важливіша за якість відповіді.</td>
           <td class="td-done">Active</td>
         </tr>
       </tbody>
@@ -437,27 +437,27 @@ flowchart TB
     <div class="adr-grid">
       <div class="adr-card">
         <strong>Agent-centered orchestration</strong>
-        <p>Claude Code / Hermes = оркестратор. LLM-виклики тільки для reasoning / synthesis / judgment. Routing і classification — дешеві моделі або rule-based.</p>
+        <p>Claude Code / Hermes = оркестратор. Потужні моделі — тільки для аналізу, синтезу і прийняття рішень. Маршрутизація і класифікація — дешеві моделі або правила. <em>Чому:</em> дорога модель на простій задачі — марна трата бюджету без виграшу в якості.</p>
       </div>
       <div class="adr-card">
         <strong>Project-per-network isolation</strong>
-        <p>Кожен проєкт — окрема Docker network. Explicit cross-network тільки через shared/data шари. Implicit зв'язки між проєктами заборонені.</p>
+        <p>Кожен проєкт — окрема Docker-мережа. Явні міжмережеві зв'язки — тільки через shared/data шари. Неявні зв'язки між проєктами заборонені. <em>Чому:</em> без ізоляції компрометація одного контейнера поширюється на весь стек; явні зв'язки читаються в compose-файлі, неявні — ні.</p>
       </div>
       <div class="adr-card">
         <strong>Cloud-first LLM</strong>
-        <p>Локальний GPU обмежений. Gemini Flash / Claude — primary models. Ollama — тільки для задач де cost/latency критичніші за якість.</p>
+        <p>Gemini Flash / Claude — основні моделі. Ollama — тільки там, де затримка важливіша за якість. <em>Чому:</em> наявна відеокарта (GTS 450, 969 МБ VRAM) не підходить для жодної сучасної мовної моделі; купувати GPU під dev-стек не виправдано.</p>
       </div>
       <div class="adr-card">
         <strong>PostgreSQL-first graph</strong>
-        <p>Граф зберігається в PostgreSQL + pgvector (не Neo4j). Gephi / NetworkX для аналізу; PostgreSQL для persistent structured truth.</p>
+        <p>Граф зберігається в PostgreSQL + pgvector (не Neo4j). Gephi / NetworkX — для аналізу; PostgreSQL — для постійного сховища. <em>Чому:</em> PostgreSQL вже є в стеку. Neo4j — це ще один тип БД для обслуговування. pgvector дає векторний пошук без додаткового сервісу.</p>
       </div>
       <div class="adr-card">
         <strong>n8n = optional adapter</strong>
-        <p>n8n не є центральною шиною системи. Per-project workflow adapter. Логіка в Python/FastAPI; n8n тільки як glue для specific automations.</p>
+        <p>n8n — не центральна шина, а адаптер для конкретного проєкту. Логіка — в Python/FastAPI; n8n лише як клей для автоматизацій. <em>Чому:</em> шина, на якій тримається все — єдина точка відмови. Якщо n8n падає, бізнес-логіка в FastAPI продовжує працювати.</p>
       </div>
       <div class="adr-card">
         <strong>Durable data core</strong>
-        <p>osint-base незалежний від producer-проєктів. Producer-контракт через API. Schema changes тільки через migration plan + rollback plan.</p>
+        <p><code>osint-base</code> незалежний від проєктів-виробників. Запис даних — тільки через API-контракт. Зміни схеми — тільки через план міграції і план відкату. <em>Чому:</em> проєкти закінчуються — курс, підрядник, ітерація. Дані не мають залежати від того, хто їх створив.</p>
       </div>
     </div>
 
@@ -469,15 +469,15 @@ flowchart TB
         <tr><th>Статус</th><th>Milestone</th></tr>
       </thead>
       <tbody>
-        <tr><td class="td-done">✓</td><td>SSH + Traefik + wildcard TLS — базова infra</td></tr>
-        <tr><td class="td-done">✓</td><td>PostgreSQL 16 + pgvector 0.8.2 — data layer</td></tr>
-        <tr><td class="td-done">✓</td><td>TCK Bot deploy — перший production сервіс</td></tr>
-        <tr><td class="td-done">✓</td><td>infra_net / shared_net / data_net / project networks — мережева ізоляція</td></tr>
-        <tr><td class="td-done">✓</td><td>osint-base → durable data core role (schema + API + scripts)</td></tr>
+        <tr><td class="td-done">✓</td><td>SSH + Traefik + TLS — базова інфраструктура</td></tr>
+        <tr><td class="td-done">✓</td><td>PostgreSQL 16 + pgvector 0.8.2 — шар даних</td></tr>
+        <tr><td class="td-done">✓</td><td>TCK Bot — перший розгорнутий сервіс</td></tr>
+        <tr><td class="td-done">✓</td><td>infra_net / shared_net / data_net / мережі проєктів — ізоляція</td></tr>
+        <tr><td class="td-done">✓</td><td>osint-base → стійке ядро даних (схема + API + скрипти)</td></tr>
         <tr><td class="td-done">✓</td><td>n8n + OSINT API на data_net</td></tr>
-        <tr><td class="td-done">✓</td><td>Cloud firewall + Redis password protection + 4 GB swap</td></tr>
-        <tr><td class="td-done">✓</td><td>Hermes agent container — orchestration layer</td></tr>
-        <tr><td class="td-done">✓</td><td>STORAGE_BACKEND=postgres (dual-write verified)</td></tr>
+        <tr><td class="td-done">✓</td><td>Хмарний файрвол + захист Redis + 4 ГБ swap</td></tr>
+        <tr><td class="td-done">✓</td><td>Hermes agent — рівень оркестрування</td></tr>
+        <tr><td class="td-done">✓</td><td>STORAGE_BACKEND=postgres (подвійний запис перевірено)</td></tr>
       </tbody>
     </table>
 
