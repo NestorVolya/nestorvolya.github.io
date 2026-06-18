@@ -516,6 +516,12 @@
           </div>
 
           <div class="case">
+            <div class="case-title"><a href="https://nestorvolya.github.io/projects/korni-vps/">devNVS/VPS — production-adjacent AI infrastructure</a></div>
+            <p>Solo-build: VPS dev/staging стек для 24/7 AI-сервісів і OSINT-автоматизації. Docker Compose + Traefik (wildcard TLS), PostgreSQL 16 + pgvector, Redis, n8n, Crawl4AI, FastAPI. Мережева ізоляція: кожен проєкт — окрема Docker network; explicit cross-network тільки через data/shared шари. Deployed: TCK Bot, OSINT pipeline API, Hermes agent, workflow automation.</p>
+            <p><a href="https://nestorvolya.github.io/projects/korni-vps/">→ Архітектурна схема</a></p>
+          </div>
+
+          <div class="case">
             <div class="case-title">HARON / tck-bot — solo-продукт для підтримки рішень</div>
             <p>Створив автоматизовану систему підтримки рішень для мобілізаційного відбору 144 Центр ССО: Python / FastAPI / PostgreSQL / Docker. Маршрут: Signal-запит → WhatsApp-контрагент → PDF → AI-аналіз → висновок адміну. SLA-ескалації, реєстр кандидатів (<code>mobzakhody</code>), безпековий контур: ізоляція сервісів, шифрування артефактів.</p>
           </div>

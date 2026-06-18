@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>devNVS/VPS — AI infrastructure | nestorvolya.github.io</title>
+  <style>
+    :root {
+      --bg: #f4f1eb;
+      --ink: #181818;
+      --muted: #57514a;
+      --line: #d8cfc0;
+      --panel: #fffaf2;
+      --dark: #111418;
+      --accent: #b2382f;
+      --accent2: #1e6f68;
+      --gold: #b88724;
+      --link: #064f8f;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+    .page {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 28px 22px 80px;
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-btn {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .nav-btn:hover { border-color: var(--muted); text-decoration: none; }
+
+    .nav-tag {
+      font-size: 13px;
+      color: var(--muted);
+      padding: 6px 0;
+    }
+
+    header {
+      margin-bottom: 36px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--line);
+    }
+
+    h1 {
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin: 0 0 10px;
+    }
+
+    .subtitle {
+      font-size: 17px;
+      color: var(--muted);
+      margin: 6px 0 14px;
+      font-weight: 400;
+      line-height: 1.3;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .meta span { margin: 0 6px; color: var(--line); }
+
+    /* TL;DR */
+    .summary-block {
+      background: var(--panel);
+      border-left: 3px solid var(--accent2);
+      border-radius: 0 8px 8px 0;
+      padding: 22px 26px;
+      margin-bottom: 52px;
+    }
+
+    .summary-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent2);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin: 0 0 14px;
+    }
+
+    .summary-block h2 {
+      font-size: 19px;
+      font-weight: 800;
+      margin: 0 0 12px;
+      color: var(--ink);
+    }
+
+    .summary-block h3 {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      margin: 20px 0 7px;
+    }
+
+    .summary-block p { margin: 0 0 10px; font-size: 15px; }
+    .summary-block ul { margin: 0 0 10px; padding-left: 20px; }
+    .summary-block li { margin-bottom: 6px; font-size: 15px; }
+
+    /* Body */
+    .case-body {
+      border-top: 1px solid var(--line);
+      padding-top: 44px;
+    }
+
+    .case-body-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin: 0 0 32px;
+    }
+
+    h3.sh {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent2);
+      margin: 44px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h3.sh:first-of-type { margin-top: 0; }
+
+    h4.sub {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 26px 0 8px;
+    }
+
+    .case-body p { margin: 0 0 14px; }
+    .case-body ul, .case-body ol { margin: 0 0 14px; padding-left: 22px; }
+    .case-body li { margin-bottom: 6px; }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 22px;
+      font-size: 14px;
+    }
+
+    th {
+      background: var(--dark);
+      color: #f7efe3;
+      padding: 9px 12px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td { background: rgba(0,0,0,.025); }
+
+    .td-label { white-space: nowrap; color: var(--muted); font-size: 13px; font-weight: 700; }
+    .td-done { color: var(--accent2); font-weight: 700; }
+    .td-code { font-family: "Consolas", monospace; font-size: 13px; color: #2a4a3a; }
+
+    /* Info / note box */
+    .note-box {
+      background: var(--panel);
+      border-left: 4px solid var(--accent2);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 16px 0 20px;
+      font-size: 15px;
+    }
+
+    .note-box strong { color: var(--accent2); }
+
+    /* Network diagram */
+    .network-box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+      overflow-x: auto;
+    }
+
+    /* ADR decision cards */
+    .adr-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin: 14px 0 22px;
+    }
+
+    .adr-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+
+    .adr-card strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--accent2);
+      margin-bottom: 5px;
+    }
+
+    .adr-card p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    /* Cross-link to related cases */
+    .cross-link {
+      background: #fdf8ec;
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 40px 0 20px;
+      font-size: 15px;
+    }
+
+    .cross-link strong { color: var(--gold); font-size: 12px; text-transform: uppercase; letter-spacing: .07em; display: block; margin-bottom: 6px; }
+
+    code {
+      font-family: "Consolas", monospace;
+      background: rgba(0,0,0,.06);
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-size: .9em;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 24px; }
+      .adr-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <nav>
+    <a class="nav-btn" href="/">← Головна</a>
+    <a class="nav-btn" href="/cv-sso.html">CV SSO</a>
+    <a class="nav-btn" href="/cv-gur.html">CV ГУР</a>
+    <span class="nav-tag">Проєкти</span>
+  </nav>
+
+  <header>
+    <h1>devNVS/VPS — production-adjacent AI infrastructure</h1>
+    <p class="subtitle">Особистий dev/staging стек: агентна система, OSINT API, автоматизація</p>
+    <p class="meta">
+      DevOps · solo-build<span>·</span>2025–2026<span>·</span><a href="mailto:devnvs@pm.me">devnvs@pm.me</a><span>·</span>Автор: <a href="/">Нестор Воля</a>
+    </p>
+  </header>
+
+  <!-- TL;DR -->
+  <div class="summary-block">
+    <div class="summary-label">Архітектурні принципи</div>
+    <h2>Три ключові рішення</h2>
+    <ul>
+      <li><strong>Розділення ролей: devNVS = розробка, VPS = 24/7 сервіси.</strong> Локальна станція — тільки для планування, кодингу і сесій. Все що має працювати постійно — на VPS.</li>
+      <li><strong>Мережева ізоляція: кожен проєкт = окрема Docker network.</strong> Явний cross-network доступ тільки через data/shared шари. Без implicit зв'язків між проєктами.</li>
+      <li><strong>Data core durable, producer-agnostic.</strong> PostgreSQL + pgvector = structured truth. Raw artifacts поза БД. Проєкти-producer замінні; дані залишаються.</li>
+    </ul>
+  </div>
+
+  <!-- Body -->
+  <div class="case-body">
+    <div class="case-body-label">Архітектура</div>
+
+    <!-- §1 -->
+    <h3 class="sh">§ 1. Архітектурна модель <small style="font-size:14px;font-weight:400;color:var(--muted)">(Architecture)</small></h3>
+
+    <p>Система складається з двох вузлів з чітко розділеними ролями. devNVS — локальна Windows-станція, на якій відбувається вся розробка, планування і управління. VPS (Linux KVM) — remote dev/staging runtime для 24/7 сервісів.</p>
+
+    <table>
+      <thead>
+        <tr><th>Вузол</th><th>Роль</th><th>Стек</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-label">devNVS (local)</td>
+          <td>Planning · coding · git · SSH access · sessions</td>
+          <td class="td-code">Windows 10, i5-6500, 16 GB RAM</td>
+        </tr>
+        <tr>
+          <td class="td-label">VPS (remote)</td>
+          <td>24/7 services · APIs · PostgreSQL · workers · Docker runtime</td>
+          <td class="td-code">Ubuntu 24.04, 2 vCPU, 8 GB RAM, 96 GB SSD</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note-box">
+      <strong>Локальні LLM не плануються.</strong> GPU/VRAM локальної станції недостатній для продуктивної роботи. Cloud-first: дорогі LLM-виклики тільки для reasoning/synthesis, дешеві — для routing/classification.
+    </div>
+
+    <!-- §2 -->
+    <h3 class="sh">§ 2. VPS service stack <small style="font-size:14px;font-weight:400;color:var(--muted)">(Services)</small></h3>
+
+    <p>Всі сервіси запущені в Docker Compose. Traefik — єдина точка входу з wildcard TLS. Сервіси згруповані в ізольовані мережі; explicit cross-network доступ тільки між явно пов'язаними шарами.</p>
+
+    <table>
+      <thead>
+        <tr><th>Шар</th><th>Сервіс</th><th>Роль</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="td-label">Entrypoint</td><td>Traefik</td><td>Reverse proxy, wildcard TLS, routing</td></tr>
+        <tr><td class="td-label">Project nets</td><td>n8n + OSINT API</td><td>Workflow adapter + OSINT data API</td></tr>
+        <tr><td class="td-label">Project nets</td><td>TCK Bot</td><td>Signal→PDF→AI→Decision pipeline</td></tr>
+        <tr><td class="td-label">Project nets</td><td>Hermes Agent</td><td>AI orchestration layer</td></tr>
+        <tr><td class="td-label">Shared tools</td><td>Crawl4AI</td><td>Web scraping / document collection</td></tr>
+        <tr><td class="td-label">Shared tools</td><td>Ollama</td><td>Local LLM (resource-sensitive; cloud-first)</td></tr>
+        <tr><td class="td-label">Data layer</td><td>PostgreSQL 16 + pgvector 0.8.2</td><td>Structured truth, vector search</td></tr>
+        <tr><td class="td-label">Data layer</td><td>Redis</td><td>Cache / queue / event broker</td></tr>
+      </tbody>
+    </table>
+
+    <h4 class="sub">Мережева схема</h4>
+    <div class="network-box">
+      <div class="mermaid">
+flowchart TB
+    internet["Internet"]
+    traefik["Reverse Proxy\n(Traefik · wildcard TLS)"]
+    internet --> traefik
+
+    subgraph shared["Shared Tools (shared_net)"]
+        crawl4ai["Crawl4AI"]
+        ollama["Ollama (LLM)"]
+    end
+
+    subgraph data["Data Layer (data_net)"]
+        pg["PostgreSQL 16\n+ pgvector 0.8.2"]
+        redis["Redis"]
+    end
+
+    subgraph projects["Project Networks (ізольовані)"]
+        n8n["n8n + OSINT API\n(pipeline_net)"]
+        tck["TCK Bot\n(tck_net)"]
+        hermes["Hermes Agent\n(hermes_net)"]
+    end
+
+    traefik --> projects
+    projects -. "explicit cross-network" .-> shared
+    projects -. "explicit cross-network" .-> data
+      </div>
+    </div>
+
+    <!-- §3 -->
+    <h3 class="sh">§ 3. Data architecture <small style="font-size:14px;font-weight:400;color:var(--muted)">(Data)</small></h3>
+
+    <p><code>osint-base</code> — durable OSINT data core: схема, API, скрипти. На VPS mirrored через git і доступний через PostgreSQL / OSINT API. Проєкти-producer записують дані через approved API, а не напряму в схему.</p>
+
+    <table>
+      <thead>
+        <tr><th>Шар</th><th>Сховище</th><th>Правило</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="td-label">Structured truth</td><td>PostgreSQL + pgvector</td><td>FACT / SOURCE / GAP / DISC / ENTITY через API</td></tr>
+        <tr><td class="td-label">Raw artifacts</td><td>External (GDrive)</td><td>Не дублюються в БД; зберігаються як посилання</td></tr>
+        <tr><td class="td-label">Secrets</td><td>Local <code>.env</code> (не в image)</td><td>Не комітяться; не в logs; не в image</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note-box">
+      <strong>Принцип: проєкти замінні, дані durable.</strong> <code>osint-base</code> не залежить від конкретного producer-проєкту. Сьогодні один pipeline — завтра інший; data core і API contract залишаються.
+    </div>
+
+    <!-- §4 -->
+    <h3 class="sh">§ 4. Deployed projects <small style="font-size:14px;font-weight:400;color:var(--muted)">(Projects)</small></h3>
+
+    <table>
+      <thead>
+        <tr><th>Проєкт</th><th>Опис</th><th>Стан</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="td-label">TCK Bot (HARON)</td>
+          <td>Signal-запит → WhatsApp → PDF → AI-аналіз → висновок. Мобілізаційний відбір. SLA-ескалації, реєстр кандидатів, шифрування артефактів.</td>
+          <td class="td-done">Active</td>
+        </tr>
+        <tr>
+          <td class="td-label">OSINT API + n8n</td>
+          <td>OSINT pipeline API (FastAPI + PostgreSQL); n8n як workflow adapter для автоматизації збору й обробки. Не центральна шина — per-project adapter.</td>
+          <td class="td-done">Active</td>
+        </tr>
+        <tr>
+          <td class="td-label">Hermes Agent</td>
+          <td>AI orchestration layer: Claude Code як primary agent, Hermes як deployed контейнер для автономних задач і skills.</td>
+          <td class="td-done">Active</td>
+        </tr>
+        <tr>
+          <td class="td-label">Crawl4AI + Ollama</td>
+          <td>Shared tools: web scraping і local LLM для routing / cheap inference. Cloud-first — Ollama для задач де latency важливіша за якість.</td>
+          <td class="td-done">Active</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- §5 -->
+    <h3 class="sh">§ 5. Ключові архітектурні рішення <small style="font-size:14px;font-weight:400;color:var(--muted)">(Decisions)</small></h3>
+
+    <div class="adr-grid">
+      <div class="adr-card">
+        <strong>Agent-centered orchestration</strong>
+        <p>Claude Code / Hermes = оркестратор. LLM-виклики тільки для reasoning / synthesis / judgment. Routing і classification — дешеві моделі або rule-based.</p>
+      </div>
+      <div class="adr-card">
+        <strong>Project-per-network isolation</strong>
+        <p>Кожен проєкт — окрема Docker network. Explicit cross-network тільки через shared/data шари. Implicit зв'язки між проєктами заборонені.</p>
+      </div>
+      <div class="adr-card">
+        <strong>Cloud-first LLM</strong>
+        <p>Локальний GPU обмежений. Gemini Flash / Claude — primary models. Ollama — тільки для задач де cost/latency критичніші за якість.</p>
+      </div>
+      <div class="adr-card">
+        <strong>PostgreSQL-first graph</strong>
+        <p>Граф зберігається в PostgreSQL + pgvector (не Neo4j). Gephi / NetworkX для аналізу; PostgreSQL для persistent structured truth.</p>
+      </div>
+      <div class="adr-card">
+        <strong>n8n = optional adapter</strong>
+        <p>n8n не є центральною шиною системи. Per-project workflow adapter. Логіка в Python/FastAPI; n8n тільки як glue для specific automations.</p>
+      </div>
+      <div class="adr-card">
+        <strong>Durable data core</strong>
+        <p>osint-base незалежний від producer-проєктів. Producer-контракт через API. Schema changes тільки через migration plan + rollback plan.</p>
+      </div>
+    </div>
+
+    <!-- §6 -->
+    <h3 class="sh">§ 6. Milestones <small style="font-size:14px;font-weight:400;color:var(--muted)">(Done)</small></h3>
+
+    <table>
+      <thead>
+        <tr><th>Статус</th><th>Milestone</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="td-done">✓</td><td>SSH + Traefik + wildcard TLS — базова infra</td></tr>
+        <tr><td class="td-done">✓</td><td>PostgreSQL 16 + pgvector 0.8.2 — data layer</td></tr>
+        <tr><td class="td-done">✓</td><td>TCK Bot deploy — перший production сервіс</td></tr>
+        <tr><td class="td-done">✓</td><td>infra_net / shared_net / data_net / project networks — мережева ізоляція</td></tr>
+        <tr><td class="td-done">✓</td><td>osint-base → durable data core role (schema + API + scripts)</td></tr>
+        <tr><td class="td-done">✓</td><td>n8n + OSINT API на data_net</td></tr>
+        <tr><td class="td-done">✓</td><td>Cloud firewall + Redis password protection + 4 GB swap</td></tr>
+        <tr><td class="td-done">✓</td><td>Hermes agent container — orchestration layer</td></tr>
+        <tr><td class="td-done">✓</td><td>STORAGE_BACKEND=postgres (dual-write verified)</td></tr>
+      </tbody>
+    </table>
+
+  </div><!-- /case-body -->
+
+  <!-- Cross-links -->
+  <div class="cross-link">
+    <strong>→ Суміжні проєкти</strong>
+    <strong>TCK Bot / HARON</strong> — система мобілізаційного відбору: Signal → PDF → AI → Decision. Deployed на VPS як один з project networks.<br>
+    <strong><a href="/cases/braschi_rc/">Russia Cristiana — OSINT-розслідування</a></strong> — OSINT pipeline в дії: actor profiling, network mapping, timeline reconstruction з використанням цього ж стеку.
+  </div>
+
+</div><!-- /page -->
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#e8f4f1',
+      primaryBorderColor: '#1e6f68',
+      primaryTextColor: '#181818',
+      lineColor: '#57514a',
+      secondaryColor: '#fffaf2',
+      tertiaryColor: '#f4f1eb'
+    }
+  });
+</script>
+</body>
+</html>
