@@ -117,6 +117,21 @@
       display: block;
     }
 
+    /* BLOCK: photo-id-card (фото-візитка) — світлий варіант */
+    .hero-photo { margin: 16px 0 0; max-width: 320px; }
+    .hero-photo img {
+      width: 100%; max-height: 300px; object-fit: cover;
+      border-radius: 6px; display: block; border: 1px solid var(--line);
+    }
+    .hero-cap { margin: 8px 0 0; text-align: center; letter-spacing: .02em; max-width: 320px; }
+    .hero-cap span { display: block; }
+    .cap-context { font-size: 9px; color: var(--muted); font-weight: 400; }
+    .cap-contact {
+      font-size: 12px; color: var(--ink); font-weight: 650;
+      margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line);
+    }
+    /* /BLOCK */
+
     .contact-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
     .contact-row a {
       background: #f0ece4;
@@ -303,7 +318,15 @@
     <a href="https://www.youtube.com/channel/UCfZqkVkfPCYuBvdukNCU0ag">YouTube</a>
     <a href="https://www.facebook.com/nestorvolya">Facebook</a>
   </div>
-  <p style="margin-top:12px;">+38 097 817 0416 · Signal · WhatsApp</p>
+  <!-- BLOCK: photo-id-card (фото-візитка): фото + контекст + обфускований контакт -->
+  <figure class="hero-photo">
+    <img src="assets/2025_vbaak_2dshb_nestor_volya.jpg" alt="Нестор Воля поруч із важким безпілотним авіаційним комплексом">
+    <figcaption class="hero-cap">
+      <span class="cap-context">2025, архівне фото: ВБпАК · 2-й ДШБ</span>
+      <span class="cap-contact">+38*978I704I6 · devnvs@pm.me</span>
+    </figcaption>
+  </figure>
+  <!-- /BLOCK: photo-id-card -->
 </section>
 
 <section id="notes">

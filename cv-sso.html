@@ -247,6 +247,23 @@
     .group-note { font-size: 13px; color: var(--muted); margin: -8px 0 14px; }
     .print-stack, .analytic-note { display: none; }
 
+    /* BLOCK: photo-id-card (фото-візитка) */
+    .hero-photo { margin: 0; }
+    .hero-photo img {
+      width: 100%; max-height: 300px; object-fit: cover;
+      border-radius: 6px; display: block;
+      border: 1px solid rgba(255,255,255,.14);
+    }
+    .hero-cap { margin: 8px 0 0; text-align: center; letter-spacing: .02em; }
+    .hero-cap span { display: block; }
+    .cap-context { font-size: 9px; color: #bcae9b; font-weight: 400; }
+    .cap-contact {
+      font-size: 12px; color: #d7c9b5; font-weight: 650;
+      margin-top: 10px; padding-top: 8px;
+      border-top: 1px solid rgba(255,255,255,.12);
+    }
+    /* /BLOCK */
+
     @media (max-width: 900px) {
       .hero, .layout { grid-template-columns: 1fr; }
       h1 { font-size: 29px; }
@@ -400,16 +417,20 @@
         <p>Освіта і навчання: магістр (інвестиційний менеджмент); курси прес-офіцерів ЗСУ / ВІКНУ, 2024; robot_dreams "AI для OSINT і розвідки", 2026 — топова позиція в рейтингу курсу, курсовий проєкт. 2000-2009: IT-системи, управління, KPI, B2B, логістика, проєктний менеджмент.</p>
       </div>
       <aside class="status-grid">
-        <div class="status-box" style="padding:8px;">
-          <img src="assets/2024-06-28_suspilne_lutsk.jpg" alt="Нестор Воля" style="width:100%;border-radius:4px;display:block;">
-          <p style="margin:4px 0 0;font-size:10px;color:#bcae9b;text-align:center;line-height:1.4;">Нестор Воля · Луцьк · 28 черв. 2024 · © Суспільне</p>
-        </div>
+        <!-- BLOCK: photo-id-card (фото-візитка): фото + контекст + обфускований контакт -->
+        <figure class="hero-photo">
+          <img src="assets/2024-06-28_suspilne_lutsk.jpg" alt="Нестор Воля, Луцьк, акція рекрутингу полку Рейнджер">
+          <figcaption class="hero-cap">
+            <span class="cap-context">Нестор Воля · Луцьк · 28 черв. 2024 · © Суспільне</span>
+            <span class="cap-contact">+38*978I704I6 · devnvs@pm.me</span>
+          </figcaption>
+        </figure>
+        <!-- /BLOCK: photo-id-card -->
         <div class="status-box">
           <span class="label">Статус</span>
           Доброволець з лютого 2022, заст. комбата з МПЗ у добробаті · ЗСУ з липня 2022 · УБД · старший сержант · ССО · оборона Києва · Херсонщина / фарватер Дніпра · Новопавлівський напрямок (ДШВ) · ВІКНУ, курси прес-офіцерів · нині: мобілізаційний рекрутинг, топові результати серед частин ССО · посада штаб-сержанта 3 кат., обмежений доступ до інформації
         </div>
         <div class="status-box">Київ</div>
-        <div class="status-box">+38097 817 0416 · Signal · WhatsApp</div>
         <div class="status-box">
           <span class="label">Профілі</span>
           <a href="https://dou.ua/users/nestor-volya/topics/">DOU</a> ·
