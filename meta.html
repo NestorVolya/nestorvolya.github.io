@@ -125,17 +125,19 @@
 
   <div class="stats-grid">
     <div class="stat-box"><span class="stat-num" data-target="7">0</span><div class="stat-label">OSINT-кейсів у роботі</div></div>
-    <div class="stat-box"><span class="stat-num" data-target="1">0</span><div class="stat-label">кейс-стаді опублікований</div></div>
+    <div class="stat-box"><span class="stat-num" data-target="2">0</span><div class="stat-label">кейс-стаді опубліковано</div></div>
     <div class="stat-box"><span class="stat-num" data-target="2">0</span><div class="stat-label">CV-варіанти live</div></div>
-    <div class="stat-box"><span class="stat-num" data-target="6">0</span><div class="stat-label">сторінок Pages</div></div>
+    <div class="stat-box"><span class="stat-num" data-target="14">0</span><div class="stat-label">сторінок Pages</div></div>
     <div class="stat-box"><span class="stat-num" data-target="20">0</span><div class="stat-label">доказових артефактів</div></div>
     <div class="stat-box"><span class="stat-num" data-target="100">0</span><div class="stat-label">файлів у проєкті</div></div>
   </div>
 
   <ul>
+    <li><strong>Вітрина (головна):</strong> термінальна single-page вітрина — фото-візитка, напрями, практичний стек, зовнішні докази; навмисно без внутрішньої навігації.</li>
     <li><strong>CV:</strong> 2 варіанти з різними аудиторіями (SSO/AI/OSINT; розвідка/ГУР) — HTML з live посиланнями на кейси, PDF для відправки.</li>
-    <li><strong>Кейс-стаді Rentafont:</strong> повне OSINT-розслідування — narrative, хронологічна таблиця «Слова vs. Справи», 11 inline evidence + 9 gallery артефактів, парадокс-бокс із ключовим протиріччям.</li>
-    <li><strong>GitHub Pages:</strong> 6 live-сторінок — дві версії CV, дос'є, профіль ranger, кейс-стаді.</li>
+    <li><strong>Кейс-стаді (2):</strong> Rentafont.RU (хронологічна таблиця «Слова vs. Справи», 20 evidence-артефактів) і Russia Cristiana / Braschi (мережа впливу РФ Італія–Москва–Україна), + landing-хаб <code>/cases/</code>.</li>
+    <li><strong>Проєкт-сторінка:</strong> devNVS / VPS — інфраструктура та OSINT-стек.</li>
+    <li><strong>GitHub Pages:</strong> ~14 live-сторінок — вітрина, дві версії CV, дос'є, ranger, ця записка, 2 кейси + хаб, проєкт, Jekyll-розділи.</li>
     <li><strong>Внутрішня документація:</strong> стратегія, OPSEC-правила, аудити, черга кейсів, пошуковий профіль вакансій.</li>
     <li><strong>Фото-база:</strong> 20 семантично названих OSINT-артефактів (WHOIS, DNS, Wayback, BuiltWith, скріни публічних заяв).</li>
   </ul>
@@ -158,15 +160,24 @@ flowchart LR
   end
   subgraph PAGES["GitHub Pages · live"]
     direction TB
+    HOME["index (вітрина)"]
     SSO["cv-sso.html"]
     GUR["cv-gur.html"]
+    DOS["dosie"]
+    HUB["cases/ (хаб)"]
     RENT["cases/rentafont_ru"]
+    BRA["cases/braschi_rc"]
+    VPS["projects/devnvs-vps"]
   end
   OUTPUT --> RENT
+  OUTPUT --> BRA
   CVDOC --> SSO
   CVDOC --> GUR
+  CVDOC --> DOS
+  HUB --> RENT
+  HUB --> BRA
   RENT -.->|"Повний кейс"| SSO
-  RENT -.->|"Повний кейс"| GUR
+  BRA -.->|"Повний кейс"| GUR
     </div>
   </div>
 
@@ -192,17 +203,25 @@ flowchart LR
       <div class="tl-date">14 червня 2026</div>
       <div class="tl-text">Rentafont кейс-стаді → GitHub Pages. 20 фото → semantic ASCII names. CV отримують прямі посилання на кейс із трьох точок входу <span class="tag tag-new">new</span></div>
     </div>
+    <div class="tl-item hi">
+      <div class="tl-date">17–18 червня 2026</div>
+      <div class="tl-text">Другий кейс Russia Cristiana / Braschi → GitHub Pages. Проєкт-сторінка devNVS / VPS. Аудит ідентичності й санітизація CV <span class="tag tag-new">new</span></div>
+    </div>
+    <div class="tl-item hi">
+      <div class="tl-date">19 червня 2026</div>
+      <div class="tl-text">Головну перероблено в термінальну вітрину; компонент фото-візитки на 4 сторінках; контакт обфусковано і прибрано реальний номер з усіх сторінок; landing-хаб <code>/cases/</code>; синхронізовано карту публічних HTML <span class="tag tag-live">live</span></div>
+    </div>
   </div>
 
   <!-- ОБСЯГ -->
   <h2 class="sh">Обсяг і масштаб <small style="font-size:14px;font-weight:400;color:var(--muted)">(Scale)</small></h2>
   <ul>
-    <li><strong>~100+ файлів</strong> у проєктній базі (7 директорій + архів)</li>
-    <li><strong>6 live URL</strong> на GitHub Pages</li>
-    <li><strong>708 рядків</strong> HTML/CSS у кейс-стаді Rentafont</li>
+    <li><strong>~100+ файлів</strong> у проєктній базі (8 директорій + архів)</li>
+    <li><strong>~14 live URL</strong> на GitHub Pages (вітрина, CV×2, дос'є, ranger, записка, 2 кейси + хаб, проєкт, Jekyll-розділи)</li>
+    <li><strong>2 опубліковані кейс-стаді</strong> — Rentafont.RU і Russia Cristiana / Braschi</li>
     <li><strong>20 семантично названих артефактів</strong> — WHOIS, DNS, Wayback, BuiltWith, скріни</li>
-    <li><strong>9 рядків хронологічної таблиці</strong> «Слова vs. Справи» — кожен із датою та джерелом</li>
-    <li><strong>2 інтенсивні сесії</strong> (13–14 червня 2026) — від нуля до повної публікації</li>
+    <li><strong>Канонічна карта публічних HTML (SoT)</strong> + reusable компонент фото-візитки на 4 сторінках</li>
+    <li><strong>Кілька інтенсивних сесій</strong> (13–19 червня 2026) — від нуля до вітрини, двох кейсів і повної OPSEC-чистки контактів</li>
   </ul>
 
   <!-- ПРОЦЕС -->
@@ -338,7 +357,7 @@ flowchart LR
     </thead>
     <tbody>
       <tr>
-        <td>Головна</td>
+        <td>Головна (вітрина)</td>
         <td><a href="https://nestorvolya.github.io/">nestorvolya.github.io</a></td>
         <td><span class="badge b-live">live</span></td>
       </tr>
@@ -363,8 +382,23 @@ flowchart LR
         <td><span class="badge b-live">live</span></td>
       </tr>
       <tr>
+        <td>Кейси — хаб (landing)</td>
+        <td><a href="https://nestorvolya.github.io/cases/">cases/</a></td>
+        <td><span class="badge b-live">live</span></td>
+      </tr>
+      <tr>
         <td>Кейс: Rentafont.RU — OSINT-розслідування</td>
         <td><a href="https://nestorvolya.github.io/cases/rentafont_ru/">cases/rentafont_ru/</a></td>
+        <td><span class="badge b-live">live</span></td>
+      </tr>
+      <tr>
+        <td>Кейс: Russia Cristiana / Braschi</td>
+        <td><a href="https://nestorvolya.github.io/cases/braschi_rc/">cases/braschi_rc/</a></td>
+        <td><span class="badge b-live">live</span></td>
+      </tr>
+      <tr>
+        <td>Проєкт: devNVS / VPS — інфраструктура</td>
+        <td><a href="https://nestorvolya.github.io/projects/devnvs-vps/">projects/devnvs-vps/</a></td>
         <td><span class="badge b-live">live</span></td>
       </tr>
       <tr>
@@ -380,6 +414,11 @@ flowchart LR
       <tr>
         <td>Braschi / Russia Cristiana — Gist-звіт</td>
         <td><a href="https://gist.github.com/NestorVolya/7997de7361e244ab9f1a1f9a3f818e9c">gist.github.com →</a></td>
+        <td><span class="badge b-pub">pub</span></td>
+      </tr>
+      <tr>
+        <td>Braschi — Notion actor profile</td>
+        <td><a href="https://infovarta.notion.site/_-308d7fb5fd9a80198f40ee491df41d18">infovarta.notion.site →</a></td>
         <td><span class="badge b-pub">pub</span></td>
       </tr>
       <tr>
