@@ -315,6 +315,19 @@
       </section>
     </div>
 
+    <!-- ПРАКТИЧНА ЦІННІСТЬ -->
+    <h2>Практична цінність</h2>
+    <section class="stack">
+      <ul class="stack-list">
+        <li>Швидко розгорнути evidence-based OSINT-профіль по особі, організації або мережі.</li>
+        <li>Підготувати аналітичний звіт, інформаційну довідку або візуалізацію для командира / аналітичного підрозділу.</li>
+        <li>Виявляти закономірності координації та мережеві зв'язки у масивах публічних даних.</li>
+        <li>Побудувати повторюваний процес збору, перевірки, архівації й звітності.</li>
+        <li>Автоматизувати OSINT / document-analysis задачі через Python, API, бази даних і LLM.</li>
+        <li>Не підміняти факти враженнями: розділяти джерело, припущення, висновок і прогалину.</li>
+      </ul>
+    </section>
+
     <!-- ПРАКТИЧНИЙ СТЕК -->
     <h2>Практичний стек</h2>
     <section class="stack">
@@ -323,7 +336,7 @@
         <li><strong>Data / AI:</strong> Python, FastAPI, PostgreSQL, pgvector, SQLite, JSON Schema, RAG, NER, Gemini, Claude, NotebookLM, Perplexity, LLM Guard, agentic workflows (tool use, multi-step orchestration).</li>
         <li><strong>Automation:</strong> Playwright, Crawl4AI, Jina, Exa, Tavily, n8n (agentic workflows), API pipelines, browser automation.</li>
         <li><strong>Graphs:</strong> Gephi, Neo4j, NetworkX, pyvis, PageRank, modularity, weighted degree.</li>
-        <li><strong>Runtime / VPS:</strong> Docker, VPS Linux server (nginx, Traefik, Let's Encrypt, reverse proxy, SSL/TLS, контейнерна ізоляція), Ubuntu/Linux, Git/GitHub, smoke checks, backup-before-change discipline.</li>
+        <li><strong>Runtime / VPS:</strong> Docker, VPS Linux server (nginx, Traefik, Let's Encrypt, reverse proxy, SSL/TLS, контейнерна ізоляція), Ubuntu/Linux, Git/GitHub, smoke checks, backup-before-change discipline. Власна production-інфраструктура для OSINT-пайплайнів і AI-агентів: PostgreSQL + pgvector, Crawl4AI, n8n, Hermes Agent — deployed 24/7. <a href="https://nestorvolya.github.io/projects/devnvs-vps/">devNVS/VPS →</a></li>
       </ul>
     </section>
 
@@ -332,9 +345,18 @@
     <div class="proof">
 
       <section class="proof-item">
+        <h3>HARON / tck-bot — система підтримки рішень</h3>
+        <p class="venue">Solo-продукт · deployed для 144 Центр ССО · 2025–2026</p>
+        <p class="body">Повний цикл від Signal-запиту до рішення адміну: PDF → AI-аналіз → висновок. Python / FastAPI / PostgreSQL / Docker. SLA-ескалації, реєстр кандидатів, ізоляція сервісів. Deployed-продукт для реальної військової операції — прямий доказ builder-профілю.</p>
+        <p class="links">
+          <a href="https://nestorvolya.github.io/projects/devnvs-vps/">devNVS/VPS — архітектура →</a>
+        </p>
+      </section>
+
+      <section class="proof-item">
         <h3>Rentafont — OSINT-розслідування</h3>
         <p class="venue">Опубліковане дослідження · dev.ua / DOU</p>
-        <p class="body">Публічна історія, інфраструктура, партнерська мережа та зв'язки з російським ринком; технічний peer review у DevOps-спільноті.</p>
+        <p class="body">Публічна історія, інфраструктура, партнерська мережа та зв'язки з російським ринком; технічний peer review у DevOps-спільноті. Метод: WHOIS-історія, DNS-інспектори, BuiltWith, Wayback Machine, urlscan. Ключовий висновок: домен rentafont.ru продовжено через 9 місяців після 24.02.2022, активний до серпня 2023; співвідношення RU/UA користувачів ~20–25:1. Peer review у DOU-треді підтвердив методологію.</p>
         <p class="links">
           <a href="https://dev.ua/blogs/posts/vidmovliaiutsia-vid-spivpratsi-rf-blog">dev.ua</a> ·
           <a href="https://dou.ua/forums/topic/47877/">DOU</a>
