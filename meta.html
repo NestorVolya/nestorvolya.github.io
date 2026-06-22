@@ -167,20 +167,11 @@ flowchart LR
     BRA["cases/braschi_rc"]
     VPS["projects/devnvs-vps"]
   end
-  subgraph CVVPS["VPS private · cv.srv1621610.hstgr.cloud"]
-    direction TB
-    SSO["cv-sso (secret-URL + htpasswd)"]
-    GUR["cv-gur (htpasswd)"]
-  end
   OUTPUT --> RENT
   OUTPUT --> BRA
-  CVDOC --> SSO
-  CVDOC --> GUR
   CVDOC --> DOS
   HUB --> RENT
   HUB --> BRA
-  RENT -.->|"Повний кейс"| SSO
-  BRA -.->|"Повний кейс"| GUR
     </div>
   </div>
 
