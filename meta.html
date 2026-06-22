@@ -161,13 +161,16 @@ flowchart LR
   subgraph PAGES["GitHub Pages · live"]
     direction TB
     HOME["index (вітрина)"]
-    SSO["cv-sso.html"]
-    GUR["cv-gur.html"]
     DOS["dosie"]
     HUB["cases/ (хаб)"]
     RENT["cases/rentafont_ru"]
     BRA["cases/braschi_rc"]
     VPS["projects/devnvs-vps"]
+  end
+  subgraph CVVPS["VPS private · cv.srv1621610.hstgr.cloud"]
+    direction TB
+    SSO["cv-sso (secret-URL + htpasswd)"]
+    GUR["cv-gur (htpasswd)"]
   end
   OUTPUT --> RENT
   OUTPUT --> BRA
@@ -197,7 +200,7 @@ flowchart LR
     </div>
     <div class="tl-item hi">
       <div class="tl-date">12–13 червня 2026</div>
-      <div class="tl-text">GitHub Pages запущено: cv-sso, cv-gur, дос'є, ranger. Архівація PII і OPSEC-матеріалів. Структура case studies. Аудит проєкту <span class="tag tag-live">live</span></div>
+      <div class="tl-text">GitHub Pages запущено: дос'є, ranger. Архівація PII і OPSEC-матеріалів. Структура case studies. Аудит проєкту <span class="tag tag-live">live</span></div>
     </div>
     <div class="tl-item hi">
       <div class="tl-date">14 червня 2026</div>
@@ -363,13 +366,13 @@ flowchart LR
       </tr>
       <tr>
         <td>CV — SSO / AI / OSINT</td>
-        <td><a href="https://nestorvolya.github.io/cv-sso.html">cv-sso.html</a></td>
-        <td><span class="badge b-live">live</span></td>
+        <td>cv.srv1621610.hstgr.cloud (secret-URL + htpasswd)</td>
+        <td><span class="badge b-wip">vps-private</span></td>
       </tr>
       <tr>
         <td>CV — Розвідка / ГУР</td>
-        <td><a href="https://nestorvolya.github.io/cv-gur.html">cv-gur.html</a></td>
-        <td><span class="badge b-live">live</span></td>
+        <td>cv.srv1621610.hstgr.cloud (htpasswd)</td>
+        <td><span class="badge b-wip">vps-private</span></td>
       </tr>
       <tr>
         <td>Дос'є аналітика</td>
