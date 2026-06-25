@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Чекаль — OSINT-профілювання | nestorvolya.github.io</title>
+  <style>
+    :root {
+      --bg: #f4f1eb;
+      --ink: #181818;
+      --muted: #57514a;
+      --line: #d8cfc0;
+      --panel: #fffaf2;
+      --dark: #111418;
+      --accent: #b2382f;
+      --accent2: #1e6f68;
+      --gold: #b88724;
+      --link: #064f8f;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+    sup { line-height: 0; }
+
+    .page {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 28px 22px 80px;
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-btn {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .nav-btn:hover { border-color: var(--muted); text-decoration: none; }
+
+    .nav-tag {
+      font-size: 13px;
+      color: var(--muted);
+      padding: 6px 0;
+    }
+
+    header {
+      margin-bottom: 36px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--line);
+    }
+
+    h1 {
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin: 0 0 10px;
+    }
+
+    .subtitle {
+      font-size: 17px;
+      color: var(--muted);
+      margin: 6px 0 14px;
+      font-weight: 400;
+      line-height: 1.3;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .meta span { margin: 0 6px; color: var(--line); }
+
+    .summary-block {
+      background: var(--panel);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 22px 26px;
+      margin-bottom: 52px;
+    }
+
+    .summary-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin: 0 0 14px;
+    }
+
+    .summary-block h2 {
+      font-size: 19px;
+      font-weight: 800;
+      margin: 0 0 12px;
+      color: var(--ink);
+    }
+
+    .summary-block h3 {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      margin: 20px 0 7px;
+    }
+
+    .summary-block p { margin: 0 0 10px; font-size: 15px; }
+    .summary-block ul { margin: 0 0 10px; padding-left: 20px; }
+    .summary-block li { margin-bottom: 6px; font-size: 15px; }
+
+    .case-body {
+      border-top: 1px solid var(--line);
+      padding-top: 44px;
+    }
+
+    .case-body-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin: 0 0 32px;
+    }
+
+    h3.sh {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent2);
+      margin: 44px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h3.sh:first-of-type { margin-top: 0; }
+
+    h4.sub {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 26px 0 8px;
+    }
+
+    .case-body p { margin: 0 0 14px; }
+    .case-body ul, .case-body ol { margin: 0 0 14px; padding-left: 22px; }
+    .case-body li { margin-bottom: 6px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 22px;
+      font-size: 14px;
+    }
+
+    th {
+      background: var(--dark);
+      color: #f7efe3;
+      padding: 9px 12px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td { background: rgba(0,0,0,.025); }
+    .td-date { white-space: nowrap; color: var(--muted); font-size: 13px; font-weight: 600; }
+    .td-pass { color: #1a6b2e; font-weight: 700; }
+    .td-warn { color: var(--accent); font-weight: 700; }
+
+    .warn-box {
+      background: #fff8f0;
+      border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 16px 0 20px;
+      font-size: 15px;
+    }
+
+    .warn-box strong { color: var(--accent); }
+
+    .insight-box {
+      background: #f0f7f6;
+      border-left: 4px solid var(--accent2);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 16px 0 20px;
+      font-size: 15px;
+    }
+
+    .insight-box strong { color: var(--accent2); }
+
+    .metric-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+
+    .metric {
+      background: var(--dark);
+      color: #f7efe3;
+      border-radius: 8px;
+      padding: 14px 20px;
+      min-width: 120px;
+      text-align: center;
+    }
+
+    .metric .val {
+      font-size: 28px;
+      font-weight: 800;
+      color: #7ed88a;
+      display: block;
+      line-height: 1;
+    }
+
+    .metric .lbl {
+      font-size: 11px;
+      color: #b0a898;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      margin-top: 4px;
+      display: block;
+    }
+
+    .network-box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+      font-family: monospace;
+      font-size: 13px;
+      overflow-x: auto;
+      white-space: pre;
+      line-height: 1.7;
+    }
+
+    .cross-link {
+      background: #fdf8ec;
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 40px 0 20px;
+      font-size: 15px;
+    }
+
+    .cross-link strong { color: var(--gold); font-size: 12px; text-transform: uppercase; letter-spacing: .07em; display: block; margin-bottom: 6px; }
+
+    .pubs {
+      border-top: 1px solid var(--line);
+      padding-top: 32px;
+      margin-top: 52px;
+    }
+
+    .pubs-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin: 0 0 14px;
+    }
+
+    .pubs ul { margin: 0; padding-left: 20px; }
+    .pubs li { margin-bottom: 8px; }
+
+    .fn-section {
+      border-top: 1px solid var(--line);
+      padding-top: 28px;
+      margin-top: 52px;
+    }
+
+    .fn-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin: 0 0 14px;
+    }
+
+    .fn-list {
+      font-size: 13px;
+      color: var(--muted);
+      padding-left: 20px;
+      margin: 0;
+    }
+
+    .fn-list li { margin-bottom: 8px; line-height: 1.5; }
+
+    .fn-list li:target {
+      background: #fef8e1;
+      border-radius: 4px;
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+
+    .fn-list a { color: var(--link); word-break: break-all; }
+    .fn-back { font-size: 12px; margin-left: 4px; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <nav>
+    <a class="nav-btn" href="../../index.html">← Головна</a>
+    <span class="nav-tag">Портфоліо кейсів</span>
+  </nav>
+
+  <header>
+    <h1>Чекаль Олексій Георгійович — OSINT-профілювання</h1>
+    <p class="subtitle">Маскований актор у культурно-релігійній сфері: ручний еталон + валідація автоматизованого pipeline</p>
+    <p class="meta">
+      Actor profiling · Ручний OSINT + pipeline<span>·</span>2025–2026<span>·</span>44 джерела · 34 домени<span>·</span>Автор: <a href="../../index.html">Нестор Воля</a>
+    </p>
+  </header>
+
+  <!-- TL;DR -->
+  <div class="summary-block">
+    <div class="summary-label">Висновки спочатку</div>
+    <h2>Короткий огляд (Executive Summary)</h2>
+    <p><strong>Олексій Чекаль</strong> — каліграф, типограф, мистецтвознавець; автор графічного стилю Православної Церкви України (ПЦУ). Публічно — проукраїнська постать. Фактично — під час повномасштабного вторгнення системна присутність у медіа та інституціях, пов'язаних з Московською патріархією та мережею м'якої сили РФ: radiovera.ru, artos.org, pravmir.ru, meetingrimini.org (Браскі / Russia Cristiana).</p>
+    <p>Унікальна методологічна цінність кейсу: до запуску пайплайну існувало <strong>вручну складене OSINT-досьє</strong> на основі Wikipedia-статті (167 виносок, первинні джерела). Стаття видалена з Вікіпедії у лютому 2026 після публічного розкриття, але збережена в archive.org. Це дало <strong>валідаційний бенчмарк</strong>: порівняти ручний і автоматичний результат і виміряти якість pipeline.</p>
+    <h3>3 ключові висновки</h3>
+    <ul>
+      <li><strong>«Кажуть одне — роблять інше».</strong> Автор ідентичності ПЦУ одночасно присутній у виданнях і виставках московської православної сфери під час активної фази війни.</li>
+      <li><strong>Wikipedia як первинна доказова база.</strong> 167 виносок у статті — вичерпна мережа верифікованих посилань. Видалення статті після розголосу підтверджує: публікація мала реальний вплив.</li>
+      <li><strong>Pipeline vs ручний пошук: recall ~30%.</strong> Автоматичний збір (44 джерела) не замінює ручний аналіз, але системно виявляє структуру мережі. Це призвело до народження метрики Corpus Health Score і 5-gate системи валідації.</li>
+    </ul>
+  </div>
+
+  <!-- Case body -->
+  <div class="case-body">
+    <div class="case-body-label">Детальний аналіз</div>
+
+    <h3 class="sh">§ 1. Актор <small style="font-size:14px;font-weight:400;color:var(--muted)">(Actor Profile)</small></h3>
+
+    <table>
+      <tr><th>Поле</th><th>Значення</th></tr>
+      <tr><td>Ім'я</td><td>Чекаль Олексій Георгійович (Oleksiy Chekal)</td></tr>
+      <tr><td>Роль (публічна)</td><td>Каліграф, типограф, мистецтвознавець; автор графічного стилю ПЦУ; PhD, Florence Classical Arts Academy</td></tr>
+      <tr><td>Тип актора</td><td>«Маскований» — культурно-релігійна сфера, проукраїнська позиція + RU-sphere контакти</td></tr>
+      <tr><td>Локація</td><td>Україна / Флоренція (академія)</td></tr>
+      <tr><td>Платформи</td><td>Instagram @oleksiy_chekal · academia.edu · drukarnia.com.ua</td></tr>
+    </table>
+
+    <h4 class="sub">Публічна vs реальна позиція</h4>
+
+    <div class="warn-box">
+      <strong>Суперечність:</strong> Автор графічної ідентичності ПЦУ (символ відриву від Московського патріархату) — і водночас активна присутність у медіа та культурних проєктах московської православної сфери під час повномасштабного вторгнення.
+    </div>
+
+    <p>Первинні джерела суперечності зафіксовані у Wikipedia-статті (архів, лютий 2026):<sup><a href="#fn1" id="fnref1">1</a></sup></p>
+    <ul>
+      <li><strong>radiovera.ru</strong> — православне радіо (Москва): матеріали за участю Чекаля</li>
+      <li><strong>artos.org</strong> — православний культурний ресурс: публікації та виставкова діяльність</li>
+      <li><strong>pravmir.ru</strong> — московське православне медіа: матеріали як автора/експерта</li>
+      <li><strong>meetingrimini.org</strong> — виставки Meeting di Rimini (Браскі / Russia Cristiana): участь у проєктах мережі<sup><a href="#fn2" id="fnref2">2</a></sup></li>
+      <li><strong>drukarnia.com.ua</strong> — публікації в українській типографській спільноті</li>
+    </ul>
+
+    <h3 class="sh">§ 2. Методологія: Wikipedia як джерельна база <small style="font-size:14px;font-weight:400;color:var(--muted)">(Methodology)</small></h3>
+
+    <p>До запуску автоматизованого pipeline існувало <strong>вручну складене OSINT-досьє</strong>:</p>
+    <ul>
+      <li>Хронологічна таблиця подій з war-context</li>
+      <li>Висловлювання з тематичною класифікацією</li>
+      <li>Мережа зв'язків (network map)</li>
+      <li>Гео-кластери</li>
+      <li>Гіпотези A / B / В</li>
+    </ul>
+
+    <p>Основа еталону — <strong>Wikipedia-стаття про Чекаля</strong> (167 виносок, первинні посилання на radiovera.ru, artos.org, pravmir.ru, meetingrimini.org, drukarnia.com.ua та ін.). Стаття видалена з Вікіпедії у лютому 2026 — після публічного розкриття зв'язків у OSINT-дослідженні Нестора Волі.<sup><a href="#fn3" id="fnref3">3</a></sup></p>
+
+    <div class="insight-box">
+      <strong>Чому Wikipedia — це методологічний еталон, а не просто джерело:</strong> стаття містила не факти про Чекаля — вона містила <em>первинні посилання</em> на 167 верифікованих зовнішніх ресурсів. Це готова доказова база, верифікована редакторами Вікіпедії, з прямими URL до першоджерел.
+    </div>
+
+    <h3 class="sh">§ 3. Gold Actor Validation <small style="font-size:14px;font-weight:400;color:var(--muted)">(Pipeline Benchmark)</small></h3>
+
+    <p>Чекаль використаний як <strong>gold actor</strong> для валідації автоматизованого OSINT pipeline (<a href="https://github.com/NestorVolya/osint-homework-2026/blob/main/КР-Nestor-V/README.md" target="_blank" rel="noopener">actor-osint-front-СС</a>): не "найзручніша публічна особа", а методологічний бенчмарк — відтворюваний, порівнювальний, задокументований.</p>
+
+    <div class="metric-row">
+      <div class="metric"><span class="val">44</span><span class="lbl">джерел (pipeline)</span></div>
+      <div class="metric"><span class="val">34</span><span class="lbl">унікальних доменів</span></div>
+      <div class="metric"><span class="val">1.00</span><span class="lbl">Corpus Health Score</span></div>
+      <div class="metric"><span class="val">5/5</span><span class="lbl">Quality Gates PASS</span></div>
+    </div>
+
+    <h4 class="sub">Ручний vs автоматичний: порівняння</h4>
+
+    <table>
+      <tr><th>Параметр</th><th>Ручний еталон</th><th>Pipeline (автомат)</th></tr>
+      <tr><td>Джерела</td><td>167 (Wikipedia виноски)</td><td>44</td></tr>
+      <tr><td>Recall</td><td>~100% (еталон)</td><td class="td-warn">~30%</td></tr>
+      <tr><td>Corpus Health Score</td><td>—</td><td class="td-pass">1.00</td></tr>
+      <tr><td>Quality Gates</td><td>—</td><td class="td-pass">5/5 PASS</td></tr>
+      <tr><td>RU-медіа (radiovera, pravmir)</td><td>✅ знайдено</td><td class="td-warn">0% recall (Class B blind zone)</td></tr>
+      <tr><td>Час</td><td>Години/дні</td><td>~15 хв</td></tr>
+    </table>
+
+    <h4 class="sub">Що pipeline пропустив — і чому це важливо</h4>
+
+    <div class="warn-box">
+      <strong>Blind zone:</strong> RU-медіа Class B (radiovera.ru, pravmir.ru) = 0% recall в автоматичному режимі. Саме ці джерела містять ключові докази суперечності. Виявлено через порівняння з ручним еталоном → задокументовано як відома обмеженість у VALIDATION_REPORT_KR.md.
+    </div>
+
+    <div class="network-box">5-gate система (народилась із Чекаль-валідації):
+
+Gate 1 — Input Gate:      seed format, мінімальна ідентифікація актора
+Gate 2 — Budget Gate:     API call limits, cost ceiling
+Gate 3 — Safety Gate:     PII фільтрація, публічний/непублічний контент
+Gate 4 — Corpus Health:   source diversity, domain uniqueness, temporal spread
+Gate 5 — Quality Report:  blind zones явні, confidence per claim, ДСТУ бібліографія</div>
+
+    <h3 class="sh">§ 4. Зв'язок з Braschi / Russia Cristiana <small style="font-size:14px;font-weight:400;color:var(--muted)">(Network)</small></h3>
+
+    <p>Присутність Чекаля у виставках <strong>meetingrimini.org</strong> ставить його в один мережевий контекст з <strong>Francesco Braschi</strong> і фондом <strong>Russia Cristiana</strong>. Детально → <a href="../braschi_rc/">кейс Russia Cristiana / Braschi</a>.</p>
+
+    <p>Чекаль у контексті мережі: <em>технічний культурний архітектор</em> — дизайн, каліграфія, типографіка як інструмент м'якої сили в православному культурному просторі.</p>
+
+    <h3 class="sh">§ 5. Наслідки розкриття <small style="font-size:14px;font-weight:400;color:var(--muted)">(Impact)</small></h3>
+
+    <p><strong>Лютий 2026:</strong> після публічного розкриття зв'язків Wikipedia-стаття про Чекаля видалена з Вікіпедії. Архів збережений у Wayback Machine (archive.org, 2026-01-29).<sup><a href="#fn1" id="fnref1-2">1</a></sup></p>
+
+    <p>Видалення статті — непрямий доказ того, що OSINT-дослідження мало реальний вплив: кроки з контролю інформаційного сліду актора після розголосу.</p>
+
+    <div class="insight-box">
+      <strong>Методологічний висновок:</strong> Wikipedia як джерело — не вічне. Статті про "незручних" акторів видаляються. Тому знімок archive.org (зроблений до видалення) є єдиним верифікованим архівним артефактом. Це підкреслює важливість archival OSINT як першого кроку будь-якого дослідження.
+    </div>
+
+    <div class="cross-link">
+      <strong>Суміжні кейси</strong>
+      <a href="../braschi_rc/"><strong>Russia Cristiana / Braschi — мережа впливу РФ</strong></a> — Чекаль як елемент мережі; meetingrimini.org як спільна точка присутності.<br><br>
+      <a href="https://github.com/NestorVolya/osint-homework-2026/tree/main/КР-Nestor-V" target="_blank" rel="noopener"><strong>actor-osint-front-СС (GitHub)</strong></a> — повний pipeline: код, VALIDATION_REPORT_KR.md, sample run з HTML-досьє.
+    </div>
+  </div>
+
+  <!-- Public materials -->
+  <div class="pubs">
+    <div class="pubs-label">Архівні джерела</div>
+    <ul>
+      <li><strong>Ручний еталон:</strong> <a href="https://web.archive.org/web/20260129202211/https://uk.wikipedia.org/wiki/%D0%A7%D0%B5%D0%BA%D0%B0%D0%BB%D1%8C_%D0%9E%D0%BB%D0%B5%D0%BA%D1%81%D1%96%D0%B9_%D0%93%D0%B5%D0%BE%D1%80%D0%B3%D1%96%D0%B9%D0%BE%D0%B2%D0%B8%D1%87" target="_blank" rel="noopener">Wikipedia — Чекаль Олексій Георгійович (Wayback, 2026-01-29)</a></li>
+      <li><strong>Pipeline + валідація:</strong> <a href="https://github.com/NestorVolya/osint-homework-2026/blob/main/КР-Nestor-V/README.md" target="_blank" rel="noopener">actor-osint-front-СС / README.md (GitHub)</a></li>
+      <li><strong>HTML-досьє pipeline:</strong> <a href="https://github.com/NestorVolya/osint-homework-2026/blob/main/КР-Nestor-V/examples/sample_run/report/report.html" target="_blank" rel="noopener">examples/sample_run/report/report.html</a></li>
+      <li><strong>Звіт якості:</strong> <a href="https://github.com/NestorVolya/osint-homework-2026/blob/main/КР-Nestor-V/VALIDATION_REPORT_KR.md" target="_blank" rel="noopener">VALIDATION_REPORT_KR.md</a></li>
+      <li><strong>Профіль Instagram:</strong> <a href="https://www.instagram.com/oleksiy_chekal/" target="_blank" rel="noopener">@oleksiy_chekal</a></li>
+      <li><strong>Academia.edu:</strong> <a href="https://independent.academia.edu/OleksiyChekal" target="_blank" rel="noopener">Oleksii Chekal — Independent Researcher</a></li>
+      <li><strong>RISU-інтерв'ю:</strong> <a href="https://risu.ua/bog-isnuye-tam-de-togo-hoche-napevno-donedavna-buv-u-pidvalah-azovstali--oleksij-chekal-avtor-grafichnogo-stilyu-dlya-pcu_n129579" target="_blank" rel="noopener">«Автор графічного стилю для ПЦУ» (RISU, 2022)</a></li>
+    </ul>
+  </div>
+
+  <!-- Footnotes -->
+  <div class="fn-section">
+    <div class="fn-label">Примітки</div>
+    <ol class="fn-list">
+      <li id="fn1">Wikipedia. Чекаль Олексій Георгійович [Електронний ресурс]. — URL: <a href="https://web.archive.org/web/20260129202211/https://uk.wikipedia.org/wiki/%D0%A7%D0%B5%D0%BA%D0%B0%D0%BB%D1%8C_%D0%9E%D0%BB%D0%B5%D0%BA%D1%81%D1%96%D0%B9_%D0%93%D0%B5%D0%BE%D1%80%D0%B3%D1%96%D0%B9%D0%BE%D0%B2%D0%B8%D1%87" target="_blank" rel="noopener">https://web.archive.org/web/20260129202211/…</a> (архів Wayback Machine, дата знімку: 29.01.2026; стаття видалена з Вікіпедії у лютому 2026). <a href="#fnref1" class="fn-back" aria-label="Повернутися">↩︎</a></li>
+      <li id="fn2">Детально про мережу Russia Cristiana і виставки Meeting di Rimini → <a href="../braschi_rc/">кейс «Russia Cristiana / Braschi»</a>. <a href="#fnref2" class="fn-back" aria-label="Повернутися">↩︎</a></li>
+      <li id="fn3">Нестор Воля. actor-osint-front-СС — Автоматизований OSINT pipeline: gold actor validation (КР курсу AI для OSINT, robot_dreams, 2026). GitHub: <a href="https://github.com/NestorVolya/osint-homework-2026/tree/main/КР-Nestor-V" target="_blank" rel="noopener">https://github.com/NestorVolya/osint-homework-2026/tree/main/КР-Nestor-V</a>. <a href="#fnref3" class="fn-back" aria-label="Повернутися">↩︎</a></li>
+    </ol>
+  </div>
+
+</div>
+</body>
+</html>
