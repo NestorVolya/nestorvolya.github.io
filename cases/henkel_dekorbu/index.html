@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HENKEL / «Декор-Буд» — Антирейдерська інформаційна оборона | nestorvolya.github.io</title>
+  <style>
+    :root {
+      --bg: #f4f1eb;
+      --ink: #181818;
+      --muted: #57514a;
+      --line: #d8cfc0;
+      --panel: #fffaf2;
+      --dark: #111418;
+      --accent: #b2382f;
+      --accent2: #1e6f68;
+      --gold: #b88724;
+      --link: #064f8f;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+    sup { line-height: 0; }
+
+    .page {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 28px 22px 80px;
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-btn {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .nav-btn:hover { border-color: var(--muted); text-decoration: none; }
+
+    .nav-tag {
+      font-size: 13px;
+      color: var(--muted);
+      padding: 6px 0;
+    }
+
+    header {
+      margin-bottom: 36px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--line);
+    }
+
+    h1 {
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin: 0 0 10px;
+    }
+
+    .subtitle {
+      font-size: 17px;
+      color: var(--muted);
+      margin: 6px 0 14px;
+      font-weight: 400;
+      line-height: 1.3;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .meta span { margin: 0 6px; color: var(--line); }
+
+    .summary-block {
+      background: var(--panel);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 22px 26px;
+      margin-bottom: 52px;
+    }
+
+    .summary-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin: 0 0 14px;
+    }
+
+    .summary-block h2 {
+      font-size: 19px;
+      font-weight: 800;
+      margin: 0 0 12px;
+      color: var(--ink);
+    }
+
+    .summary-block h3 {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      margin: 20px 0 7px;
+    }
+
+    .summary-block p { margin: 0 0 10px; font-size: 15px; }
+    .summary-block ul { margin: 0 0 10px; padding-left: 20px; }
+    .summary-block li { margin-bottom: 6px; font-size: 15px; }
+
+    .case-body {
+      border-top: 1px solid var(--line);
+      padding-top: 44px;
+    }
+
+    .case-body-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin: 0 0 32px;
+    }
+
+    h3.sh {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent2);
+      margin: 44px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h3.sh:first-of-type { margin-top: 0; }
+
+    h4.sub {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 26px 0 8px;
+    }
+
+    .case-body p { margin: 0 0 14px; }
+    .case-body ul, .case-body ol { margin: 0 0 14px; padding-left: 22px; }
+    .case-body li { margin-bottom: 6px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 22px;
+      font-size: 14px;
+    }
+
+    th {
+      background: var(--dark);
+      color: #f7efe3;
+      padding: 9px 12px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td { background: rgba(0,0,0,.025); }
+    .td-date { white-space: nowrap; color: var(--muted); font-size: 13px; font-weight: 600; }
+
+    .warn-box {
+      background: #fff8f0;
+      border-left: 4px solid var(--accent);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 16px 0 20px;
+      font-size: 15px;
+    }
+
+    .warn-box strong { color: var(--accent); }
+
+    .insight-box {
+      background: #f0f7f6;
+      border-left: 4px solid var(--accent2);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 16px 0 20px;
+      font-size: 15px;
+    }
+
+    .insight-box strong { color: var(--accent2); }
+
+    .network-box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+      font-family: monospace;
+      font-size: 13px;
+      overflow-x: auto;
+      white-space: pre;
+      line-height: 1.7;
+    }
+
+    .cross-link {
+      background: #fdf8ec;
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 40px 0 20px;
+      font-size: 15px;
+    }
+
+    .cross-link strong { color: var(--gold); font-size: 12px; text-transform: uppercase; letter-spacing: .07em; display: block; margin-bottom: 6px; }
+
+    .pubs {
+      border-top: 1px solid var(--line);
+      padding-top: 32px;
+      margin-top: 52px;
+    }
+
+    .pubs-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin: 0 0 14px;
+    }
+
+    .pubs ul { margin: 0; padding-left: 20px; }
+    .pubs li { margin-bottom: 8px; }
+
+    .fn-section {
+      border-top: 1px solid var(--line);
+      padding-top: 28px;
+      margin-top: 52px;
+    }
+
+    .fn-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin: 0 0 14px;
+    }
+
+    .fn-list {
+      font-size: 13px;
+      color: var(--muted);
+      padding-left: 20px;
+      margin: 0;
+    }
+
+    .fn-list li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .fn-list li:target {
+      background: #fef8e1;
+      border-radius: 4px;
+      outline: 2px solid var(--gold);
+      outline-offset: 2px;
+    }
+
+    .fn-list a { color: var(--link); word-break: break-all; }
+    .fn-back { font-size: 12px; margin-left: 4px; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <nav>
+    <a class="nav-btn" href="../../index.html">← Головна</a>
+    <span class="nav-tag">Портфоліо кейсів</span>
+  </nav>
+
+  <header>
+    <h1>HENKEL / «Декор-Буд» — Антирейдерська інформаційна оборона</h1>
+    <p class="subtitle">Асиметрична стратегія: публічна доказова база як зброя стримування (2007–2009)</p>
+    <p class="meta">
+      Корпоративна безпека · інформаційна оборона<span>·</span>2007–2009<span>·</span>Автор: <a href="../../index.html">Нестор Воля</a>
+    </p>
+  </header>
+
+  <!-- TL;DR -->
+  <div class="summary-block">
+    <div class="summary-label">Висновки спочатку</div>
+    <h2>Короткий огляд (Executive Summary)</h2>
+    <p>Топ-менеджери <strong>Henkel Bautechnik Ukraine</strong> — не корпорація, а конкретні посадові особи — розгорнули рейдерську атаку на партнера по дистрибуції: 5 силових нападів на склад, фальсифікований протокол зборів засновників, спроба виключити Корнієнка з 49% частки в ТОВ «ЦК №1». У відповідь замість прямого протистояння — <strong>асиметрична нелінійна стратегія</strong>: відкрита публічна документація через сайт <code>ceresit-pro.kiev.ua</code>, фотоісторія, доказова база онлайн. Результат: судове відновлення прав у двох інстанціях, стримування подальшого тиску, репутаційні втрати для нападників.</p>
+    <h3>3 ключові висновки</h3>
+    <ul>
+      <li><strong>Відкритість як щит.</strong> Достовірна публічна інформація унеможливила позови про захист ділової репутації з боку нападників — і зробила продовження тиску занадто коштовним для них.</li>
+      <li><strong>Перцептивна помилка нападника.</strong> Служба безпеки центрального офісу Henkel (Німеччина) вирішила, що сайт підготовлений «Групою Західних спеціалістів» — і обрала тактику ігнорування. Це і було метою.</li>
+      <li><strong>Early OSINT-мислення (2007).</strong> Принципи — публічна документація, відкрита доказова база, інформаційний тиск як захисний інструмент — задовго до того, як ці підходи отримали назву OSINT-захист.</li>
+    </ul>
+  </div>
+
+  <!-- Case body -->
+  <div class="case-body">
+    <div class="case-body-label">Детальний аналіз</div>
+
+    <h3 class="sh">§ 1. Передумови <small style="font-size:14px;font-weight:400;color:var(--muted)">(Background)</small></h3>
+
+    <p>2005–2007: Корнієнко — директор і керуючий партнер ГК «Декор-Буд» / ТОВ «Декор-Буд ЛБ» (Київ), офіційний дистрибутор <strong>Henkel Bautechnik Ukraine</strong> (будівельні матеріали, ТМ Ceresit/Thomsit). До 40 осіб у штаті, B2B-дистрибуція, VIP-клієнти, комплектація будівельних об'єктів.</p>
+
+    <p>Результати 2006: +92% продажів, ТОП-3 у контурі Henkel Україна, відзнаки «Лідер Центрального регіону» і «Лідер України з продажу ТМ Ceresit».<sup><a href="#fn1" id="fnref1">1</a></sup></p>
+
+    <p>Ідея, яка спровокувала конфлікт: концепція «CERESIT-PRO» — створення дистрибуційного каналу під контролем українського менеджменту, незалежного від корпоративної вертикалі. Топ-менеджерам Henkel Ukraine це категорично не сподобалось.</p>
+
+    <div class="warn-box">
+      <strong>Важливо:</strong> Боротьба велась не з корпорацією Henkel AG (Дюссельдорф), а з конкретними топ-менеджерами українського підрозділу, які паралельно реєстрували власний побічний бізнес (на імена дружин) і прагнули усунути незалежного конкурента.
+    </div>
+
+    <h3 class="sh">§ 2. Атака <small style="font-size:14px;font-weight:400;color:var(--muted)">(Attack)</small></h3>
+
+    <h4 class="sub">Фізична фаза (серпень–листопад 2007)</h4>
+    <p>П'ять «бандитсько-прокурорсько-міліцейських» нападів на склад зі спірним товаром. Спроба силового захоплення фізичних активів. Жертва атаки зупинила «активну» стадію протидії власним рішенням — перейшла до нелінійної стратегії.</p>
+
+    <h4 class="sub">Правова фальсифікація (10 серпня 2007)</h4>
+    <p>Нарисований фальсифікований протокол загальних зборів засновників ТОВ «ЦК №1». Рішення: виключення Корнієнка О.О. з числа співзасновників (49% частки). «Швидка» реєстрація змін до статуту — без відома і згоди учасника.</p>
+
+    <table>
+      <tr><th>Що</th><th>Деталі</th></tr>
+      <tr><td>Суб'єкт атаки</td><td>Корнієнко О.О., 49% частка ТОВ «ЦК №1»</td></tr>
+      <tr><td>Метод</td><td>Фальсифікований протокол зборів від 10.08.2007 + силові напади на склад</td></tr>
+      <tr><td>Нападники</td><td>Топ-менеджери Henkel Bautechnik Ukraine (особисто, не корпорація)</td></tr>
+      <tr><td>Ресурс нападників</td><td>Матеріальний і адміністративний ресурс міжнародної корпорації + впевненість в абсолютній безкарності</td></tr>
+    </table>
+
+    <h3 class="sh">§ 3. Стратегія оборони <small style="font-size:14px;font-weight:400;color:var(--muted)">(Defense Strategy)</small></h3>
+
+    <p>Ключовий принцип: <em>«найефективніші методи стримування нелінійного нападення — ответні нелінійні стратегії, що не допускають відкритого протистояння»</em>.<sup><a href="#fn2" id="fnref2">2</a></sup></p>
+
+    <h4 class="sub">Інструменти</h4>
+    <ul>
+      <li><strong>ceresit-pro.kiev.ua</strong> (грудень 2007) — «інформаційна торпеда»: детальна документація конфлікту, позови, протоколи, заяви, судові рішення у відкритому доступі.<sup><a href="#fn3" id="fnref3">3</a></sup></li>
+      <li><strong>Фотоісторія</strong> (picasaweb.google.com/a2korni) — візуальна хронологія подій.</li>
+      <li><strong>Форум planetaprava</strong> (2009) — поширення як «приклад ефективного методу сдерживания нелинейного нападения» серед фахівців з корпоративного захисту.<sup><a href="#fn4" id="fnref4">4</a></sup></li>
+    </ul>
+
+    <h4 class="sub">Чому відкритість — це захист</h4>
+    <div class="insight-box">
+      <strong>Принцип:</strong> Відкритість і достовірність інформації унеможливлює позови про захист ділової репутації. Позови подавала виключно сторона, що захищалась. Нападники не мали підстав звернутися до суду — бо кожен факт на сайті був підтверджений документально.
+    </div>
+
+    <h4 class="sub">Перцептивна помилка противника</h4>
+    <p>Служба безпеки центрального офісу Henkel (Німеччина) проаналізувала сайт і зробила <strong>помилковий висновок</strong>: ресурс підготовлений «Групою Західних спеціалістів». Обрана тактика — ігнорування.</p>
+    <p>Це була саме та реакція, яка і потрібна була жертві: стримування без відкритого протистояння. Кілька «душевних бесід», ініційованих Генеральним Директором Henkel Ukraine, і невдалі спроби закрити сайт — єдине, що змогли зробити нападники.</p>
+
+    <h3 class="sh">§ 4. Судовий процес <small style="font-size:14px;font-weight:400;color:var(--muted)">(Legal Outcome)</small></h3>
+
+    <table>
+      <tr><th class="td-date">Дата</th><th>Подія</th></tr>
+      <tr><td class="td-date">10.08.2007</td><td>Фальсифікований протокол зборів ТОВ «ЦК №1» — незаконне виключення Корнієнка (49%)</td></tr>
+      <tr><td class="td-date">серп.–лист. 2007</td><td>5 силових нападів на склад; активна стадія протидії зупинена рішенням жертви</td></tr>
+      <tr><td class="td-date">грудень 2007</td><td>Запуск ceresit-pro.kiev.ua — «інформаційна торпеда»</td></tr>
+      <tr><td class="td-date">2008</td><td>Судовий процес: оскарження фальсифікованого протоколу. Пройдено всі інстанції</td></tr>
+      <tr><td class="td-date">2008</td><td><strong>Київський Апеляційний Господарський Суд:</strong> рішення протоколу від 10.08.2007 про виключення Корнієнка визнано недійсним</td></tr>
+      <tr><td class="td-date">12.11.2008</td><td><strong>Верховний Господарський Суд України</strong> підтвердив рішення апеляції. Корнієнко відновлений у правах співзасновника (49%)</td></tr>
+      <tr><td class="td-date">2009</td><td>«Ця битва закінчена» — публічна заява на форумі</td></tr>
+    </table>
+
+    <p>Матеріального задоволення не отримано: бізнес на момент відновлення прав вже був розграбований, плюс загальна економічна криза 2008–2009. Проте мета була досягнута: <strong>репутаційна битва виграна</strong>. Сайт продовжував «грати в плюс» захисній стороні і «в мінус» нападникам ще довгий час після завершення активної фази.</p>
+
+    <h3 class="sh">§ 5. Аналітичні висновки <small style="font-size:14px;font-weight:400;color:var(--muted)">(Analysis)</small></h3>
+
+    <div class="network-box">Структура асиметричного захисту (2007):
+
+Нападник (топ-менеджери Henkel Ukraine)
+  ├─ матеріальний ресурс: корпоративна інфраструктура
+  ├─ адміністративний ресурс: зв'язки з прокуратурою / міліцією
+  └─ психологічна впевненість: «жертва не відповість»
+
+Захисна стратегія (Корнієнко)
+  ├─ ceresit-pro.kiev.ua → відкрита доказова база
+  ├─ фотоісторія → візуальна хронологія
+  ├─ суд → юридичне відновлення прав
+  └─ форум → поширення методу (репутаційний ефект)
+
+Ключовий ефект: сайт сприйнятий як «Група Західних спеціалістів»
+→ тактика ігнорування нападника = стримування без ескалації</div>
+
+    <h4 class="sub">Чому це «early OSINT-мислення»</h4>
+    <p>2007 рік. Терміни «OSINT-захист», «інформаційна оборона», «відкрита розвідка» в корпоративному контексті ще не існували як дисципліна. Але принципи були застосовані точно:</p>
+    <ul>
+      <li>Збір і публічне розміщення верифікованих даних</li>
+      <li>Документування дій противника (позови, протоколи, судові рішення)</li>
+      <li>Використання відкритості як захисту від юридичного тиску</li>
+      <li>Управління перцепцією противника через дизайн ресурсу</li>
+      <li>Асиметрична відповідь замість прямого протистояння</li>
+    </ul>
+
+    <div class="insight-box">
+      <strong>Висновок:</strong> Інформаційна торпеда спрацювала один раз — і продовжувала грати роль стримувача роками. Неможливість завдати шкоди через інформаційний канал вже є частковою перемогою. Репутаційний актив захищеної сторони зберігся; репутаційні втрати нападників — задокументовані і незворотні.
+    </div>
+
+    <div class="cross-link">
+      <strong>Суміжний кейс</strong>
+      <a href="../rentafont_ru/"><strong>Rentafont.RU — OSINT-розслідування</strong></a> — публічне корпоративне OSINT-розслідування RF-зв'язків: реєстри, домени, архіви, технічні сліди. Схожий принцип: публічність як інструмент.
+    </div>
+  </div>
+
+  <!-- Public materials -->
+  <div class="pubs">
+    <div class="pubs-label">Архівні джерела (Wayback Machine)</div>
+    <ul>
+      <li><a href="https://web.archive.org/web/20250117175335/http://planetaprava.plarson.ru/forum/forum-9/topic-75.html" target="_blank" rel="noopener">Planetaprava — форум «Рейдерство: конкретний приклад і протидія» (2009, Wayback 2025)</a></li>
+      <li><a href="https://web.archive.org/web/20180314035736/http://www.ceresit-pro.kiev.ua/home" target="_blank" rel="noopener">ceresit-pro.kiev.ua — головна (Wayback 2018)</a></li>
+      <li><a href="https://web.archive.org/web/20180314035712/http://www.ceresit-pro.kiev.ua/let22" target="_blank" rel="noopener">ceresit-pro.kiev.ua/let22 — листи / документи (Wayback 2018)</a></li>
+      <li><a href="https://web.archive.org/web/20160202223811/http://www.ceresit-pro.kiev.ua/let3" target="_blank" rel="noopener">ceresit-pro.kiev.ua/let3 — документи (Wayback 2016)</a></li>
+    </ul>
+  </div>
+
+  <!-- Footnotes -->
+  <div class="fn-section">
+    <div class="fn-label">Примітки</div>
+    <ol class="fn-list">
+      <li id="fn1">Результати діяльності ГК «Декор-Буд» 2005–2007: local evidence (внутрішня документація, відзнаки Henkel). <a href="#fnref1" class="fn-back" aria-label="Повернутися">↩︎</a></li>
+      <li id="fn2">Цитата з дискусії на форумі planetaprava (2009-04-01): «Как правило, наиболее эффективные методы сдерживания нелинейного нападения — ответные нелинейные стратегии». <a href="#fnref2" class="fn-back" aria-label="Повернутися">↩︎</a></li>
+      <li id="fn3">Сайт ceresit-pro.kiev.ua (запущено грудень 2007). Архів: <a href="https://web.archive.org/web/20180314035736/http://www.ceresit-pro.kiev.ua/home" target="_blank" rel="noopener">Wayback Machine, 2018-03-14</a>. <a href="#fnref3" class="fn-back" aria-label="Повернутися">↩︎</a></li>
+      <li id="fn4">Форум planetaprava, тема «Рейдерство — конкретний приклад і протидія», 2009-04-01. Архів: <a href="https://web.archive.org/web/20250117175335/http://planetaprava.plarson.ru/forum/forum-9/topic-75.html" target="_blank" rel="noopener">Wayback Machine, 2025-01-17</a>. <a href="#fnref4" class="fn-back" aria-label="Повернутися">↩︎</a></li>
+    </ol>
+  </div>
+
+</div>
+</body>
+</html>
