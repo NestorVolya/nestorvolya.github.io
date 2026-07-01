@@ -281,7 +281,7 @@
     <h1>devNVS/VPS — персональний сервер для AI і OSINT-автоматизації</h1>
     <p class="subtitle">Власна інфраструктура для AI-сервісів і OSINT-автоматизації: від локальної розробки до безперервного розгортання на сервері</p>
     <p class="meta">
-      DevOps · solo-build<span>·</span>2025–2026<span>·</span><a href="mailto:devnvs@pm.me">devnvs@pm.me</a><span>·</span>Автор: <a href="../../index.html">Нестор Воля</a>
+      DevOps · solo-build<span>·</span>2025–2026 · оновлено 2026-07-01<span>·</span><a href="mailto:devnvs@pm.me">devnvs@pm.me</a><span>·</span>Автор: <a href="../../index.html">Нестор Воля</a>
     </p>
   </header>
 
@@ -339,12 +339,13 @@
       <tbody>
         <tr><td class="td-label">Entrypoint</td><td>Traefik</td><td>Reverse proxy, wildcard TLS, routing</td></tr>
         <tr><td class="td-label">Project nets</td><td>n8n + OSINT API</td><td>Workflow adapter + OSINT data API</td></tr>
-        <tr><td class="td-label">Project nets</td><td>TCK Bot</td><td>Signal→PDF→AI→Decision pipeline</td></tr>
-        <tr><td class="td-label">Project nets</td><td>Hermes Agent</td><td>AI orchestration layer</td></tr>
-        <tr><td class="td-label">Shared tools</td><td>Crawl4AI</td><td>Web scraping / document collection</td></tr>
-        <tr><td class="td-label">Shared tools</td><td>Ollama</td><td>Local LLM (resource-sensitive; cloud-first)</td></tr>
+        <tr><td class="td-label">Project nets</td><td>TCK Bot / HARON</td><td>Signal→PDF→AI→Decision pipeline (production)</td></tr>
+        <tr><td class="td-label">Project nets</td><td>Vacancy Pipeline</td><td>Парсинг вакансій → scoring → веб-дашборд</td></tr>
+        <tr><td class="td-label">Project nets</td><td>FlowSint</td><td>Graph intelligence layer (6 контейнерів: api, app, celery, redis, neo4j, postgres)</td></tr>
+        <tr><td class="td-label">Project nets</td><td>Tasks API</td><td>REST API для персональних задач і планування</td></tr>
+        <tr><td class="td-label">Project nets</td><td>Private CV Hosting</td><td>nginx + Basic Auth: приватні CV для роботодавців</td></tr>
         <tr><td class="td-label">Data layer</td><td>PostgreSQL 16 + pgvector 0.8.2</td><td>Structured truth, vector search</td></tr>
-        <tr><td class="td-label">Data layer</td><td>Redis</td><td>Cache / queue / event broker</td></tr>
+        <tr><td class="td-label">Planned</td><td>Hermes Agent</td><td>AI-оркестратор для автономних задач — deploy на новий VPS</td></tr>
       </tbody>
     </table>
 
@@ -356,25 +357,21 @@ flowchart TB
     traefik["Reverse Proxy\n(Traefik · wildcard TLS)"]
     internet --> traefik
 
-    subgraph shared["Shared Tools (shared_net)"]
-        crawl4ai["Crawl4AI"]
-        ollama["Ollama (LLM)"]
-    end
-
     subgraph data["Data Layer (data_net)"]
         pg["PostgreSQL 16\n+ pgvector 0.8.2"]
-        redis["Redis"]
     end
 
     subgraph projects["Project Networks (ізольовані)"]
         n8n["n8n + OSINT API\n(pipeline_net)"]
-        tck["TCK Bot\n(tck_net)"]
-        hermes["Hermes Agent\n(hermes_net)"]
+        tck["TCK Bot / HARON\n(tck_net)"]
+        vacancy["Vacancy Pipeline\n(vacancy_net)"]
+        flowsint["FlowSint\n(flowsint_network_prod)"]
+        tasks["Tasks API"]
+        cv["Private CV\n(nginx + auth)"]
     end
 
     traefik --> projects
-    projects -. "explicit cross-network" .-> shared
-    projects -. "explicit cross-network" .-> data
+    n8n -. "explicit cross-network" .-> data
       </div>
     </div>
 
@@ -417,14 +414,24 @@ flowchart TB
           <td class="td-done">Active</td>
         </tr>
         <tr>
-          <td class="td-label">Hermes Agent</td>
-          <td>Рівень оркестрування AI: Claude Code як основний агент, Hermes — розгорнутий контейнер для автономних задач.</td>
+          <td class="td-label">Vacancy Pipeline</td>
+          <td>Парсинг вакансій із Signal/вебу, scoring по матриці навичок, веб-дашборд з фільтрами і пошуком.</td>
           <td class="td-done">Active</td>
         </tr>
         <tr>
-          <td class="td-label">Crawl4AI + Ollama</td>
-          <td>Спільні інструменти: збір даних із вебу і локальна LLM для швидкого виведення. Ollama — для задач де затримка важливіша за якість відповіді.</td>
+          <td class="td-label">Tasks API</td>
+          <td>REST API для персональних задач і планування. Інтегрований з локальним операційним дашбордом.</td>
           <td class="td-done">Active</td>
+        </tr>
+        <tr>
+          <td class="td-label">Private CV Hosting</td>
+          <td>nginx + Basic Auth: приватний доступ до CV-варіантів для конкретних роботодавців. Без публічних посилань.</td>
+          <td class="td-done">Active</td>
+        </tr>
+        <tr>
+          <td class="td-label">Hermes Agent</td>
+          <td>AI-оркестратор для автономних задач (Claude Code + контейнер для тривалих агентних pipelines). Архітектура спроєктована — deploy на новий VPS.</td>
+          <td style="color:var(--gold);font-weight:700">Planned</td>
         </tr>
       </tbody>
     </table>
@@ -474,8 +481,10 @@ flowchart TB
         <tr><td class="td-done">✓</td><td>osint-base → стійке ядро даних (схема + API + скрипти)</td></tr>
         <tr><td class="td-done">✓</td><td>n8n + OSINT API на data_net</td></tr>
         <tr><td class="td-done">✓</td><td>Хмарний файрвол + захист Redis + 4 ГБ swap</td></tr>
-        <tr><td class="td-done">✓</td><td>Hermes agent — рівень оркестрування</td></tr>
         <tr><td class="td-done">✓</td><td>STORAGE_BACKEND=postgres (подвійний запис перевірено)</td></tr>
+        <tr><td class="td-done">✓</td><td>Vacancy Pipeline, Tasks API, Private CV Hosting — deployed</td></tr>
+        <tr><td class="td-done">✓</td><td>Disk cleanup: −28 GB (crawl4ai + ollama + build cache) → 35% використання</td></tr>
+        <tr><td class="td-done">✓</td><td>Security hardening: tck_signal порт 8080 закрито ззовні (127.0.0.1 only)</td></tr>
       </tbody>
     </table>
 
