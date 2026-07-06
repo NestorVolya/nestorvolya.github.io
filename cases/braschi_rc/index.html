@@ -287,6 +287,15 @@
 
     .fn-list a { color: var(--link); word-break: break-all; }
     .fn-back { font-size: 12px; margin-left: 4px; }
+
+    /* TOC */
+    .toc { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 16px 20px; margin-bottom: 28px; }
+    .toc-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 10px; }
+    .toc-list { margin: 0; padding-left: 20px; columns: 2; column-gap: 28px; }
+    .toc-list li { margin: 3px 0; font-size: 13.5px; break-inside: avoid; }
+    .toc-list a { color: var(--link); text-decoration: none; }
+    .toc-list a:hover { text-decoration: underline; }
+    @media (max-width: 560px) { .toc-list { columns: 1; } }
   </style>
 </head>
 <body>
@@ -305,8 +314,25 @@
     </p>
   </header>
 
+  <!-- TOC -->
+  <nav class="toc" aria-label="Зміст">
+    <p class="toc-label">Зміст</p>
+    <ol class="toc-list">
+      <li><a href="#summary">Короткий огляд</a></li>
+      <li><a href="#s1">§1 Фонд Russia Cristiana</a></li>
+      <li><a href="#s2">§2 Виставки Meeting di Rimini</a></li>
+      <li><a href="#s3">§3 Конференції: дзеркальний формат</a></li>
+      <li><a href="#s4">§4 Мережа акторів</a></li>
+      <li><a href="#s5">§5 Таймлайн Браскі</a></li>
+      <li><a href="#s6">§6 Браскі в часі війни</a></li>
+      <li><a href="#s7">§7 Аналітичні висновки</a></li>
+      <li><a href="#pubs">Публікації</a></li>
+      <li><a href="#notes">Примітки</a></li>
+    </ol>
+  </nav>
+
   <!-- TL;DR -->
-  <div class="summary-block">
+  <div class="summary-block" id="summary">
     <div class="summary-label">Висновки спочатку</div>
     <h2>Короткий огляд (Executive Summary)</h2>
     <p>Виявлено багаторівневу інституційну мережу навколо <strong>Francesco Braschi</strong> (Biblioteca Ambrosiana, Мілан) та фонду <strong>Russia Cristiana</strong> (засн. 1957), що функціонує в Україні з 2007 р. Ядром мережі є Центр св. Климента (Київ) під керівництвом проф. НаУКМА <strong>Костянтина Сігова</strong>. Технічний архітектор — харківський дизайнер <strong>Олексій Чекаль</strong>, автор графічного стилю ПЦУ.</p>
@@ -323,7 +349,7 @@
     <div class="case-body-label">Повне дослідження</div>
 
     <!-- §1 -->
-    <h3 class="sh">§ 1. Фонд Russia Cristiana <small style="font-size:14px;font-weight:400;color:var(--muted)">(Organization)</small></h3>
+    <h3 class="sh" id="s1">§ 1. Фонд Russia Cristiana <small style="font-size:14px;font-weight:400;color:var(--muted)">(Organization)</small></h3>
 
     <p>Фонд <em>Russia Cristiana</em> (раніше — Centro Studi Russia Cristiana) заснований у <strong>1957 році</strong> в Мілані католицьким священником о. Романо Скальфі (1923–2016). Початкова мета — «розкрити для християн Заходу сутність літургійної традиції та культури слов'янських народів».<sup><a href="#fn1" id="fnref1">1</a></sup></p>
 
@@ -342,7 +368,7 @@
     <p>Після смерті Скальфі (25.12.2016) <strong>Франческо Браскі</strong> очолив фонд. Браскі — водночас: президент RC, віце-префект Biblioteca Ambrosiana (Мілан), проф. Università Cattolica del Sacro Cuore, директор Класу славістики Accademia Ambrosiana.</p>
 
     <!-- §2 -->
-    <h3 class="sh">§ 2. Виставки Meeting di Rimini <small style="font-size:14px;font-weight:400;color:var(--muted)">(Exhibitions)</small></h3>
+    <h3 class="sh" id="s2">§ 2. Виставки Meeting di Rimini <small style="font-size:14px;font-weight:400;color:var(--muted)">(Exhibitions)</small></h3>
 
     <p>Meeting di Rimini — щорічний фестиваль руху Comunione e Liberazione, 800 тис.+ відвідувачів/рік. Russia Cristiana присутня з <strong>1982 року</strong> — <strong>44 роки</strong> безперервної присутності (до 2018+).<sup><a href="#fn6" id="fnref6">6</a></sup></p>
 
@@ -369,7 +395,7 @@
     </div>
 
     <!-- §3 -->
-    <h3 class="sh">§ 3. Конференції: «дзеркальний» формат <small style="font-size:14px;font-weight:400;color:var(--muted)">(Conferences)</small></h3>
+    <h3 class="sh" id="s3">§ 3. Конференції: «дзеркальний» формат <small style="font-size:14px;font-weight:400;color:var(--muted)">(Conferences)</small></h3>
 
     <p>RC проводила щорічні академічні конференції в Серіате (Бергамо) з 1997 р. З <strong>2012 р.</strong> — «дзеркальний» формат: одночасно в Італії та Москві.<sup><a href="#fn7" id="fnref7">7</a></sup></p>
 
@@ -394,7 +420,7 @@
     </div>
 
     <!-- §4 -->
-    <h3 class="sh">§ 4. Мережа акторів <small style="font-size:14px;font-weight:400;color:var(--muted)">(Network)</small></h3>
+    <h3 class="sh" id="s4">§ 4. Мережа акторів <small style="font-size:14px;font-weight:400;color:var(--muted)">(Network)</small></h3>
 
     <h4 class="sub">Адольф Овчинніков (1931–2021) — вузол рекрутменту</h4>
     <p>Художник-реставратор ВХНРЦ ім. Грабаря. Куратор виставки ікон у Ватикані (1989–90). Іконопис у школі Серіате протягом 7 років (1990-ті). Написав іконостас для домової церкви вілли Амбівері. Виставка 27 фресок на Meeting 1993.<sup><a href="#fn4" id="fnref4">4</a></sup></p>
@@ -425,7 +451,7 @@
     </div>
 
     <!-- §5 -->
-    <h3 class="sh">§ 5. Таймлайн Браскі <small style="font-size:14px;font-weight:400;color:var(--muted)">(Timeline)</small></h3>
+    <h3 class="sh" id="s5">§ 5. Таймлайн Браскі <small style="font-size:14px;font-weight:400;color:var(--muted)">(Timeline)</small></h3>
 
     <table>
       <thead>
@@ -451,7 +477,7 @@
     </table>
 
     <!-- §6 -->
-    <h3 class="sh">§ 6. Браскі в часі війни <small style="font-size:14px;font-weight:400;color:var(--muted)">(Wartime Activity)</small></h3>
+    <h3 class="sh" id="s6">§ 6. Браскі в часі війни <small style="font-size:14px;font-weight:400;color:var(--muted)">(Wartime Activity)</small></h3>
 
     <p>Після 24.02.2022 Russia Cristiana та особисто Браскі <strong>не припинили</strong> жодної діяльності в РФ. Навпаки — активізувалися:</p>
 
@@ -467,7 +493,7 @@
     </div>
 
     <!-- §7 -->
-    <h3 class="sh">§ 7. Аналітичні висновки <small style="font-size:14px;font-weight:400;color:var(--muted)">(Conclusions)</small></h3>
+    <h3 class="sh" id="s7">§ 7. Аналітичні висновки <small style="font-size:14px;font-weight:400;color:var(--muted)">(Conclusions)</small></h3>
 
     <h4 class="sub">67 років системної операції м'якої сили</h4>
     <p>Russia Cristiana — не аматорський культурний проект. Факти: 44 роки безперервної присутності на Meeting di Rimini (1982+); КЦ «Покровські ворота» — нерухомість у центрі Москви (відреставрована, куплена); 8+ штатних співробітників; щорічні конференції в двох країнах (2012–2018); альбоми-календарі на 5 мовах; паралельний доступ до Ватикану та РПЦ через одну людину (Парравічіні).</p>
@@ -488,7 +514,7 @@
   </div>
 
   <!-- Public materials -->
-  <div class="pubs">
+  <div class="pubs" id="pubs">
     <div class="pubs-label">Публічні матеріали</div>
     <ul>
       <li>OSINT-профіль: <a href="https://infovarta.notion.site/_-308d7fb5fd9a80198f40ee491df41d18" target="_blank" rel="noopener">Francesco Braschi — Notion →</a><sup><a href="#fn9" id="fnref9">9</a></sup></li>
@@ -498,7 +524,7 @@
   </div>
 
   <!-- ДСТУ footnotes -->
-  <div class="fn-section">
+  <div class="fn-section" id="notes">
     <div class="fn-label">Примітки</div>
     <ol class="fn-list">
       <li id="fn1">«Россия для отца Романо Скальфи была именно Святой Русью» [Електронний ресурс] / Благовест-Инфо. — 19.03.2017. — URL: <a href="https://blagovest-info.ru/index.php?ss=2&s=4&id=77337" target="_blank" rel="noopener">https://blagovest-info.ru/index.php?ss=2&s=4&id=77337</a> (дата звернення: 15.02.2026). <a href="#fnref1" class="fn-back" aria-label="Повернутися">↩︎</a></li>
