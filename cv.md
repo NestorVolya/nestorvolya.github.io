@@ -34,7 +34,9 @@ OSINT-аналітик із поєднанням доказового пошук
 
 ## Навчання
 
-[robot_dreams "AI для OSINT і розвідки"](https://robotdreams.cc/uk/course/2631-ai-osint-intelligence), 2026: прикінцева стадія навчання, курсовий проєкт; топова позиція в рейтингу курсу.
+[robot_dreams "AI для OSINT і розвідки"](https://robotdreams.cc/uk/course/2631-ai-osint-intelligence), 09.04–25.06.2026: завершено, ТОП-3 рейтингу курсу, [сертифікат](https://lms.robotdreams.cc/certificate/f739b8e046d287d29148cd5ed96fc77a).
+
+Курси прес-офіцерів ЗСУ, ВІКНУ (30.09–14.10.2024): [свідоцтво](https://nestorvolya.github.io/assets/2024-10-14_viknu_certificate.jpg).
 
 Публічні технічні матеріали:
 
