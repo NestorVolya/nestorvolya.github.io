@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Нестор Воля — OSINT-аналітик</title>
-  <meta name="description" content="Публічний профіль Нестора Волі: OSINT, дослідження інформаційних операцій, AI/OSINT-автоматизація, вибрані публічні підтвердження.">
+  <meta name="description" content="Публічний профіль Нестора Волі: OSINT, дослідження інформаційних операцій, AI/OSINT-автоматизація, кейси, реєстри, інституційний аналіз.">
   <style>
     :root {
       --bg: #f4f1eb;
@@ -34,6 +34,36 @@
     a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 2px; }
     a:hover { text-decoration-thickness: 2px; }
 
+    .site-tabs {
+      max-width: 820px;
+      margin: 20px auto 0;
+      padding: 0 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tab {
+      display: inline-block;
+      padding: 9px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--panel);
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all .15s ease;
+    }
+
+    .tab:hover,
+    .tab.active {
+      background: var(--dark);
+      border-color: var(--dark);
+      color: #f7efe3;
+      text-decoration: none;
+    }
+
     .page {
       max-width: 820px;
       margin: 0 auto;
@@ -51,6 +81,7 @@
       grid-template-columns: 1.5fr .9fr;
       gap: 28px;
       align-items: center;
+      margin-top: 14px;
     }
 
     .hero-photo {
@@ -256,6 +287,9 @@
     .ico.whatsapp { background: #25d366; }
 
     @media (max-width: 680px) {
+      .site-tabs {
+        padding: 0 14px;
+      }
       .hero {
         grid-template-columns: 1fr;
         padding: 26px 22px;
@@ -269,6 +303,13 @@
   </style>
 </head>
 <body>
+  <nav class="site-tabs" aria-label="Основна навігація">
+    <a class="tab active" href="./">Головна</a>
+    <a class="tab" href="projects/">Проєкти</a>
+    <a class="tab" href="cases/">Кейси</a>
+    <a class="tab" href="#profiles">Контакти</a>
+  </nav>
+
   <main class="page">
 
     <!-- HERO -->
@@ -277,7 +318,7 @@
         <div class="eyebrow">Публічний OSINT-профіль</div>
         <h1>Нестор Воля</h1>
         <div class="subtitle">OSINT-аналітик · дослідник інформаційних операцій · AI/OSINT-автоматизація</div>
-        <p class="lead">Доказовий аналіз відкритих джерел, підготовка аналітичних матеріалів, робота з публічними кейсами акторів і мереж, автоматизація збору й структурування даних.</p>
+        <p class="lead">Доказовий аналіз відкритих джерел, підготовка аналітичних матеріалів, робота з публічними джерелами, графи знань та AI-інструменти для досліджень.</p>
         <div class="chips">
           <span class="chip">доказовий OSINT</span>
           <span class="chip">аналіз акторів і мереж</span>
@@ -287,15 +328,13 @@
           <span class="chip">AI-допоміжний аналіз</span>
         </div>
       </div>
-      <!-- BLOCK: photo-id-card (фото-візитка): фото + архівний контекст + обфускований контакт -->
       <figure class="hero-photo">
-        <img src="assets/2025_vbaak_2dshb_nestor_volya.jpg" alt="Нестор Воля поруч із важким безпілотним авіаційним комплексом">
+        <img src="assets/2025_vbaak_2dshb_nestor_volya.jpg" alt="Нестор Воля">
         <figcaption class="hero-cap">
           <span class="cap-context">2025, архівне фото: ВБпАК · 2-й ДШБ</span>
           <span class="cap-contact">+38О978I704I6 · devnvs@pm.me</span>
         </figcaption>
       </figure>
-      <!-- /BLOCK: photo-id-card -->
     </section>
 
     <!-- НАПРЯМИ -->
@@ -303,7 +342,7 @@
     <div class="grid">
       <section class="card">
         <h3>OSINT і перевірка джерел</h3>
-        <p>Пошук, звірка, архівація та аналіз відкритих джерел: медіа, реєстри, домени, веб-архіви, соціальні сигнали, публічні профілі.</p>
+        <p>Пошук, звірка, архівація та аналіз відкритих джерел: медіа, реєстри, домени, веб-архіви, соціальні сигнали.</p>
       </section>
       <section class="card">
         <h3>Інформаційні операції</h3>
@@ -311,7 +350,7 @@
       </section>
       <section class="card">
         <h3>AI/OSINT-автоматизація</h3>
-        <p>Технічні пайплайни для збору, структурування, витягу сутностей, виявлення суперечностей і підготовки звітних матеріалів.</p>
+        <p>Технічні пайплайни для збору, структурування, витягу сутностей, виявлення суперечностей і підготовки звітів.</p>
       </section>
     </div>
 
@@ -320,7 +359,7 @@
     <section class="stack">
       <ul class="stack-list">
         <li>Швидко розгорнути evidence-based OSINT-профіль по особі, організації або мережі.</li>
-        <li>Підготувати аналітичний звіт, інформаційну довідку або візуалізацію для командира / аналітичного підрозділу.</li>
+        <li>Підготувати аналітичний звіт, інформаційну довідку або візуалізацію для командира / аналітичного відділу.</li>
         <li>Виявляти закономірності координації та мережеві зв'язки у масивах публічних даних.</li>
         <li>Побудувати повторюваний процес збору, перевірки, архівації й звітності.</li>
         <li>Автоматизувати OSINT / document-analysis задачі через Python, API, бази даних і LLM.</li>
@@ -333,10 +372,10 @@
     <section class="stack">
       <ul class="stack-list">
         <li><strong>OSINT:</strong> Wayback Machine, WHOIS/DNS, BuiltWith, urlscan, Google operators, source registry.</li>
-        <li><strong>Data / AI:</strong> Python, FastAPI, PostgreSQL, pgvector, SQLite, JSON Schema, RAG, NER, Gemini, Claude, NotebookLM, Perplexity, LLM Guard, agentic workflows (tool use, multi-step orchestration).</li>
+        <li><strong>Data / AI:</strong> Python, FastAPI, PostgreSQL, pgvector, SQLite, JSON Schema, RAG, NER, Gemini, Claude, NotebookLM, Perplexity, LLM Guard, agentic workflows.</li>
         <li><strong>Automation:</strong> Playwright, Crawl4AI, Jina, Exa, Tavily, n8n (agentic workflows), API pipelines, browser automation.</li>
         <li><strong>Graphs:</strong> Gephi, Neo4j, NetworkX, pyvis, PageRank, modularity, weighted degree.</li>
-        <li><strong>Runtime / VPS:</strong> Docker, VPS Linux server (nginx, Traefik, Let's Encrypt, reverse proxy, SSL/TLS, контейнерна ізоляція), Ubuntu/Linux, Git/GitHub, smoke checks, backup-before-change discipline. Власна production-інфраструктура для OSINT-пайплайнів і AI-агентів: PostgreSQL + pgvector, n8n, Vacancy Pipeline — deployed 24/7. <a href="https://nestorvolya.github.io/projects/devnvs-vps/">devNVS/VPS →</a></li>
+        <li><strong>Runtime / VPS:</strong> Docker, VPS Linux server (nginx, Traefik, Let's Encrypt, reverse proxy, SSL/TLS), Ubuntu/Linux, Git/GitHub.</li>
       </ul>
     </section>
 
@@ -347,7 +386,7 @@
       <section class="proof-item">
         <h3>HARON / tck-bot — система підтримки рішень</h3>
         <p class="venue">Solo-продукт · deployed · 2025–2026</p>
-        <p class="body">Повний цикл від Signal-запиту до рішення адміну: PDF → AI-аналіз → висновок. Python / FastAPI / PostgreSQL / Docker. SLA-ескалації, реєстр кандидатів, ізоляція сервісів. Deployed-продукт для реальної військової операції — прямий доказ builder-профілю.</p>
+        <p class="body">Повний цикл від Signal-запиту до рішення адміну: PDF → AI-аналіз → висновок. Python / FastAPI / PostgreSQL / Docker.</p>
         <p class="links">
           <a href="https://nestorvolya.github.io/projects/devnvs-vps/">devNVS/VPS — архітектура →</a>
         </p>
@@ -356,7 +395,7 @@
       <section class="proof-item">
         <h3>Rentafont — OSINT-розслідування</h3>
         <p class="venue">Опубліковане дослідження · dev.ua / DOU</p>
-        <p class="body">Публічна історія, інфраструктура, партнерська мережа та зв'язки з російським ринком; технічний peer review у DevOps-спільноті. Метод: WHOIS-історія, DNS-інспектори, BuiltWith, Wayback Machine, urlscan. Ключовий висновок: домен rentafont.ru продовжено через 9 місяців після 24.02.2022, активний до серпня 2023; співвідношення RU/UA користувачів ~20–25:1. Peer review у DOU-треді підтвердив методологію.</p>
+        <p class="body">Публічна історія, інфраструктура, партнерська мережа та зв'язки з російським ринком; технічний і відкритий аналіз.</p>
         <p class="links">
           <a href="https://dev.ua/blogs/posts/vidmovliaiutsia-vid-spivpratsi-rf-blog">dev.ua</a> ·
           <a href="https://dou.ua/forums/topic/47877/">DOU</a> ·
@@ -367,28 +406,27 @@
       <section class="proof-item">
         <h3>Russia Cristiana / Braschi — мережа впливу РФ</h3>
         <p class="venue">Актор-профілювання · мережа впливу РФ · Італія–Москва–Україна · 2026</p>
-        <p class="body">OSINT-розслідування м'якої сили РФ: Francesco Braschi / Russia Cristiana як transnational influence network на перетині релігійних, академічних і проросійських інформаційних середовищ. Методи: actor profiling, network mapping, timeline reconstruction, source registry. Ключовий вузол кластеру: <a href="cases/chekal_osint/">Олексій Чекаль</a> — актор мережі Braschi зі стверджуваним зв'язком до Rentafont.</p>
+        <p class="body">OSINT-розслідування м'якої сили РФ: Francesco Braschi / Russia Cristiana як transnational influence network.</p>
         <p class="links">
           <a href="cases/braschi_rc/">Повний кейс →</a> ·
-          <a href="https://gist.github.com/NestorVolya/7997de7361e244ab9f1a1f9a3f818e9c">Аналітичний звіт (GitHub Gist)</a> ·
-          <a href="https://infovarta.notion.site/_-308d7fb5fd9a80198f40ee491df41d18">Notion profile</a>
+          <a href="https://gist.github.com/NestorVolya/7997de7361e244ab9f1a1f9a3f818e9c">Аналітичний звіт (GitHub Gist)</a>
         </p>
       </section>
 
       <section class="proof-item">
         <h3>Чекаль Олексій — actor profiling</h3>
         <p class="venue">Actor profiling · ручний еталон + pipeline benchmark · 2025–2026</p>
-        <p class="body">Каліграф, автор графічного стилю ПЦУ — і системна присутність у проросійській медіасфері під час повномасштабного вторгнення. Актор мережі <a href="cases/braschi_rc/">Russia Cristiana / Braschi</a>; стверджуваний зв'язок із Rentafont. Методологічний бенчмарк: Wikipedia (167 виносок) як ручний еталон vs автоматичний pipeline (44 джерела, CHS 1.00, 5/5 gates). Wikipedia-стаття видалена після розкриття.</p>
+        <p class="body">Каліграф, автор графічного стилю ПЦУ — і системна присутність у проросійській медіасфері.</p>
         <p class="links">
           <a href="cases/chekal_osint/">Повний кейс →</a> ·
-          <a href="https://web.archive.org/web/20260129202211/https://uk.wikipedia.org/wiki/Чекаль_Олексій_Георгійович">Wikipedia (Wayback)</a>
+          <a href="https://web.archive.org/web/20260129202211/https://uk.wikipedia.org/wiki/%D0%A7%D0%B5%D0%BA%D0%B0%D0%BB%D1%8C_%D0%9E%D0%BB%D0%B5%D0%BA%D1%81%D1%96%D0%B9_%D0%93%D0%B5%D0%BE%D1%80%D0%B3%D1%96%D0%B9%D0%BE%D0%B2%D0%B8%D1%87">Wikipedia (Wayback)</a>
         </p>
       </section>
 
       <section class="proof-item">
         <h3>AI для OSINT і розвідки</h3>
         <p class="venue">robot_dreams · 09.04–25.06.2026 · завершено, ТОП-3 рейтингу курсу</p>
-        <p class="body">Курсове навчання та проєктні артефакти застосування AI в OSINT-аналізі. Диплом виданий, 197 балів, 99% успішності, 10/10 завдань.</p>
+        <p class="body">Курсове навчання та проєктні артефакти застосування AI в OSINT-аналізі. Диплом виданий, 197 балів.</p>
         <p class="links">
           <a href="https://lms.robotdreams.cc/certificate/f739b8e046d287d29148cd5ed96fc77a">сертифікат</a> ·
           <a href="https://robotdreams.cc/uk/course/2631-ai-osint-intelligence">сторінка курсу</a> ·
@@ -399,7 +437,7 @@
       <section class="proof-item">
         <h3>Курси прес-офіцерів ЗСУ</h3>
         <p class="venue">ВІКНУ · Військовий інститут КНУ ім. Тараса Шевченка · 30.09–14.10.2024</p>
-        <p class="body">Курс підвищення кваліфікації з питань інформування громадськості та взаємодії з медіа, 108 год / 3,6 кредити ЄКТС. Підсумковий контроль: 96 балів, оцінка "відмінно". СПК №22994521/7955-24.</p>
+        <p class="body">Курс підвищення кваліфікації з питань інформування громадськості та взаємодії з медіа.</p>
         <p class="links">
           <a href="assets/2024-10-14_viknu_certificate.jpg">свідоцтво</a>
         </p>
@@ -408,14 +446,14 @@
     </div>
 
     <!-- КОНТАКТИ -->
-    <h2>Контакти</h2>
+    <h2 id="contacts">Контакти</h2>
     <div class="contacts">
       <span class="contact-num">
         <span class="ico whatsapp" title="WhatsApp" aria-label="WhatsApp">
-          <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.08-.297-.149-1.259-.463-2.395-1.478-.886-.79-1.486-1.763-1.663-2.06-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.149-.173.199-.297.299-.495.099-.198.049-.372-.025-.521-.074-.149-.67-1.617-.916-2.214-.241-.58-.487-.5-.67-.51-.173-.008-.372-.01-.571-.01-.199 0-.521.074-.794.372-.273.297-1.043 1.02-1.043 2.485s1.067 2.876 1.214 3.074c.149.199 2.095 3.201 5.076 4.488.708.305 1.261.488 1.692.625.709.226 1.354.194 1.864.118.569-.085 1.758-.719 2.006-1.414.248-.695.248-1.29.173-1.414-.074-.124-.272-.199-.571-.348z"></path></svg>
         </span>
         <span class="ico signal" title="Signal" aria-label="Signal">
-          <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2C6.5 2 2 5.94 2 10.8c0 2.5 1.2 4.74 3.12 6.31-.13.97-.5 1.86-1.06 2.62-.18.24.02.58.31.52 1.6-.3 2.9-.84 3.9-1.45 1.13.33 2.36.5 3.73.5 5.5 0 10-3.94 10-8.8S17.5 2 12 2Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2C6.5 2 2 5.94 2 10.8c0 2.5 1.2 4.74 3.12 6.31-.13.97-.5 1.86-1.06 2.62-.18.24.02.58.31.52 1.6-.3 2.9-.84 3.9-1.45 1.2.4 2.5.6 3.73.6 5.5 0 10-3.94 10-8.8S17.5 2 12 2zm-1.1 4.7c.3-.02.52.16.52.46 0 .66.28 1.35.86 1.99.58.64 1.23 1.02 2 1.02.32 0 .6.24.6.57 0 .35-.27.58-.62.58-.12 0-.22-.03-.34-.06-1.56-.47-2.8-1.9-3.24-3.18-.14-.43.04-.83.42-.98.1-.04.2-.05.3-.04zm4.8 1.2c.28 0 .52.18.56.44.13.91.2 1.7.2 2.52 0 .31-.23.54-.54.54-.3 0-.54-.23-.54-.54 0-.7-.05-1.37-.17-2.02-.08-.45.2-.87.49-.92zm-7 1.3c.29 0 .53.2.56.48.16.82.32 1.67.38 2.53.06.83-.44 1.53-1.23 1.53-.3 0-.59-.1-.81-.29-.21-.18-.33-.45-.33-.74 0-.87.4-1.66.72-2.51.16-.43.4-.8.71-1.06.08-.07.18-.14.3-.14zm12.4 2.28c.48 0 .85.36.85.84 0 .49-.38.86-.85.86-.26 0-.5-.11-.68-.28-.5-.45-.8-1.1-.8-1.82 0-.31.24-.55.55-.55.13 0 .25.03.36.09.08.04.12.08.17.14.05.06.1.13.15.18.1.12.14.28.14.44 0 .07-.01.13-.03.19-.02.08-.06.16-.11.22-.06.08-.13.14-.22.18-.05.03-.1.05-.16.06-.05.01-.09.01-.14.01zm-9.6-.18c.2 0 .36.16.36.36v.55c0 .2-.16.36-.36.36s-.36-.16-.36-.36v-.55c.01-.2.17-.36.36-.36zm3.8 0c.2 0 .36.16.36.36v.55c0 .2-.16.36-.36.36s-.36-.16-.36-.36v-.55c.01-.2.17-.36.36-.36z"></path></svg>
         </span>
         <span class="num">+38О978I704I6</span>
       </span>
@@ -424,7 +462,7 @@
 
     <!-- ПРОФІЛІ -->
     <h2>Профілі</h2>
-    <div class="profiles">
+    <div class="profiles" id="profiles">
       <a class="profile-btn" href="https://github.com/NestorVolya">GitHub</a>
       <a class="profile-btn" href="https://www.linkedin.com/in/kornisan">LinkedIn</a>
       <a class="profile-btn" href="https://dou.ua/users/nestor-volya/topics/">DOU</a>
@@ -432,9 +470,8 @@
       <a class="profile-btn" href="https://www.facebook.com/nestorvolya">Facebook</a>
     </div>
 
-    <!-- CALLOUT -->
     <div class="callout">
-      Публічна санітизована версія профілю. Закриті джерела, службові деталі, персональні дані третіх осіб і повні HR-додатки не публікуються.
+      Публічна санітизована версія профілю. Закриті джерела, службові деталі, персональні дані третіх осіб і конфіденційні матеріали не публікуються.
     </div>
 
     <footer>© Нестор Воля</footer>
