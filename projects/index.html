@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Проєкти — інфраструктура і публічні ресурси | Нестор Воля</title>
+  <meta name="description" content="Проєкти Нестора Волі: devNVS/VPS — персональний сервер для AI і OSINT-автоматизації; #інфоВАРТА — публічна довідка і дашборд.">
+  <style>
+    :root {
+      --bg:#f4f1eb; --ink:#181818; --muted:#57514a; --line:#d8cfc0;
+      --panel:#fffaf2; --dark:#111418; --accent:#b2382f; --accent2:#1e6f68;
+      --gold:#b88724; --link:#064f8f;
+    }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:"Segoe UI",Arial,sans-serif; line-height:1.55; }
+    a { color:var(--link); text-underline-offset:2px; }
+    .page { max-width:780px; margin:0 auto; padding:28px 22px 72px; }
+
+    nav { display:flex; gap:10px; margin-bottom:22px; flex-wrap:wrap; }
+    .nav-btn { border:1px solid var(--line); background:var(--panel); color:var(--ink); padding:7px 14px;
+               border-radius:6px; font-weight:600; text-decoration:none; font-size:14px; }
+    .nav-btn:hover { border-color:var(--muted); }
+
+    .hero { background:var(--dark); color:#f7efe3; border-radius:12px; padding:30px 28px; margin-bottom:26px; }
+    .eyebrow { color:var(--gold); font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; margin-bottom:10px; }
+    .hero h1 { margin:0 0 6px; font-size:30px; font-weight:800; line-height:1.05; }
+    .hero p { margin:0; color:#f2e7d6; }
+
+    .project {
+      background:var(--panel); border:1px solid var(--line); border-left:4px solid var(--accent2);
+      border-radius:8px; padding:18px 20px; margin-bottom:14px;
+    }
+    .project h2 { margin:0 0 4px; font-size:19px; }
+    .project h2 a { color:var(--ink); text-decoration:none; }
+    .project h2 a:hover { color:var(--accent2); }
+    .venue { margin:0 0 8px; color:var(--gold); font-size:13px; font-weight:700; }
+    .project p.body { margin:0 0 10px; color:var(--muted); font-size:14.5px; }
+    .links { margin:0; font-size:14px; font-weight:650; }
+
+    .callout { margin-top:26px; background:rgba(30,111,104,.06); border:1px solid rgba(30,111,104,.25);
+               border-radius:8px; padding:14px 16px; color:var(--muted); font-size:13.5px; }
+    footer { margin-top:30px; color:var(--muted); font-size:13px; text-align:center; }
+
+    @media (max-width:600px) {
+      .page { padding:20px 14px 56px; }
+      .hero { padding:22px 18px; }
+      .hero h1 { font-size:24px; }
+      .project { padding:16px 15px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+
+    <nav>
+      <a class="nav-btn" href="../">← Головна</a>
+      <a class="nav-btn" href="../cases/">Кейси</a>
+    </nav>
+
+    <section class="hero">
+      <div class="eyebrow">Інфраструктура · автоматизація · публічні ресурси</div>
+      <h1>Проєкти</h1>
+      <p>Власні технічні системи й публічні ресурси, на яких тримаються OSINT-розслідування та дослідницька робота.</p>
+    </section>
+
+    <section class="project">
+      <h2><a href="devnvs-vps/">devNVS/VPS — персональний сервер для AI і OSINT-автоматизації</a></h2>
+      <p class="venue">DevOps · solo-build · 2025–2026</p>
+      <p class="body">Два вузли з розділеними ролями: локальна станція для розробки і VPS для сервісів 24/7. Docker Compose, Traefik з TLS, ізоляція проєктів по мережах, PostgreSQL 16 + pgvector як стійке ядро даних. На VPS працюють TCK Bot (HARON), OSINT API + n8n, Vacancy Pipeline, FlowSint, Tasks API.</p>
+      <p class="links">
+        <a href="devnvs-vps/">→ Повний опис</a>
+      </p>
+    </section>
+
+    <section class="project">
+      <h2><a href="https://nestorvolya.github.io/infovarta/">#інфоВАРТА — публічна довідка і дашборд</a></h2>
+      <p class="venue">Громадська ініціатива · проєкт «Рутенія. Графіка української мови»</p>
+      <p class="body">Публічна довідка і дашборд подій ініціативи #інфоВАРТА: матеріали проєкту «Рутенія», шрифти, архів і супровідні OSINT-матеріали.</p>
+      <p class="links">
+        <a href="https://nestorvolya.github.io/infovarta/">→ Відкрити сайт</a> ·
+        <a href="https://github.com/NestorVolya/infovarta">GitHub</a>
+      </p>
+    </section>
+
+    <div class="callout">
+      Публічна версія. Секрети, внутрішні адреси та службові деталі не публікуються.
+    </div>
+
+    <footer>© Нестор Воля</footer>
+
+  </main>
+</body>
+</html>
