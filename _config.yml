@@ -37,6 +37,8 @@ exclude:
 nav:
   - title: "Профіль"
     url: "/profile/"
+  - title: "Проєкти"
+    url: "/projects/"
   - title: "Кейси"
     url: "/cases/"
   - title: "Методи"
