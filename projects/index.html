@@ -56,6 +56,11 @@
            color:var(--ink); font-size:14px; font-weight:700; text-decoration:none; transition:all .15s ease; }
     .tab:hover, .tab.active { background:var(--dark); border-color:var(--dark); color:#f7efe3; text-decoration:none; }
     @media (max-width:680px) { .site-tabs { padding:0 14px; } }
+    @media (max-width:680px) {
+      .site-tabs { flex-wrap:nowrap; gap:6px; padding:0 12px; margin-top:14px; overflow-x:auto; scrollbar-width:none; }
+      .site-tabs::-webkit-scrollbar { display:none; }
+      .tab { flex:1 1 auto; text-align:center; white-space:nowrap; padding:7px 8px; font-size:13px; }
+    }
   </style>
 </head>
 <body>

@@ -300,6 +300,11 @@
       .hero h1 { font-size: 30px; }
       .grid { grid-template-columns: 1fr; }
     }
+    @media (max-width:680px) {
+      .site-tabs { flex-wrap:nowrap; gap:6px; padding:0 12px; margin-top:14px; overflow-x:auto; scrollbar-width:none; }
+      .site-tabs::-webkit-scrollbar { display:none; }
+      .tab { flex:1 1 auto; text-align:center; white-space:nowrap; padding:7px 8px; font-size:13px; }
+    }
   </style>
 </head>
 <body>
