@@ -40,6 +40,11 @@
     .doc-header .subtitle { color: #d7c9b5; font-size: 16px; font-weight: 650; margin-bottom: 12px; }
     .doc-header p { color: #f2e7d6; margin: 0 0 8px; font-size: 15px; }
     .doc-header a { color: #f5d48a; }
+    .doc-header .eyebrow { color: #bcae9b; font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 14px; }
+    .hdr { display: grid; grid-template-columns: 1fr 170px; gap: 24px; align-items: start; }
+    .hdr-photo { margin: 0; }
+    .hdr-photo img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; display: block; border: 2px solid rgba(255,255,255,.25); }
+    .hdr-photo figcaption { color: #bcae9b; font-size: 12px; line-height: 1.35; margin-top: 6px; }
     .nav { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
     .nav a {
       border: 1px solid rgba(255,255,255,.25);
@@ -140,6 +145,10 @@
       .page { padding: 16px 14px 60px; }
       .doc-header { padding: 22px 18px; }
       .doc-header h1 { font-size: 22px; }
+      .hdr { grid-template-columns: 1fr; gap: 14px; }
+      .hdr-photo { display: flex; gap: 12px; align-items: center; }
+      .hdr-photo img { width: 96px; flex-shrink: 0; }
+      .hdr-photo figcaption { margin-top: 0; }
     }
     .lb-overlay {
       display: none;
@@ -188,17 +197,20 @@
 <main class="page">
 
 <div class="doc-header">
-  <div style="display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;">
-    <img src="assets/2024-06-28_suspilne_lutsk.jpg" alt="Нестор Воля · Луцьк · 28 черв. 2024 · © Суспільне" style="width:130px;height:130px;object-fit:cover;border-radius:8px;flex-shrink:0;border:2px solid rgba(255,255,255,.25);">
-    <div>
+  <div class="eyebrow">Звіт про виконану роботу · ССО · 2024</div>
+  <div class="hdr">
+    <div class="hdr-text">
       <h1>Олександр Корнієнко / Нестор Воля</h1>
       <div class="subtitle">PR і рекрутинг 6-го полку ССО «Рейнджер»</div>
       <p>Старший сержант · червень–вересень 2024 · Хмельницький</p>
-      <p style="font-size:12px;color:#bcae9b;margin:0;">Луцьк · 28 черв. 2024 · © Суспільне</p>
-      <div class="nav">
-        <a href="https://nestorvolya.github.io">← Основна сторінка</a>
-      </div>
     </div>
+    <figure class="hdr-photo">
+      <img src="assets/2024-06-28_suspilne_lutsk.jpg" alt="Нестор Воля на рекрутинговій акції полку «Рейнджер», Луцьк, 28.06.2024">
+      <figcaption>Акція «День без повісток», Луцьк, 28.06.2024<br>Фото © Суспільне</figcaption>
+    </figure>
+  </div>
+  <div class="nav">
+    <a href="https://nestorvolya.github.io">← Основна сторінка</a>
   </div>
 </div>
 
