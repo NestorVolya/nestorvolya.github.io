@@ -33,7 +33,6 @@ exclude:
   - Gemfile.lock
   - vendor/
   - node_modules/
-  - HANDOFF.md
 
 nav:
   - title: "Профіль"
